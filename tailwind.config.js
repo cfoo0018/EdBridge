@@ -6,7 +6,12 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'Overpass': ['"Overpass"', 'sans-serif'],
+        'Fredoka': ['Fredoka', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
