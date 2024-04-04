@@ -9,8 +9,12 @@ module.exports = {
     extend: {
       fontFamily:{
         'Overpass': ['"Overpass"', 'sans-serif'],
+        'Overpass-Mono': ['"Overpass Mono"', 'monospace'],
         'Fredoka': ['Fredoka', 'sans-serif'],
       },
+      blur: {
+        xs: '1px',
+      }
     },
   },
   plugins: [],

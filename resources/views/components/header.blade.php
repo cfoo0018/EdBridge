@@ -12,7 +12,7 @@
     <!-- Navigation Links (Hidden on small screens, visible on medium and larger screens) -->
     <div class="flex justify-center items-center static h-fit">
         <div class="z-50 px-4 flex fixed top-8 self-center backdrop-blur-sm bg-white/10 rounded-full">
-            <nav class="flex self-center space-x-4 text-white font-Overpass py-4">
+            <nav class="flex self-center space-x-4 text-white font-Fredoka py-4">
                 <a href="/" class="hover:backdrop-blur-none hover:bg-sky-600 rounded-3xl px-4 py-1">Home</a>
                 <a href="#" class="hover:backdrop-blur-none hover:bg-sky-600 rounded-3xl px-4 py-1">Resource Hub</a>
                 <a href="#" class="hover:backdrop-blur-none hover:bg-sky-600 rounded-full px-4 py-1">Support</a>
