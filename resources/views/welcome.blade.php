@@ -21,63 +21,57 @@
     </div>
 </div>
 
-<!-- <div class="hero bg-base-200 min-w-screen">
+<div class="hero bg-base-200 font-Fredoka">
     <div class="hero-content flex-col lg:flex-row min-w-screen">
-        <img src="{{ asset('images/welcome.jpg') }}" class="max-w-sm rounded-lg shadow-2xl min-h-screen" />
-        <div class="px-6 text-center">
-            <h1 class="text-7xl font-bold font-Overpass text-Second">What We Do</h1>
+        <img src="{{ asset('images/welcome.jpg') }}" class="max-w-sm rounded-lg hero-h-sreen" />
+        <div class="px-6 w-2/3">
+            <h1 class="text-7xl font-bold font-Overpass text-Second text-center">What We Do</h1>
             <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="p-6"/></figure>
+                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="pl-6"/></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn bg-Button text-white">See more</button>
-                    </div>
+                    <h2 class="card-title">Resource Hub</h2>
+                    <p>Explore a curated collection of educational resources designed to support vulnerable students.</p>
                 </div>
             </div>
-            <div class="card card-side bg-base-100 shadow-xl">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="p-6"/></figure>
+            <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
+                <figure><img src="{{ asset('images/icon (1).png') }}" alt="Movie" class="pl-6"/></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
+                    <h2 class="card-title">Support Service Directory</h2>
+                    <p>Access essential support services tailored for tertiary education, including tutoring and counselling.</p>
                 </div>
             </div>
-            <div class="card card-side bg-base-100 shadow-xl">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="p-6"/></figure>
+            <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
+                <figure><img src="{{ asset('images/icon (2).png') }}" alt="Movie" class="pl-6"/></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
+                    <h2 class="card-title">Personalised Education Pathways</h2>
+                    <p>Discover personalized learning pathways that cater to the unique needs and goals of students.</p>
                 </div>
             </div>
-            <div class="card card-side bg-base-100 shadow-xl">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="p-6"/></figure>
+            <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
+                <figure><img src="{{ asset('images/icon (3).png') }}" alt="Movie" class="pl-6"/></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
+                    <h2 class="card-title">Accessibility & Inclusivity Tools</h2>
+                    <p>Utilize advanced tools aimed at ensuring education is accessible and inclusive.</p>
                 </div>
             </div>
-            <div class="card card-side bg-base-100 shadow-xl">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="Movie" class="p-6"/></figure>
+            <div class="card card-side bg-base-100 shadow-xl w-full">
+                <figure><img src="{{ asset('images/icon (4).png') }}" alt="Movie" class="pl-6"/></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Watch</button>
-                    </div>
+                    <h2 class="card-title">Financial Aid & Scholarship Portal</h2>
+                    <p>Navigate a comprehensive portal for financial aid and scholarships.</p>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
+</div>
+<div class="justify-center flex mt-12">
+    <img src="{{ asset('images/genericstudy.jpg') }}" class="min-w-full" />
+</div>
 @endsection
+
+<style>
+    .hero-h-sreen {
+        height: 90vh;
+    }
+</style>
 
