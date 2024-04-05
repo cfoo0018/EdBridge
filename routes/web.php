@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/resourcehub', function () {
+    return view('resourcehub');
+})->name('resourcehub');
