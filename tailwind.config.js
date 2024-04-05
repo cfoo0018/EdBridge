@@ -20,7 +20,7 @@ module.exports = {
       },
       blur: {
         xs: '1px',
-      }
+      },
     },
   },
   plugins: [require("daisyui")],
