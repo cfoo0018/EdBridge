@@ -1,3 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: Fredoka;
+    src: url('../../public/fonts/Fredoka-Regular.ttf');
+}
+@font-face {
+    font-family: Overpass;
+    src: url('../../public/fonts/Overpass-Regular.ttf');
+}
+@font-face {
+    font-family: Overpass-Mono;
+    src: url('../../public/fonts/OverpassMono-Regular.ttf');
+}
+
+.nav-link {
+    transition: color 0.3s ease-in-out;
+}
+
+.glow-effect {
+    text-shadow: 0 0 8px #FFF, 0 0 10px #FFF, 0 0 15px #E5E5E5, 0 0 20px #E5E5E5;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #ffffff; 
+    text-decoration: none; 
+}
+
+.nav-link:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphism-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 50px;
+    margin: 0 auto;
+    max-width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphism-slider{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 60%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-content {
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out;
+}
+
+.center img{
+    max-height: 500px;
+    min-height: 500px;
+    margin: auto;
+    display: block;
+}
+
+.slick-prev, .slick-next {
+    display: none !important;
+}
+
+.carousel-item {
+    @apply p-2 w-6 md:w-8;
+}
+
+.carousel-item img{
+    @apply h-6 md:h-10;
+}
+
+.carousel-item p{
+    @apply text-xs;
+}
