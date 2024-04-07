@@ -44,6 +44,17 @@
             });
         </script>
         <script type="text/javascript">
+            var buttonRight = document.getElementById('slideRight');
+            var buttonLeft = document.getElementById('slideLeft');
+
+            buttonRight.onclick = function () {
+                document.getElementById('subjects').scrollBy += 200;
+            };
+            buttonLeft.onclick = function () {
+                document.getElementById('subjects').scrollBy -= 200;
+            };
+        </script>
+        <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
                 var hamburgerBtn = document.getElementById('hamburgerBtn');
                 var mobileNav = document.getElementById('mobileNav');

@@ -81,3 +81,15 @@
 .slick-prev, .slick-next {
     display: none !important;
 }
+
+.carousel-item {
+    @apply p-2 w-6 md:w-8;
+}
+
+.carousel-item img{
+    @apply h-6 md:h-10;
+}
+
+.carousel-item p{
+    @apply text-xs;
+}

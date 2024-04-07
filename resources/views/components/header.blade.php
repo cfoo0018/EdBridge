@@ -39,8 +39,8 @@
         </div>
         <!-- Mobile Navigation Links -->
         <nav class="text-center">
-            <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Home</a>
-            <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Resource Hub</a>
+            <a href="{{ route('home') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Home</a>
+            <a href="{{ route('resourcehub') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Resource Hub</a>
             <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support</a>
             <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Pathways</a>
             <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Accessibility</a>

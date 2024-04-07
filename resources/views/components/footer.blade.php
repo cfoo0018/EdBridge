@@ -1,10 +1,10 @@
 <footer class="footer p-10 bg-base-200 text-Second font-Freedoka">
   <aside>
-    <h1 class="font-Overpass font-bold text-5xl">Bridge Ed</h1>
+    <a href="{{ route('home') }}" class="font-Overpass font-bold text-5xl">Bridge Ed</a>
     <p class="font-Freedoka">Empower your journey.<br>Find Warm Support & Resources with us!</p>
   </aside> 
   <nav>
-    <a class="link link-hover font-Freedoka font-semibold">Resouce Hub</a>
+    <a href="{{ route('resourcehub') }}" class="link link-hover font-Freedoka font-semibold">Resouce Hub</a>
     <a class="link link-hover font-Freedoka font-semibold">Accessibility</a>
 
   </nav> 
