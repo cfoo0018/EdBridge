@@ -63,7 +63,7 @@
         </div>
     </div>
 </div>
-<div class="justify-center flex mt-12">
+<div class="hidden justify-center mt-12">
     <div class="carousel carousel-center rounded-box">
         <div class="carousel-item">
             <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="carousel-item" />
