@@ -1,5 +1,5 @@
 @extends('layout.layout')
-
+@section('title', 'BridgeEd - ResourceHub')
 @section('content')
 <div class="flex items-center justify-center flex-row space-x-4 space-y-4 md:space-y-0 mt-20 md:mt-32 mb-4">
     <label class="input input-md input-bordered flex items-center gap-4 font-Fredoka w-5/6 md:w-1/2">
