@@ -114,7 +114,7 @@
     max-width: 900px;
 }
 
-#loadingScreen {
+/* #loadingScreen {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,13 +125,13 @@
     transition: opacity 0.5s ease, visibility 0.5s ease;
     opacity: 1;
     visibility: visible;
-}
+} */
 
-.main-content {
+/* .main-content {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s linear 1s, opacity 1s;
-}
+} */
 
 @keyframes fadeInOut {
     0%, 100% { opacity: 0; }
@@ -141,4 +141,16 @@
 #animatedText {
     animation: fadeInOut 3s ease-in-out infinite;
     color: #109CDE; 
+}
+
+#loadingScreen {
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-content {
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+    visibility: hidden;
 }
