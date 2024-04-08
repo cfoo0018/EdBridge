@@ -170,8 +170,8 @@
                     loadingScreen.remove(); // Remove loading screen from the DOM
                     mainContent.style.visibility = 'visible';
                     mainContent.style.opacity = '1';
-                }, 1000); 
-            }, 3000); 
+                }, 1500); 
+            }, 4000); 
         });
     </script>
 
