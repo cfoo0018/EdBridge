@@ -1,16 +1,16 @@
 <!-- Header Section -->
 <header class="">
     <!-- Hamburger Menu Icon (Visible on small screens) -->
-    <div class="md:hidden flex items-center static">
-        <div class="z-50 px-4 flex fixed self-center backdrop-blur-sm bg-Button/50 top-0 w-screen h-16">
-            <button id="hamburgerBtn" class="text-white focus:outline-none z-50">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-10 h-10 stroke-current">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
+    <div class="flex items-center justify-between fixed top-0 w-full h-16 px-4 bg-opacity-50 backdrop-blur-sm z-50 bg-Button/50">
+        {{-- <div class="z-50 px-4 flex fixed self-center backdrop-blur-sm bg-Button/50 top-0 w-screen h-16"> --}}
+        <span class="text-xl font-bold text-white font-Overpass">BridgeEd</span>
+        <button id="hamburgerBtn" class="text-white focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="currentColor" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
     </div>
-
+    
     <!-- Navigation Links (Hidden on small screens, visible on medium and larger screens) -->
     <div class="hidden md:flex justify-center items-center static h-fit">
         <div class="z-50 px-4 flex fixed top-8 self-center backdrop-blur-sm bg-Button/50 rounded-full">

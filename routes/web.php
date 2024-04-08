@@ -24,3 +24,7 @@ Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourceh
 
 // Route::get('/youtube', [YouTubeController::class, 'index'])->name('youtube.index');
 Route::get('/resourcehub/search', [YouTubeController::class, 'search'])->name('youtube.search');
+
+Route::fallback(function () {
+    return response()->view('404', [], 404);
+});
