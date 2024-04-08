@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\YouTubeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/resourcehub', function () {
-    return view('resourcehub');
-})->name('resourcehub');
+// Route::get('/resourcehub', function () {
+//     return view('resourcehub');
+// })->name('resourcehub');
+Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');
+
+// Route::get('/youtube', [YouTubeController::class, 'index'])->name('youtube.index');
+Route::get('/resourcehub/search', [YouTubeController::class, 'search'])->name('youtube.search');

@@ -112,6 +112,32 @@
             typeWriterEffect(); // Initiate the typewriter effect
         });
     </script>
+
+    <script>
+        function openVideoModal(videoId) {
+            const modal = document.getElementById('videoModal');
+            // Set innerHTML of the modal box to include the video iframe
+            modal.querySelector('.modal-box').innerHTML = `
+        <div class="flex justify-end">
+          <button onclick="closeVideoModal()" class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+        </div>
+        <div class="aspect-video">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      `;
+            modal.classList.add('modal-open'); // Use DaisyUI's class to open the modal
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            // Clear the innerHTML of the modal box to stop the video
+            modal.querySelector('.modal-box').innerHTML = '';
+            modal.classList.remove('modal-open'); // Use DaisyUI's class to close the modal
+        }
+    </script>
+
+
 </body>
 
 </html>
