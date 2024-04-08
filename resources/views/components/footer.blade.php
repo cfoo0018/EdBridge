@@ -23,7 +23,7 @@
             </nav>
             <nav class="w-full lg:w-auto">
                 <h6 class="footer-title">Contact Us</h6>
-                <a href="mailto:info@bridgeed.com" class="link link-hover">info@bridgeed.com</a>
+                <a href="mailto:info@bridgeed.com" class="link link-hover">info@bridgeed.me</a>
             </nav>
         </div>
 
