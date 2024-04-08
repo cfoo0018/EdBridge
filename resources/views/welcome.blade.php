@@ -21,41 +21,48 @@
 </div>
 
 <div class="hero bg-base-200 font-Fredoka">
-    <div class="hero-content mt-20 mb-20 flex-col lg:flex-row min-w-screen">
-        <img src="{{ asset('images/welcome.jpg') }}" class="rounded-lg w-1/2 md:hero-h-sreen" />
-        <div class="px-6 w-2/3">
-            <h1 class="text-5xl xs:text-7xl font-bold font-Overpass text-Second text-center">What We Do</h1>
-            <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
-                <figure><img src="{{ asset('images/icon.png') }}" alt="icon" class="pl-6"/></figure>
-                <div class="card-body">
+    <div class="hero-content lg:mt-20 mb-20 flex-col lg:flex-row min-w-screen sm:mt-5 sm:mb-5">
+        <img src="{{ asset('images/welcome.jpg') }}" class="rounded-lg lg:w-1/2 md:hero-h-sreen sm:w-full" />
+        <div class="px-6 lg:w-2/3 sm:w-full">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-Overpass text-Second text-center">What We Do</h1>
+            {{-- <div class="card card-side bg-base-100 shadow-xl mb-4 sm:flex w-full">
+                <figure class="lg:w-1/3 sm:w-1/3"><img src="{{ asset('images/icon.png') }}" alt="icon" class="pl-6 sm:w-full"/></figure>
+                <div class="card-body lg:w-full sm:w-2/3">
+                    <h2 class="card-title">Resource Hub</h2>
+                    <p>Explore a curated collection of educational resources designed to support vulnerable students.</p>
+                </div>
+            </div> --}}
+            <div class="card card-side bg-base-100 shadow-xl mb-4 flex w-full">
+                <figure class="lg:w-20 sm:w-1/3"><img src="{{ asset('images/icon.png') }}" alt="icon" class="pl-6 w-full"/></figure>
+                <div class="card-body w-2/3">
                     <h2 class="card-title">Resource Hub</h2>
                     <p>Explore a curated collection of educational resources designed to support vulnerable students.</p>
                 </div>
             </div>
-            <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
-                <figure><img src="{{ asset('images/icon (1).png') }}" alt="icon" class="pl-6"/></figure>
-                <div class="card-body">
+            <div class="card card-side bg-base-100 shadow-xl mb-4 flex w-full">
+                <figure class="lg:w-20 sm:w-1/3"><img src="{{ asset('images/icon (1).png') }}" alt="icon" class="pl-6 w-full"/></figure>
+                <div class="card-body w-2/3">
                     <h2 class="card-title">Support Service Directory</h2>
                     <p>Access essential support services tailored for tertiary education, including tutoring and counselling.</p>
                 </div>
             </div>
             <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
-                <figure><img src="{{ asset('images/icon (2).png') }}" alt="icon" class="pl-6"/></figure>
-                <div class="card-body">
+                <figure class="lg:w-20 sm:w-1/3" ><img src="{{ asset('images/icon (2).png') }}" alt="icon" class="pl-6 w-full"/></figure>
+                <div class="card-body w-2/3">
                     <h2 class="card-title">Personalised Education Pathways</h2>
                     <p>Discover personalized learning pathways that cater to the unique needs and goals of students.</p>
                 </div>
             </div>
             <div class="card card-side bg-base-100 shadow-xl mb-4 w-full">
-                <figure><img src="{{ asset('images/icon (3).png') }}" alt="icon" class="pl-6"/></figure>
-                <div class="card-body">
+                <figure class="lg:w-20 sm:w-1/3"><img src="{{ asset('images/icon (3).png') }}" alt="icon" class="pl-6 w-full"/></figure>
+                <div class="card-body w-2/3">
                     <h2 class="card-title">Accessibility & Inclusivity Tools</h2>
                     <p>Utilize advanced tools aimed at ensuring education is accessible and inclusive.</p>
                 </div>
             </div>
             <div class="card card-side bg-base-100 shadow-xl w-full">
-                <figure><img src="{{ asset('images/icon (4).png') }}" alt="icon" class="pl-6"/></figure>
-                <div class="card-body">
+                <figure class="lg:w-20 sm:w-1/3"><img src="{{ asset('images/icon (4).png') }}" alt="icon" class="pl-6 w-full"/></figure>
+                <div class="card-body w-2/3">
                     <h2 class="card-title">Financial Aid & Scholarship Portal</h2>
                     <p>Navigate a comprehensive portal for financial aid and scholarships.</p>
                 </div>
