@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'BrideEd')
+@section('title', 'BridgeEd')
 @section('content')
 <div class="hero mb-12 mx-auto" style="height:38rem; background-image: url(../../images/landingpageheader.webp);">
     <div class="hero-overlay bg-opacity-60"></div>
