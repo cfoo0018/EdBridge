@@ -1,7 +1,7 @@
 <!-- Header Section -->
 <header class="">
     <!-- Hamburger Menu Icon (Visible on small screens) -->
-    <div class="flex items-center justify-between fixed top-0 w-full h-16 px-4 bg-opacity-50 backdrop-blur-sm z-50 bg-Button/50">
+    <div class="md:hidden flex items-center justify-between fixed top-0 w-full h-16 px-4 bg-opacity-50 backdrop-blur-sm z-50 bg-Button/50">
         {{-- <div class="z-50 px-4 flex fixed self-center backdrop-blur-sm bg-Button/50 top-0 w-screen h-16"> --}}
         <span class="text-xl font-bold text-white font-Overpass">BridgeEd</span>
         <button id="hamburgerBtn" class="text-white focus:outline-none">
