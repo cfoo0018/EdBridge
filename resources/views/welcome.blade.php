@@ -1,16 +1,16 @@
 @extends('layout.layout')
 @section('title', 'BridgeEd')
 @section('content')
-<div class="hero mb-12 mx-auto" style="height:38rem; background-image: url(../../images/landingpageheader.webp);">
+<div class="hero mx-auto" style="min-height:100vh; background-image: url(../../images/landingpageheader.webp);">
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="hero-content text-center text-neutral-content">
         <div class="max-w-md">
             <h1 class="my-5 text-7xl font-bold font-Overpass text-white">Bridge Ed</h1>
-            <p class="mb-5 font-Overpass-Mono blur-xs text-xl ">"Collecting Paths, Unlocking Potential".</p>
+            <p id="typewriter-text" class="mb-5 font-Overpass-Mono blur-xs text-xl text-white"></p>
             <p class="font-Fredoka text-lg text-white">Empower your journey.</p>
             <p class="mb-10 font-Fredoka text-lg text-white">Find Warm Support & Resources with us!</p>
             <div class="md:flex items-center md:flex-row space-x-4 space-y-4 md:space-y-0">
-                <label class="input input-md input-bordered flex items-center gap-4 font-Fredoka w-full">
+                <label class="input input-md input-bordered flex items-center gap-4 font-Fredoka w-96">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-6 h-6 stroke-2"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg> 
                     <input type="text" class="grow text-Secondary" placeholder="What are you looking for?" />
                 </label>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="hero bg-base-200 font-Fredoka">
-    <div class="hero-content flex-col lg:flex-row min-w-screen">
+    <div class="hero-content mt-20 mb-20 flex-col lg:flex-row min-w-screen">
         <img src="{{ asset('images/welcome.jpg') }}" class="rounded-lg w-1/2 md:hero-h-sreen" />
         <div class="px-6 w-2/3">
             <h1 class="text-5xl xs:text-7xl font-bold font-Overpass text-Second text-center">What We Do</h1>
