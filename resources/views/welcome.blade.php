@@ -9,13 +9,13 @@
             <p id="typewriter-text" class="mb-5 font-Overpass-Mono blur-xs text-xl text-white"></p>
             <p class="font-Fredoka text-lg text-white">Empower your journey.</p>
             <p class="mb-10 font-Fredoka text-lg text-white">Find Warm Support & Resources with us!</p>
-            <div class="md:flex items-center md:flex-row space-x-4 space-y-4 md:space-y-0">
+            <form action="{{ route('search') }}" method="GET" class="md:flex items-center md:flex-row space-x-4 space-y-4 md:space-y-0">
                 <label class="input input-md input-bordered flex items-center gap-4 font-Fredoka w-96">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-6 h-6 stroke-2"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg> 
-                    <input type="text" class="grow text-Secondary" placeholder="What are you looking for?" />
+                    <input type="text" name="query" class="grow text-Secondary" placeholder="What are you looking for?" />
                 </label>
-                <button class="btn btn-ghost text-white font-Fredoka bg-Button font-normal">Search</button>
-            </div>
+                <button type="submit" class="btn btn-ghost text-white font-Fredoka bg-Button font-normal">Search</button>
+            </form>
         </div>
     </div>
 </div>

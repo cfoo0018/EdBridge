@@ -122,45 +122,67 @@
                 </select>
             </div>
 
+            <!-- Level Selection -->
+            <div class="w-full md:w-1/4">
+                <select name="level" class="select select-bordered w-full">
+                    <option value="">Select difficulty</option>
+                    <option value="beginner" {{ request('level') == 'beginner' ? 'selected' : '' }}>Beginner</option>
+                    <option value="intermediate" {{ request('level') == 'intermediate' ? 'selected' : '' }}>Intermediate
+                    </option>
+                    <option value="advanced" {{ request('level') == 'advanced' ? 'selected' : '' }}>Advanced</option>
+                </select>
+            </div>
+
             <!-- Search Button -->
             <div class="w-full md:w-auto">
                 <button type="submit"
-                    class="btn btn-md bg-Button text-white font-Fredoka hover:text-Second w-full md:w-auto">Search</button>
+                    class="btn btn-ghost bg-Button text-white font-bold py-2 px-4 rounded">Search</button>
             </div>
         </div>
     </form>
 
     <!-- Search Results and Pagination -->
-    <div class="flex flex-col items-center justify-center space-y-8 mx-auto p-4" style="max-width: 768px;">
+    <div class="mx-auto p-4" style="max-width: 1200px;">
+        @if (session('no-results'))
+            <div class="alert alert-warning">{{ session('no-results') }}</div>
+        @endif
+
         @isset($videos)
-            @forelse ($videos as $video)
-                <div class="card w-full md:max-w-4xl bg-base-100 shadow-lg overflow-hidden">
-                    <div class="md:flex">
-                        <img src="{{ $video->snippet->thumbnails->high->url }}" alt="Thumbnail"
-                            class="w-full h-48 object-cover md:w-48">
-                        <div class="p-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                @forelse ($videos as $video)
+                    <div class="card bg-base-100 shadow-lg overflow-hidden flex flex-col" style="height: 100%;">
+                        <!-- Thumbnail on top -->
+                        <img src="{{ $video->snippet->thumbnails->high->url }}" alt="Thumbnail" class="w-full flex-shrink-0"
+                            style="height: 200px; object-fit: cover;">
+
+                        <!-- Text and button below -->
+                        <div class="p-4 flex flex-col flex-grow">
                             <h2 class="card-title text-xl font-semibold mb-2">{{ $video->snippet->title }}</h2>
-                            <p class="text-gray-700">{{ $video->snippet->description }}</p>
+                            <p class="text-gray-700 text-sm flex-grow">{{ $video->snippet->description }}</p>
                             <a href="#" onclick="openVideoModal('{{ $video->id->videoId }}')"
-                                class="btn bg-Second hover:bg-white hover:text-Second text-white font-bold py-2 px-4 rounded mt-4 w-full">Watch</a>
+                                class="btn bg-Button text-white font-bold py-2 px-4 rounded mt-4">Watch</a>
                         </div>
                     </div>
-                </div>
-            @empty
-                <p>No videos found.</p>
-            @endforelse
+                @empty
+                    <div class="col-span-3 text-center">
+                        <p class="text-lg font-semibold">No videos found. Try adjusting your search criteria.</p>
+                    </div>
+                @endforelse
+            </div>
         @endisset
 
         @if (!empty($prevPageToken) || !empty($nextPageToken))
-            <div class="btn-group">
-                @if (!empty($prevPageToken))
-                    <a href="{{ route('youtube.search', ['course' => request('course'), 'duration' => request('duration'), 'pageToken' => $prevPageToken]) }}"
-                        class="btn">« Previous</a>
-                @endif
-                @if (!empty($nextPageToken))
-                    <a href="{{ route('youtube.search', ['course' => request('course'), 'duration' => request('duration'), 'pageToken' => $nextPageToken]) }}"
-                        class="btn">Next »</a>
-                @endif
+            <div class="flex justify-center mt-6">
+                <div class="btn-group">
+                    @if (!empty($prevPageToken))
+                        <a href="{{ route('youtube.search', ['course' => request('course'), 'duration' => request('duration'), 'pageToken' => $prevPageToken, 'level' => request('level')]) }}"
+                            class="btn bg-Button text-white">« Previous</a>
+                    @endif
+                    @if (!empty($nextPageToken))
+                        <a href="{{ route('youtube.search', ['course' => request('course'), 'duration' => request('duration'), 'pageToken' => $nextPageToken, 'level' => request('level')]) }}"
+                            class="btn bg-Button text-white">Next »</a>
+                    @endif
+                </div>
             </div>
         @endif
     </div>
