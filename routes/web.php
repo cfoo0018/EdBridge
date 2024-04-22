@@ -12,6 +12,9 @@ use App\Http\Controllers\YouTubeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/support', function () {
+    return view('support');
+})->name('support');
 
 Route::get('/', function () {
     return view('welcome');
