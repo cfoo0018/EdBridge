@@ -154,3 +154,37 @@
     opacity: 0;
     visibility: hidden;
 }
+
+.collapse {
+    @apply md:max-w-lg;
+}
+
+.collapse-title {
+    @apply text-left;
+}
+
+.checkbox {
+    @apply border-2;
+}
+
+.checkbox:indeterminate {
+    @apply bg-inherit bg-none;
+}
+
+.steps .step-primary + .step-primary:before, .steps .step-primary:after {
+    @apply bg-Second;
+}
+
+@media (min-width: 768px) {
+    #pathway-div .card {
+        max-width: 288px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #pathway-div .card {
+        max-width: 520px;
+        max-height: 288px;
+    }
+}
+

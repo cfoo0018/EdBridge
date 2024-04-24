@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@yield('title', 'Default Title')</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/quiz.js')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -69,17 +70,6 @@
                 }
             });
         });
-    </script>
-    <script type="text/javascript">
-        var buttonRight = document.getElementById('slideRight');
-        var buttonLeft = document.getElementById('slideLeft');
-
-        buttonRight.onclick = function() {
-            document.getElementById('subjects').scrollBy += 200;
-        };
-        buttonLeft.onclick = function() {
-            document.getElementById('subjects').scrollBy -= 200;
-        };
     </script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
@@ -193,6 +183,8 @@
         });
     </script>
 
+    <!-- <script src="{{ asset('/js/quiz.js') }} ">
+    </script> -->
 </body>
 
 </html>
