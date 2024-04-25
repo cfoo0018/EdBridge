@@ -4,8 +4,9 @@
 /public/storage
 /storage/*.key
 /vendor/
+
+ca-certificate.crt
 .env
-/ ca-certificate.crt
 .env.backup
 .env.production
 .phpunit.result.cache
