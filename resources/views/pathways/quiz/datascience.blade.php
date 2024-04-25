@@ -33,8 +33,8 @@
     <!-- Result -->
     <div id="result-div" class="flex flex-col justify-center items-center text-center px-8 py-16 border-t border-base-300"></div>
     <!-- Navigate Buttons -->
-    <div id="nav-btn" class="flex flex-col md:flex-row justify-center md:py-4 md:space-x-12 border-t border-base-300">
-        <button id="submit-btn" class="btn btn-outline hover:bg-Button ">Submit Answer</button>
+    <div id="nav-btn" class="flex flex-col md:flex-row justify-center md:py-4 md:space-x-12 border-t border-base-300 p-3 m-3">
+        <button id="submit-btn" class="btn btn-outline hover:bg-Button mb-1">Submit Answer</button>
         <button id="restart-btn" class="btn btn-outline hover:bg-Button">Restart Quiz</button>
         <button id="skip-btn" class="btn btn-outline btn-error">Skip Question</button>
     </div>

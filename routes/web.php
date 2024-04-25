@@ -21,17 +21,11 @@ Route::get('/', function () {
 
 Route::get('/search', [SearchController::class,'index'])->name('search');
 
-// Route::get('/resourcehub', function () {
-//     return view('resourcehub');
-// })->name('resourcehub');
-
 Route::get('/support', [CharityController::class, 'index'])->name('support.index');
 Route::get('/support/geocode', [CharityController::class,'geocodeCharities'])->name('support.geocode');
 
 
 Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');
-
-// Route::get('/youtube', [YouTubeController::class, 'index'])->name('youtube.index');
 Route::get('/resourcehub/search', [YouTubeController::class, 'search'])->name('youtube.search');
 
 Route::get('/pathways', function () {
