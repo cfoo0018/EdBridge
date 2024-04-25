@@ -74,9 +74,14 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
+            'schema' => 'public',
+            'sslmode' => env('DB_SSLMODE', 'prefer'),
+            'options' => [
+                PDO::MYSQL_ATTR_SSL_CA => env('DB_SSL_CA'),
+                PDO::MYSQL_ATTR_SSL_CERT => env('DB_SSL_CERT'),
+                PDO::MYSQL_ATTR_SSL_KEY => env('DB_SSL_KEY')
+            ],            
+        ],        
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

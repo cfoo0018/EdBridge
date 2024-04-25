@@ -1,4 +1,15 @@
 <?php return array (
+  'alexpechkarev/google-maps' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'GoogleMaps\\ServiceProvider\\GoogleMapsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'GoogleMaps' => 'GoogleMaps\\Facade\\GoogleMapsFacade',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 

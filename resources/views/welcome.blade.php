@@ -24,7 +24,7 @@
     <div class="hero-content lg:mt-20 mb-20 flex-col lg:flex-row min-w-screen sm:mt-5 sm:mb-5">
         <img src="{{ asset('images/welcome.jpg') }}" class="rounded-lg lg:w-1/2 md:hero-h-sreen sm:w-full" />
         <div class="px-6 lg:w-2/3 sm:w-full">
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-Overpass text-Second text-center">What We Do</h1>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-Overpass text-Second text-center md:mb-10">What We Do</h1>
             {{-- <div class="card card-side bg-base-100 shadow-xl mb-4 sm:flex w-full">
                 <figure class="lg:w-1/3 sm:w-1/3"><img src="{{ asset('images/icon.png') }}" alt="icon" class="pl-6 sm:w-full"/></figure>
                 <div class="card-body lg:w-full sm:w-2/3">
