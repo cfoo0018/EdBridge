@@ -45,25 +45,18 @@ class CharityController extends Controller
             $response = GoogleMaps::load('geocoding')
                 ->setParam(['address' => $address, 'key' => env('GOOGLE_MAPS_API_KEY')])
                 ->get();
+            $data = json_decode($response, true);
 
-            Log::info('Geocoding API raw response:', ['response' => $response]);
-
-            $responseData = json_decode($response, true);
-
-            if (!empty($responseData['status']) && $responseData['status'] === 'OK') {
-                if (!empty($responseData['results'][0]['geometry']['location'])) {
-                    return $responseData['results'][0]['geometry']['location'];
-                } else {
-                    Log::warning('No geocoding results found for the given address.', ['address' => $address]);
-                }
+            if ($data['status'] === 'OK') {
+                return $data['results'][0]['geometry']['location'];
             } else {
-                Log::warning('Geocoding API returned status other than OK.', ['status' => $responseData['status']]);
+                Log::warning('Geocoding failed:', ['address' => $address, 'response' => $data]);
+                return null;
             }
         } catch (\Exception $e) {
-            Log::error('Geocoding request failed.', ['error' => $e->getMessage()]);
+            Log::error('Geocoding exception:', ['error' => $e->getMessage()]);
+            return null;
         }
-
-        return null;
     }
 
     protected function getServiceTypes()
@@ -97,12 +90,13 @@ class CharityController extends Controller
 
     protected function processCharitiesDistance($charities, $userLocation)
     {
-        // Transform the collection to compute distances
         $transformed = $charities->getCollection()->map(function ($charity) use ($userLocation) {
             if ($this->isAddressComplete($charity->full_address)) {
                 $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
                 $charityLocation = $this->geocodeAddress($charity->full_address);
                 if ($charityLocation) {
+                    $charity->latitude = $charityLocation['lat'];  // Add latitude
+                    $charity->longitude = $charityLocation['lng']; // Add longitude
                     $charity->distance = $this->haversineGreatCircleDistance(
                         $userLocation['lat'],
                         $userLocation['lng'],
@@ -114,11 +108,10 @@ class CharityController extends Controller
             }
             return null;
         })->filter();
-
-        // Sort by distance and update the original collection
+    
         $sorted = $transformed->sortBy('distance');
         $charities->setCollection($sorted);
-    }
+    }    
 
     protected function mapServiceType($type)
     {
@@ -159,5 +152,23 @@ class CharityController extends Controller
 
         $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
+    }
+
+    public function geocodeCharities()
+    {
+        $charities = Charity::all(['charity_legal_name', 'full_address']);
+        $geocodedCharities = $charities->map(function ($charity) {
+            $location = $this->geocodeAddress($charity->full_address);
+            if ($location) {
+                return [
+                    'name' => $charity->charity_legal_name,
+                    'address' => $charity->full_address,
+                    'latitude' => $location['lat'],
+                    'longitude' => $location['lng']
+                ];
+            }
+        });
+
+        return response()->json($geocodedCharities->filter());
     }
 }

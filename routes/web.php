@@ -23,6 +23,7 @@ Route::get('/', function () {
 // })->name('resourcehub');
 
 Route::get('/support', [CharityController::class, 'index'])->name('support.index');
+Route::get('/support/geocode', [CharityController::class,'geocodeCharities'])->name('support.geocode');
 
 
 Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');
