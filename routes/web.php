@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CharityController;
 use App\Http\Controllers\YouTubeController;
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ Route::get('/', function () {
 // Route::get('/resourcehub', function () {
 //     return view('resourcehub');
 // })->name('resourcehub');
+
+Route::get('/support', [CharityController::class, 'index'])->name('support.index');
+Route::get('/support/geocode', [CharityController::class,'geocodeCharities'])->name('support.geocode');
+
+
 Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');
 
 // Route::get('/youtube', [YouTubeController::class, 'index'])->name('youtube.index');

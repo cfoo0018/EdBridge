@@ -4,7 +4,10 @@
 /public/storage
 /storage/*.key
 /vendor/
+<<<<<<< HEAD
 / .env
+=======
+>>>>>>> alex
 .env
 .env.backup
 .env.production
