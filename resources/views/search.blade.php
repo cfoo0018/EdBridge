@@ -1,7 +1,7 @@
 <!-- resources/views/youtube/search.blade.php -->
 
 @extends('layout.layout')
-
+@section('title', 'BridgeEd - Search')
 @section('content')
     <h1>Search YouTube Videos</h1>
 

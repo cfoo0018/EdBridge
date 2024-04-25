@@ -36,6 +36,43 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <script>
+        // Constants for the view modes
+        const listView = document.getElementById('listView');
+        const mapView = document.getElementById('mapView');
+        const listViewToggle = document.getElementById('listViewToggle');
+        const mapViewToggle = document.getElementById('mapViewToggle');
+
+        // Function to show the list view and hide the map view
+        function showListView() {
+            listView.style.display = 'block';
+            mapView.style.display = 'none';
+            localStorage.setItem('preferredView', 'list'); // Save the state
+        }
+
+        // Function to show the map view and hide the list view
+        function showMapView() {
+            mapView.style.display = 'block';
+            listView.style.display = 'none';
+            localStorage.setItem('preferredView', 'map'); // Save the state
+        }
+
+        // Event listeners for the buttons
+        listViewToggle.addEventListener('click', showListView);
+        mapViewToggle.addEventListener('click', showMapView);
+
+        // Check local storage for the preferred view on document load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedView = localStorage.getItem('preferredView');
+            if (savedView === 'map') {
+                showMapView();
+            } else {
+                showListView();
+            }
+        });
+    </script>
+
     <script>
         $(function() {
             $('a').each(function() {
