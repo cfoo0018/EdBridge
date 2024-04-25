@@ -4,7 +4,7 @@
 /public/storage
 /storage/*.key
 /vendor/
-/ .env
+.env
 / ca-certificate.crt
 .env.backup
 .env.production
