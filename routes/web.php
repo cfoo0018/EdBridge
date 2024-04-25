@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharityController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\YouTubeController;
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use App\Http\Controllers\YouTubeController;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('/search', [SearchController::class,'index'])->name('search');
 
 // Route::get('/resourcehub', function () {
 //     return view('resourcehub');
