@@ -35,7 +35,7 @@
         <div id="result-div"
             class="flex flex-col justify-center items-center text-center px-8 py-16 border-t border-base-300">
 
-            <canvas id="birthday"></canvas>
+            {{-- <canvas id="birthday"></canvas> --}}
         </div>
         <!-- Navigate Buttons -->
         <div id="nav-btn"
@@ -48,7 +48,7 @@
 @endsection
 
 @push('script')
-    <script>
+    {{-- <script>
         //01000001 01010011
         // helper functions
         const PI2 = Math.PI * 2
@@ -209,5 +209,5 @@
 
 
         })()
-    </script>
+    </script> --}}
 @endpush
