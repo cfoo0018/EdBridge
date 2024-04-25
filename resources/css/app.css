@@ -3,15 +3,15 @@
 @tailwind utilities;
 @font-face {
     font-family: Fredoka;
-    src: url('../../public/fonts/Fredoka-Regular.ttf');
+    src: url("../../public/fonts/Fredoka-Regular.ttf");
 }
 @font-face {
     font-family: Overpass;
-    src: url('../../public/fonts/Overpass-Regular.ttf');
+    src: url("../../public/fonts/Overpass-Regular.ttf");
 }
 @font-face {
     font-family: Overpass-Mono;
-    src: url('../../public/fonts/OverpassMono-Regular.ttf');
+    src: url("../../public/fonts/OverpassMono-Regular.ttf");
 }
 
 .nav-link {
@@ -19,13 +19,13 @@
 }
 
 .glow-effect {
-    text-shadow: 0 0 8px #FFF, 0 0 10px #FFF, 0 0 15px #E5E5E5, 0 0 20px #E5E5E5;
+    text-shadow: 0 0 8px #fff, 0 0 10px #fff, 0 0 15px #e5e5e5, 0 0 20px #e5e5e5;
 }
 
 .nav-link:hover,
 .nav-link:focus {
-    color: #ffffff; 
-    text-decoration: none; 
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .nav-link:focus {
@@ -55,7 +55,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.glassmorphism-slider{
+.glassmorphism-slider {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -71,13 +71,127 @@
     transition: max-height 0.7s ease-in-out;
 }
 
-.center img{
+.center img {
     max-height: 500px;
     min-height: 500px;
     margin: auto;
     display: block;
 }
 
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
     display: none !important;
 }
+
+.carousel-item {
+    @apply p-2 w-6 md:w-8;
+}
+
+.carousel-item img {
+    @apply h-6 md:h-10;
+}
+
+.carousel-item p {
+    @apply text-xs;
+}
+
+@keyframes blink-cursor {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: white;
+    }
+}
+
+#typewriter-text::after {
+    content: "|";
+    animation: blink-cursor 0.75s step-end infinite;
+}
+
+.modal-box{
+    max-width: 900px;
+}
+
+/* #loadingScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem; 
+    height: 100vh;
+    width: 100vw;
+    z-index: 50;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    opacity: 1;
+    visibility: visible;
+} */
+
+/* .main-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 1s, opacity 1s;
+} */
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+#animatedText {
+    animation: fadeInOut 3s ease-in-out infinite;
+    color: #109CDE; 
+}
+
+#loadingScreen {
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-content {
+    transition: opacity 0.5s ease-in;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.collapse {
+    @apply md:max-w-lg;
+}
+
+.collapse-title {
+    @apply text-left;
+}
+
+.checkbox {
+    @apply border-2;
+}
+
+.checkbox:indeterminate {
+    @apply bg-inherit bg-none;
+}
+
+.steps .step-primary + .step-primary:before, .steps .step-primary:after {
+    @apply bg-Second;
+}
+
+@media (min-width: 768px) {
+    #pathway-div .card {
+        max-width: 288px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #pathway-div .card {
+        max-width: 520px;
+        max-height: 288px;
+    }
+}
+
+@media (min-width: 768px) {
+    #pathway-div figure {
+        min-width: 255px;
+        height: 288px;
+    }
+}
+
