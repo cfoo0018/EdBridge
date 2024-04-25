@@ -1,16 +1,16 @@
 @extends('layout.layout')
 
-@section('title', 'BridgeEd - Data Science Pathway')
+@section('title', 'BridgeEd - Software Development Pathway')
 
 @section('content')
 
 <!-- Roadmap Title -->
 <div id="roadmap_title" class="md:text-center flex flex-col items-center mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl">Data Science Pathway</h1>
-        <img src="{{ asset('images/datasciencelogo.png') }}" alt="data science" class=" h-10"/>
+        <h1 class="font-Overpass font-bold text-4xl">Business Information System Pathway</h1>
+        <img src="{{ asset('images/businessinformationlogo.png') }}" alt="business information system" class=" h-10"/>
     </div>
-    <p class="text-xl">The guide to understanding data science pathway</p>
+    <p class="text-xl">The guide to understanding business information system pathway</p>
 </div>
 
 <div class="divider"></div>
@@ -27,16 +27,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Introduction to Data Science
+                        Introduction to Business Information Systems
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective :  Understand the basics of data science and its applications.</p>
+                        <p class="mb-3">Objective :  Understand the role of information systems in modern businesses.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>What is Data Science?</li>
-                            <li>Overview of the Data Science Process</li>
-                            <li>Introduction to Key Programming Languages (Python, R, Julia)</li>
-                            <li>Basic Statistics and Probability</li>
+                            Overview of Business Information Systems (BIS)
+                            Types of Information Systems (Transactional, Management, Decision Support)
+                            Importance of Information Systems in Business Operations
+                            Basic Concepts of Business Process Management
                         </ul>
                     </div>
                 </div>          
@@ -53,19 +53,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Programming Foundations
+                        Fundamentals of Business Analysis and Requirements Gathering
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Gain proficiency in one or more programming languages essential for data science.</p>
+                        <p class="mb-3">Objective : Learn techniques for analyzing business requirements and defining system specifications.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Python Programming for Data Science</li>
-                            <li>R for Statistical Analysis</li>
-                            <li>Julia for High-Performance Scientific Computing</li>
-                            <li>Data Manipulation and Management Techniques across Languages</li>
-                            <li>Data Structures and Algorithms</li>
-                            <li>Working with Data Libraries (Pandas, NumPy)</li>
-                            <li>Introduction to SQL for Data Handling</li>
+                            Business Process Modeling (Flowcharts, Use Cases)
+                            Stakeholder Analysis and Management
+                            Requirements Elicitation Techniques (Interviews, Surveys)
+                            Documenting Requirements with Use Cases and User Stories
                         </ul>
                     </div>
                 </div>    
@@ -82,16 +79,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Data Analysis and Visualization
+                        Database Management and Business Intelligence
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Learn to analyse and visualise data to extract meaningful insights using different tools.</p>
+                        <p class="mb-3">Objective : Understand the role of databases and business intelligence in managing organizational data.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Exploratory Data Analysis (EDA) in Python, R, or Julia</li>
-                            <li>Statistical Analysis Techniques across Languages</li>
-                            <li>Data Visualization (Matplotlib and Seaborn for Python; ggplot2 for R; Plots.jl for Julia)</li>
-                            <li>Advanced Data Handling (SQL and NoSQL Databases)</li>
+                            Relational Database Concepts (Tables, Queries, Relationships)
+                            SQL Fundamentals for Data Retrieval and Manipulation
+                            Introduction to Business Intelligence Tools (Reporting, Dashboards)
+                            Data Warehousing and Data Mining Techniques
                         </ul>
                     </div>
                 </div>
@@ -108,16 +105,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Machine Learning Basics
+                        Enterprise Resource Planning (ERP) Systems
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Understand the fundamentals of machine learning and build simple models with different languages.</p>
+                        <p class="mb-3">Objective : Gain knowledge of ERP systems and their integration within organizations.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Supervised vs Unsupervised Learning in Python, R, and Julia</li>
-                            <li>Regression and Classification Models across Languages</li>
-                            <li>Decision Trees and Random Forests</li>
-                            <li>Model Evaluation and Validation Techniques</li>
+                            Overview of ERP Systems and Modules (Finance, HR, Supply Chain)
+                            ERP Implementation Lifecycle
+                            Customization and Configuration of ERP Software
+                            ERP System Integration and Data Migration
                         </ul>
                     </div>
                 </div>    
@@ -134,16 +131,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Advanced Machine Learning
+                        Customer Relationship Management (CRM) Systems
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Deepen knowledge in advanced machine learning techniques and algorithms using multiple languages.</p>
+                        <p class="mb-3">Objective : Understand the importance of CRM systems in managing customer interactions and relationships.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Ensemble Methods and Support Vector Machines in Python and R</li>
-                            <li>Introduction to Neural Networks and Deep Learning in Python and Julia</li>
-                            <li>Natural Language Processing (NLP) Techniques</li>
-                            <li>Time Series Analysis in R</li>
+                            CRM Concepts and Benefits
+                            Customer Data Management and Analysis
+                            CRM Implementation Strategies
+                            Customer Segmentation and Targeting Techniques
                         </ul>
                     </div>
                 </div>
@@ -160,15 +157,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Big Data and AI Technologies
+                        E-commerce and Online Business Strategies
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Explore technologies used for handling big data and building AI systems.</p>
+                        <p class="mb-3">Objective : Explore e-commerce platforms and strategies for conducting business online.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Big Data Tools and Frameworks (Hadoop and Spark – APIs available in Python, Scala, Java)</li>
-                            <li>Cloud Computing for Data Science (platform-agnostic principles; AWS, Azure, Google Cloud)</li>
-                            <li>Advanced Machine Learning and AI Concepts (using TensorFlow or PyTorch in Python; MXNet in R)</li>
+                            E-commerce Models (B2B, B2C, C2C)
+                            Online Payment Systems and Security
+                            Digital Marketing Techniques (SEO, SEM, Social Media Marketing)
+                            E-commerce Website Development and Optimization
                         </ul>
                     </div>
                 </div>
@@ -185,16 +183,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Real-World Applications and Projects
+                        Business Process Automation and Workflow Management
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Apply knowledge to real-world data science problems and projects using various languages.</p>
+                        <p class="mb-3">Objective :  Learn about automation technologies and workflow management systems.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Capstone Projects (choice of language)</li>
-                            <li>Industry-Specific Applications (healthcare analysis in R, financial modelling in Python, or engineering computations in Julia)</li>
-                            <li>Ethical Considerations in Data Science</li>
-                            <li>Data Security and Privacy Compliance</li>
+                            Workflow Automation Tools and Platforms
+                            Business Process Modeling Notation (BPMN)
+                            Integration of Workflow Systems with Business Applications
+                            Monitoring and Optimization of Business Processes
                         </ul>
                     </div>
                 </div>
@@ -211,16 +209,16 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Career Preparation and Advancement
+                        Business Continuity Planning and Disaster Recovery
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Prepare for a career in data science with knowledge of multiple programming environments.</p>
+                        <p class="mb-3">Objective : Learn strategies for ensuring business continuity and recovering from disruptions.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Building a Data Science Portfolio (showcasing projects)</li>
-                            <li>Effective Resume and Cover Letter Preparation</li>
-                            <li>Interviewing Skills for Data Science (technical and problem-solving skills across languages)</li>
-                            <li>Networking and Professional Development</li>
+                            Business Impact Analysis (BIA)
+                            Disaster Recovery Planning (DRP)
+                            Backup and Restore Procedures
+                            Testing and Maintenance of Business Continuity Plans
                         </ul>
                     </div>
                 </div>
@@ -238,7 +236,7 @@
         <h2 class="font-Overpass font-bold text-4xl">Knowledge Quest</h2>
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-9"/>
     </div>
-    <p class="mb-4">Are you ready to take on the data science pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
+    <p class="mb-4">Are you ready to take on the business information system pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
     <a href="{{ route('datasciencequiz') }}" class="md:flex md:justify-center">
         <button class="btn btn-outline hover:bg-Button">Play</button>
     </a>

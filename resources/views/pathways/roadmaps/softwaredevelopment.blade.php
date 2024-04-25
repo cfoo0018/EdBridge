@@ -1,16 +1,16 @@
 @extends('layout.layout')
 
-@section('title', 'BridgeEd - Data Science Pathway')
+@section('title', 'BridgeEd - Software Development Pathway')
 
 @section('content')
 
 <!-- Roadmap Title -->
 <div id="roadmap_title" class="md:text-center flex flex-col items-center mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl">Data Science Pathway</h1>
-        <img src="{{ asset('images/datasciencelogo.png') }}" alt="data science" class=" h-10"/>
+        <h1 class="font-Overpass font-bold text-4xl">Software Development Pathway</h1>
+        <img src="{{ asset('images/codinglogo.png') }}" alt="coding" class=" h-10"/>
     </div>
-    <p class="text-xl">The guide to understanding data science pathway</p>
+    <p class="text-xl">The guide to understanding software development pathway</p>
 </div>
 
 <div class="divider"></div>
@@ -27,16 +27,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Introduction to Data Science
+                        Learn Programming Basics
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective :  Understand the basics of data science and its applications.</p>
+                        <p class="mb-3">Objective :  Master basic programming concepts and syntax, understand programming environments.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>What is Data Science?</li>
-                            <li>Overview of the Data Science Process</li>
-                            <li>Introduction to Key Programming Languages (Python, R, Julia)</li>
-                            <li>Basic Statistics and Probability</li>
+                            <li>Programming concepts (variables, data types, control flow, etc.)</li>
+                            <li>Common programming languages (Python, JavaScript, Java, etc.)</li>
+                            <li>Setting up development environments (editors, IDEs, etc.)</li>
                         </ul>
                     </div>
                 </div>          
@@ -53,19 +52,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Programming Foundations
+                        Networking Fundamentals
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Gain proficiency in one or more programming languages essential for data science.</p>
+                        <p class="mb-3">Objective : Understand basic networking concepts and communication protocols.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Python Programming for Data Science</li>
-                            <li>R for Statistical Analysis</li>
-                            <li>Julia for High-Performance Scientific Computing</li>
-                            <li>Data Manipulation and Management Techniques across Languages</li>
-                            <li>Data Structures and Algorithms</li>
-                            <li>Working with Data Libraries (Pandas, NumPy)</li>
-                            <li>Introduction to SQL for Data Handling</li>
+                                <li>Fundamentals of networking (IP addresses, ports, HTTP, etc.)</li>
+                                <li>OSI model and TCP/IP protocol stack</li>
+                                <li>HTTP and RESTful API</li>
                         </ul>
                     </div>
                 </div>    
@@ -82,16 +77,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Data Analysis and Visualization
+                        Data Structures and Algorithms
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Learn to analyse and visualise data to extract meaningful insights using different tools.</p>
+                        <p class="mb-3">Objective : Understand common data structures and algorithms, and be able to use them to solve simple problems.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Exploratory Data Analysis (EDA) in Python, R, or Julia</li>
-                            <li>Statistical Analysis Techniques across Languages</li>
-                            <li>Data Visualization (Matplotlib and Seaborn for Python; ggplot2 for R; Plots.jl for Julia)</li>
-                            <li>Advanced Data Handling (SQL and NoSQL Databases)</li>
+                            <li>Arrays, linked lists, stacks, queues, etc.</li>
+                            <li>Basic algorithms (sorting, searching, etc.)</li>
+                            <li>Complexity analysis</li>
                         </ul>
                     </div>
                 </div>
@@ -108,16 +102,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Machine Learning Basics
+                        Web Development
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Understand the fundamentals of machine learning and build simple models with different languages.</p>
+                        <p class="mb-3">Objective : Master basic web development knowledge, able to build simple web applications.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Supervised vs Unsupervised Learning in Python, R, and Julia</li>
-                            <li>Regression and Classification Models across Languages</li>
-                            <li>Decision Trees and Random Forests</li>
-                            <li>Model Evaluation and Validation Techniques</li>
+                            <li>HTML, CSS, JavaScript basics</li>
+                            <li>Frontend frameworks (React, Vue.js, etc.)</li>
+                            <li>Backend development (Node.js, Express, etc.)</li>
                         </ul>
                     </div>
                 </div>    
@@ -134,16 +127,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Advanced Machine Learning
+                        Databases and Data Storage
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Deepen knowledge in advanced machine learning techniques and algorithms using multiple languages.</p>
+                        <p class="mb-3">Objective : Understand database principles and common database systems, able to design and operate databases.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Ensemble Methods and Support Vector Machines in Python and R</li>
-                            <li>Introduction to Neural Networks and Deep Learning in Python and Julia</li>
-                            <li>Natural Language Processing (NLP) Techniques</li>
-                            <li>Time Series Analysis in R</li>
+                            <li>Relational databases (MySQL, PostgreSQL, etc.)</li>
+                            <li>NoSQL databases (MongoDB, Redis, etc.)</li>
+                            <li>Database design and optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -160,15 +152,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Big Data and AI Technologies
+                        Version Control
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Explore technologies used for handling big data and building AI systems.</p>
+                        <p class="mb-3">Objective : Master version control tools, able to effectively manage code versions.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Big Data Tools and Frameworks (Hadoop and Spark – APIs available in Python, Scala, Java)</li>
-                            <li>Cloud Computing for Data Science (platform-agnostic principles; AWS, Azure, Google Cloud)</li>
-                            <li>Advanced Machine Learning and AI Concepts (using TensorFlow or PyTorch in Python; MXNet in R)</li>
+                            <li>Basic Git operations</li>
+                            <li>Branching and merging</li>
+                            <li>Collaborative development and code review</li>
                         </ul>
                     </div>
                 </div>
@@ -185,16 +177,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Real-World Applications and Projects
+                        Architecture Design
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Apply knowledge to real-world data science problems and projects using various languages.</p>
+                        <p class="mb-3">Objective : Understand software architecture design principles, able to design and evaluate complex system architectures.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Capstone Projects (choice of language)</li>
-                            <li>Industry-Specific Applications (healthcare analysis in R, financial modelling in Python, or engineering computations in Julia)</li>
-                            <li>Ethical Considerations in Data Science</li>
-                            <li>Data Security and Privacy Compliance</li>
+                            <li>Design patterns and architecture patterns</li>
+                            <li>Microservices architecture</li>
+                            <li>Scalability and performance optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -211,16 +202,15 @@
                 <div tabindex="0" class="collapse collapse-plus border-2 border-dotted border-Second bg-base-200">
                     <input type="checkbox" />
                     <div class="collapse-title text-lg font-Overpass font-semibold">
-                        Career Preparation and Advancement
+                        DevOps
                     </div>
                     <div class="collapse-content text-left"> 
-                        <p class="mb-3">Objective : Prepare for a career in data science with knowledge of multiple programming environments.</p>
+                        <p class="mb-3">Objective : Master DevOps tools and processes, able to achieve continuous integration and continuous delivery.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            <li>Building a Data Science Portfolio (showcasing projects)</li>
-                            <li>Effective Resume and Cover Letter Preparation</li>
-                            <li>Interviewing Skills for Data Science (technical and problem-solving skills across languages)</li>
-                            <li>Networking and Professional Development</li>
+                            <li>Automated deployment and testing</li>
+                            <li>Containerization technologies (Docker, Kubernetes, etc.)</li>
+                            <li>Monitoring and log management</li>
                         </ul>
                     </div>
                 </div>
@@ -238,7 +228,7 @@
         <h2 class="font-Overpass font-bold text-4xl">Knowledge Quest</h2>
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-9"/>
     </div>
-    <p class="mb-4">Are you ready to take on the data science pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
+    <p class="mb-4">Are you ready to take on the software development pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
     <a href="{{ route('datasciencequiz') }}" class="md:flex md:justify-center">
         <button class="btn btn-outline hover:bg-Button">Play</button>
     </a>

@@ -37,6 +37,30 @@ Route::get('/datascience/quiz', function () {
     return view('pathways.quiz.datascience');
 })->name('datasciencequiz');
 
+Route::get('/softwaredevelopment', function () {
+    return view('pathways.roadmaps.softwaredevelopment');
+})->name('softwaredevelopment');
+
+Route::get('/softwaredevelopment/quiz', function () {
+    return view('pathways.quiz.softwaredevelopment');
+})->name('softwaredevelopmentquiz');
+
+Route::get('/cybersecurity', function () {
+    return view('pathways.roadmaps.cybersecurity');
+})->name('cybersecurity');
+
+Route::get('/cybersecurity/quiz', function () {
+    return view('pathways.quiz.cybersecurity');
+})->name('cybersecurityquiz');
+
+Route::get('/businessinformation', function () {
+    return view('pathways.roadmaps.businessinformation');
+})->name('businessinformation');
+
+Route::get('/businessinformation/quiz', function () {
+    return view('pathways.quiz.businessinformation');
+})->name('businessinformationquiz');
+
 Route::fallback(function () {
     return response()->view('404', [], 404);
 });

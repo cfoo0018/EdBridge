@@ -188,3 +188,10 @@
     }
 }
 
+@media (min-width: 768px) {
+    #pathway-div figure {
+        min-width: 255px;
+        height: 288px;
+    }
+}
+
