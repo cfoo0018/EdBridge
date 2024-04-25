@@ -110,7 +110,7 @@
     animation: blink-cursor 0.75s step-end infinite;
 }
 
-.modal-box{
+.modal-box {
     max-width: 900px;
 }
 
@@ -133,17 +133,22 @@
     transition: visibility 0s linear 1s, opacity 1s;
 } */
 
-#question-numbers li{
+#question-numbers li {
     min-width: 3rem !important;
 }
 @keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+    0%,
+    100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 #animatedText {
     animation: fadeInOut 3s ease-in-out infinite;
-    color: #109CDE; 
+    color: #109cde;
 }
 
 #loadingScreen {
@@ -174,7 +179,8 @@
     @apply bg-inherit bg-none;
 }
 
-.steps .step-primary + .step-primary:before, .steps .step-primary:after {
+.steps .step-primary + .step-primary:before,
+.steps .step-primary:after {
     @apply bg-Second;
 }
 
@@ -197,4 +203,19 @@
         height: 288px;
     }
 }
-
+canvas {
+    display: block;
+    max-width: 80%;
+}
+/* .congrats{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    color: #fff;
+    font-family: "Source Sans Pro";
+    font-size: 4em;
+    font-weight: 900;
+    -webkit-user-select: none;
+    user-select: none;
+} */

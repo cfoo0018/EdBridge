@@ -237,7 +237,7 @@
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-9"/>
     </div>
     <p class="mb-4">Are you ready to take on the cyber security pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
-    <a href="{{ route('datasciencequiz') }}" class="md:flex md:justify-center">
+    <a href="{{ route('cybersecurityquiz') }}" class="md:flex md:justify-center">
         <button class="btn btn-outline hover:bg-Button">Play</button>
     </a>
 </div>
