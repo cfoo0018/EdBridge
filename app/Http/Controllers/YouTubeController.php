@@ -8,14 +8,13 @@ use App\Services\YouTubeService;
 class YouTubeController extends Controller
 {
     protected $youTubeService;
-    // Define a list of allowed courses
     private $allowedCourses = [
-        'STEM Education', 
-        'Biology', 
-        'Computer Science', 
-        'Mathematics', 
-        'Physics', 
-        'Psychology', 
+        'STEM Education',
+        'Biology',
+        'Computer Science',
+        'Mathematics',
+        'Physics',
+        'Psychology',
         'Sociology'
     ];
 
@@ -26,36 +25,40 @@ class YouTubeController extends Controller
 
     public function index()
     {
-        // Initialize videos to an empty array if no search has been performed yet
-        $videos = [];
-        // Pass allowed courses and videos to the view
-        return view('resourcehub', ['allowedCourses' => $this->allowedCourses, 'videos' => $videos]);
+        $defaultCourse = 'STEM Education';
+        $query = $defaultCourse . ' courses';
+
+        $searchResults = $this->youTubeService->searchVideos($query);
+        $videos = $searchResults['items'];
+        $nextPageToken = $searchResults['nextPageToken'] ?? null;
+        $prevPageToken = $searchResults['prevPageToken'] ?? null;
+
+        if (empty($videos)) {
+            $videos = [];
+            session()->flash('no-results', 'No default videos found.');
+        }
+
+        return view('resourcehub', compact('videos', 'nextPageToken', 'prevPageToken', 'query') + ['allowedCourses' => $this->allowedCourses]);
     }
-    
 
     public function search(Request $request)
     {
-        // Retrieve the course from the request and append " courses" to form the query
-        $course = $request->input('course', 'STEM Education'); // Default to "STEM Education" if no course is selected
-        $query = $course . ' courses'; // Append ' courses' to the query
-    
+        $course = $request->input('course', 'STEM Education');
+        $query = $course . ' courses';
         $pageToken = $request->input('pageToken', null);
         $duration = $request->input('duration', null);
-    
-        // Fetch search results from the YouTubeService using the modified query
-        $searchResults = $this->youTubeService->searchVideos($query, $duration, $pageToken);
+        $level = $request->input('level', null); // Retrieve level from the request
+
+        $searchResults = $this->youTubeService->searchVideos($query, $duration, $pageToken, $level);
         $videos = $searchResults['items'];
-        $nextPageToken = $searchResults['nextPageToken'];
-        $prevPageToken = $searchResults['prevPageToken'];
-    
-        // Handle no results
+        $nextPageToken = $searchResults['nextPageToken'] ?? null;
+        $prevPageToken = $searchResults['prevPageToken'] ?? null;
+
         if (empty($videos)) {
             session()->flash('no-results', 'No videos found for your query. Showing default STEM education content.');
             return redirect()->route('resourcehub');
         }
-    
-        // Since $allowedCourses is used in the view, ensure it's available as part of the view data
-        return view('resourcehub', compact('videos', 'nextPageToken', 'prevPageToken', 'query') + ['allowedCourses' => $this->allowedCourses]);
-    }
 
+        return view('resourcehub', compact('videos', 'nextPageToken', 'prevPageToken', 'query', 'level') + ['allowedCourses' => $this->allowedCourses]);
+    }
 }
