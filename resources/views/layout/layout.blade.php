@@ -68,7 +68,6 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
     <!-- Scripts -->
     @yield('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
     @stack('script')
     <!-- Scripts -->
     {{-- <script>
