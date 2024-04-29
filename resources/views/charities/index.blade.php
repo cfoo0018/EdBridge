@@ -6,17 +6,8 @@
     <div class="py-8 px-4 md:px-8 lg:px-16 mt-20">
         <!-- Title, Search Bar, and View Toggle -->
         <div class="mb-8">
-            <div class="flex justify-between items-center">
+            <div class="items-center">
                 <h1 class="text-3xl md:text-4xl font-Fredoka text-Second text-center">Support Service Directory</h1>
-                <!-- View Toggle -->
-                <div class="flex items-center">
-                    <button id="listViewToggle" class="text-Second hover:text-gray-800 focus:outline-none text-3xl">
-                        <i class="fas fa-list"></i>
-                    </button>
-                    <button id="mapViewToggle" class="ml-2 text-Second hover:text-gray-800 focus:outline-none text-3xl">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </button>
-                </div>
             </div>
             <p class="text-lg text-gray-600 mt-2">Find the nearest support services based on your location</p>
             <!-- Search Form -->
@@ -24,40 +15,52 @@
                 <input type="text" name="search" id="locationInput" placeholder="Enter your postal address"
                     class="w-full p-4 rounded-lg border-2 border-gray-200"
                     value="{{ request()->filled('search') ? request()->search : '' }}">
-                <!-- Include the entered location in a hidden input field -->
-                <input type="hidden" name="location" value="{{ $userLocation ? implode(',', $userLocation) : '' }}">
                 <button type="submit"
                     class="mt-2 w-full bg-Button hover:bg-blue-700 text-white font-Fredoka py-2 px-4 rounded-lg">Search</button>
             </form>
         </div>
-        <!-- Category Filters -->
-        <div class="mb-4 flex flex-wrap gap-2">
-            <!-- Desktop view -->
-            <div class="hidden md:block">
-                @foreach ($serviceTypes as $key => $name)
-                    <a href="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'location' => request()->input('location')]) }}"
-                        class="text-sm {{ $currentType === $key ? 'bg-Second text-white' : 'bg-gray-200 text-gray-800' }} hover:bg-white hover:text-Second btn font-Fredoka py-2 px-4 rounded-full transition-colors duration-300">
-                        {{ $name }}
-                    </a>
-                @endforeach
-            </div>
 
-            <!-- Mobile view -->
-            <div class="md:hidden w-full">
-                <div class="sm:w-full">
-                    <select onchange="window.location.href = this.value;"
-                        class="w-full text-sm bg-gray-200 text-gray-800 hover:bg-white hover:text-Second btn font-Fredoka py-2 px-4 rounded-full transition-colors duration-300">
-                        @foreach ($serviceTypes as $key => $name)
-                            <option
-                                value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'location' => request()->input('location')]) }}"
-                                {{ $currentType === $key ? 'selected' : '' }}>
-                                {{ $name }}
-                            </option>
-                        @endforeach
-                    </select>
+        <!-- Category Filters with Dropdown, Range Slider, and View Toggle -->
+        <div class="mb-4 flex justify-between">
+            <!-- Dropdown Select -->
+            <div class="relative mr-2">
+                <select onchange="window.location.href = this.value;"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-2 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500 transition-colors duration-300">
+                    @foreach ($serviceTypes as $key => $name)
+                        <option
+                            value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'location' => request()->input('location')]) }}"
+                            {{ $currentType === $key ? 'selected' : '' }}>
+                            {{ $name }}
+                        </option>
+                    @endforeach
+                </select>
+                <!-- Dropdown Indicator Icon -->
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-800">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M4.293 7.293a 1 1 0 0 1 1.414-1.414L10 10.586l4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5a1 1 0 0 1-1.414 0l-5-5z" />
+                    </svg>
                 </div>
             </div>
+
+            <!-- Range Slider -->
+            <div class="w-1/4">
+                <label for="rangeSlider">Max Distance (km): <span id="sliderValue">50</span></label>
+                <input type="range" min="0" max="100" value="50" name="distance"
+                    class="slider w-full appearance-none bg-gray-200 h-2 rounded-full mt-2" id="rangeSlider">
+            </div>
+
+            <!-- View Toggle Buttons -->
+            <div class="flex items-center">
+                <button id="listViewToggle" class="text-Second hover=text-gray-800 focus:outline-none text-3xl">
+                    <i class="fas fa-list"></i>
+                </button>
+                <button id="mapViewToggle" class="ml-2 text-Second hover=text-gray-800 focus:outline-none text-3xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+            </div>
         </div>
+
         <!-- Views Container -->
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Map View -->
@@ -72,6 +75,7 @@
                 @endforeach
                 <div id="map" class="w-full h-full"></div>
             </div>
+
             <!-- List View -->
             <div id="listView" class="hidden w-full">
                 <div class="overflow-auto h-96 lg:h-full bg-white rounded-xl shadow-lg">
@@ -118,36 +122,46 @@
                     </ul>
                     <!-- Pagination Links -->
                     <div class="px-4 py-3">
-                        {{ $charities->appends(request()->query())->links() }}
-                        {{-- {{ $charities->links() }} --}}
+                        {{ $charities->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-@push('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#locationInput').autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: '{{ route('support.search') }}',
-                    dataType: 'json',
-                    data: { term: request.term },
-                    success: function(data) {
-                        response(data);
-                    }
-                });
-            },
-            minLength: 2,
-            select: function(event, ui) {
-                $('#locationInput').val(ui.item.value);
-            }
-        });
-    });
-</script>
 
+@push('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#locationInput').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: '{{ route('support.search') }}',
+                        dataType: 'json',
+                        data: {
+                            term: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function(event, ui) {
+                    $('#locationInput').val(ui.item.value);
+                    $('#locationState').val(ui.item.state);
+                }
+            });
+
+            // Slider Functionality
+            const rangeSlider = document.getElementById('rangeSlider');
+            const sliderValue = document.getElementById('sliderValue');
+
+            rangeSlider.addEventListener('input', function() {
+                sliderValue.textContent = rangeSlider.value;
+            });
+        });
+    </script>
 
     <div x-data="{ showAlert: false }">
         <script>
@@ -178,9 +192,10 @@
                 } else {
                     showListView();
                 }
-
+                const defaultLocation = [-37.8136, 144.9631]; // Melbourne coordinates
+                const defaultZoom = 10;
                 // Map-related functionalities
-                const map = L.map('map').setView([-23.6980, 133.8807], 4);
+                const map = L.map('map').setView(defaultLocation, defaultZoom);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 18,
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

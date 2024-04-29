@@ -4,41 +4,61 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Charity;
-use GoogleMaps\GoogleMaps;
+use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
+use Illuminate\Support\Facades\Log;
 
-class GeocodeCharities extends Command
-{
-    protected $signature = 'geocode:charities';
-    protected $description = 'Geocode all charities that need geocoding';
+class GeocodeCharities extends Command {
+    protected $signature = 'charities:geocode';
+    protected $description = 'Geocode charities and populate missing data';
 
-    public function handle()
-    {
-        $charities = Charity::whereNull('latitude')->orWhereNull('longitude')->get();
-        
-        foreach ($charities as $charity) {
-            if (!empty($charity->address)) {
-                $coordinates = $this->geocodeAddress($charity->address);
-                if ($coordinates) {
-                    $charity->latitude = $coordinates['lat'];
-                    $charity->longitude = $coordinates['lng'];
+    public function handle() {
+        $charities = Charity::all();
+
+        $charities->each(function ($charity) {
+            if (!$charity->latitude || !$charity->longitude || !$charity->state) {
+                $geocodeResult = $this->geocodeAddress($charity->full_address);
+                if ($geocodeResult) {
+                    $charity->latitude = $geocodeResult['location']['lat'];
+                    $charity->longitude = $geocodeResult['location']['lng'];
+                    $charity->state = $geocodeResult['state'];
                     $charity->save();
-                    $this->info("Geocoded: {$charity->name}");
                 }
             }
-        }
+        });
+
+        $this->info('Charities geocoded successfully.');
     }
 
-    private function geocodeAddress($address)
-    {
-        $googleMaps = new GoogleMaps(env('GOOGLE_MAPS_API_KEY'));
-        $response = $googleMaps->load('geocoding')
-                                ->setParam(['address' => $address])
-                                ->get();
+    protected function geocodeAddress($address) {
+        try {
+            $response = GoogleMaps::load('geocoding')
+                ->setParam(['address' => $address, 'key' => env('GOOGLE_MAPS_API_KEY')])
+                ->get();
 
-        if (!empty($response['results'][0]['geometry']['location'])) {
-            return $response['results'][0]['geometry']['location'];
+            $data = json_decode($response, true);
+            if ($data['status'] === 'OK') {
+                $result = $data['results'][0];
+                $location = $result['geometry']['location'];
+                $state = null;
+
+                foreach ($result['address_components'] as $component) {
+                    if (in_array('administrative_area_level_1', $component['types'])) {
+                        $state = $component['short_name'];
+                        break;
+                    }
+                }
+
+                return [
+                    'location' => $location,
+                    'state',
+                ];
+            } else {
+                Log::warning('Geocoding failed:', ['address' => $address, 'response' => $data]);
+                return null;
+            }
+        } catch (\Exception $e) {
+            Log::error('Geocoding exception:', ['error' => $e->getMessage()]);
+            return null;
         }
-
-        return null;
     }
 }

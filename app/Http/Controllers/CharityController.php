@@ -10,35 +10,58 @@ use Illuminate\Support\Facades\Http;
 
 class CharityController extends Controller
 {
+
     public function index(Request $request)
-    {
-        $query = Charity::query();
-        $userLocation = $request->session()->get('user_location');
+{
+    $query = Charity::query();
 
-        if ($request->filled('search') && !$userLocation) {
-            $userLocation = $this->geocodeAddress($request->search);
-            $request->session()->put('user_location', $userLocation);
-        }
-
-        if ($request->has('service_type') && $request->service_type != 'all') {
-            $query->where('service_type', $this->mapServiceType($request->service_type));
-        }
-
-        $serviceTypes = $this->getServiceTypes();
-        $query->select('id', 'charity_legal_name', 'full_address', 'service_type', 'charity_website');
-        $charities = $query->paginate(15);
-
-        if ($userLocation) {
-            $this->processCharitiesDistance($charities, $userLocation);
-        }
-
-        return view('charities.index', [
-            'charities' => $charities,
-            'serviceTypes' => $serviceTypes,
-            'currentType' => $request->service_type ?? 'all',
-            'userLocation' => $userLocation,
-        ]);
+    // Check for user location input and geocode if needed
+    if ($request->filled('search')) {
+        $userLocation = $this->geocodeAddress($request->input('search'));
+        $request->session()->put('user_location', $userLocation);
+        $request->session()->put('user_state', $this->getStateFromCoordinates($userLocation)); // Save state
+    } else {
+        // Default to Melbourne if no location is given
+        $userLocation = $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
     }
+
+    if ($userLocation) {
+        $state = $this->getStateFromCoordinates($userLocation);
+        $postcodeRange = $this->getPostcodeRangeFromCoordinates($userLocation);
+
+        // Filter by state or postcode range
+        $query->where(function ($q) use ($state, $postcodeRange) {
+            if ($state) {
+                $q->where('state', $state);
+            }
+
+            if ($postcodeRange) {
+                $q->orWhereBetween('postcode', $postcodeRange);
+            }
+        });
+    }
+
+    // Filter by service type
+    if ($request->has('service_type') && $request->service_type != 'all') {
+        $query->where('service_type', $this->mapServiceType($request->service_type));
+    }
+
+    $serviceTypes = $this->getServiceTypes();
+    $query->select('id', 'charity_legal_name', 'full_address', 'service_type', 'charity_website');
+    $charities = $query->paginate(30);
+
+    if ($userLocation) {
+        $this->processCharitiesDistance($charities, $userLocation);
+    }
+
+    return view('charities.index', [
+        'charities' => $charities,
+        'serviceTypes' => $serviceTypes,
+        'currentType' => $request->service_type ?? 'all',
+        'userLocation' => $userLocation,
+    ]);
+}
+
 
     protected function geocodeAddress($address)
     {
@@ -48,8 +71,11 @@ class CharityController extends Controller
                 ->get();
             $data = json_decode($response, true);
 
-            if ($data['status'] === 'OK') {
-                return $data['results'][0]['geometry']['location'];
+            if ($data['status'] === 'OK' && isset($data['results'][0]['geometry']['location']['lat']) && isset($data['results'][0]['geometry']['location']['lng'])) {
+                return [
+                    'lat' => $data['results'][0]['geometry']['location']['lat'],
+                    'lng' => $data['results'][0]['geometry']['location']['lng'],
+                ];
             } else {
                 Log::warning('Geocoding failed:', ['address' => $address, 'response' => $data]);
                 return null;
@@ -58,6 +84,22 @@ class CharityController extends Controller
             Log::error('Geocoding exception:', ['error' => $e->getMessage()]);
             return null;
         }
+    }
+
+    protected function getStateFromCoordinates($coordinates)
+    {
+        // Fetch the state from coordinates (implement this as needed, e.g., via reverse geocoding)
+        return "VIC"; // Example hard-coded response, replace with actual logic
+    }
+
+    protected function getPostcodeRangeFromCoordinates($coordinates)
+    {
+        $lat = $coordinates['lat'];
+        $lng = $coordinates['lng'];
+
+        // Determine postcode range based on coordinates
+        // This is a placeholder; replace it with logic to convert coordinates to postcode ranges.
+        return [3000, 3999];
     }
 
     protected function getServiceTypes()
@@ -77,42 +119,11 @@ class CharityController extends Controller
             'advancing_education' => 'Advancing Education',
             'people_at_risk_of_homelessness' => 'People at Risk of Homelessness',
             'unemployed_person' => 'Unemployed Person',
-            'people_with_chronic_illness' => 'People with Chronic Illness',
-            'advancing_culture' => 'Advancing Culture',
+            'people_with_chronic illness' => 'People with Chronic Illness',
+            'advancing culture' => 'Advancing Culture',
             'gay_lesbian_bisexual' => 'LGBTQ+',
         ];
     }
-
-    protected function isAddressComplete($address)
-    {
-        // Check if the address has at least one comma, suggesting it includes more than one part
-        return strpos($address, ',') !== false && !preg_match('/,,/', $address);
-    }
-
-    protected function processCharitiesDistance($charities, $userLocation)
-    {
-        $transformed = $charities->getCollection()->map(function ($charity) use ($userLocation) {
-            if ($this->isAddressComplete($charity->full_address)) {
-                $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
-                $charityLocation = $this->geocodeAddress($charity->full_address);
-                if ($charityLocation) {
-                    $charity->latitude = $charityLocation['lat'];  // Add latitude
-                    $charity->longitude = $charityLocation['lng']; // Add longitude
-                    $charity->distance = $this->haversineGreatCircleDistance(
-                        $userLocation['lat'],
-                        $userLocation['lng'],
-                        $charityLocation['lat'],
-                        $charityLocation['lng']
-                    );
-                }
-                return $charity;
-            }
-            return null;
-        })->filter();
-    
-        $sorted = $transformed->sortBy('distance');
-        $charities->setCollection($sorted);
-    }    
 
     protected function mapServiceType($type)
     {
@@ -136,12 +147,44 @@ class CharityController extends Controller
         ][strtolower($type)] ?? $type;
     }
 
+    protected function processCharitiesDistance($charities, $userLocation)
+    {
+        $transformed = $charities->getCollection()->map(function ($charity) use ($userLocation) {
+            if ($this->isAddressComplete($charity->full_address)) {
+                $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
+                $charityLocation = $this->geocodeAddress($charity->full_address);
+                if ($charityLocation) {
+                    $charity->latitude = $charityLocation['lat'];
+                    $charity->longitude = $charityLocation['lng'];
+                    $charity->distance = $this->haversineGreatCircleDistance(
+                        $userLocation['lat'],
+                        $userLocation['lng'],
+                        $charityLocation['lat'],
+                        $charityLocation['lng']
+                    );
+                }
+                return $charity;
+            }
+            return null;
+        })->filter();
+
+        // Sort charities by distance
+        $sorted = $transformed->sortBy('distance');
+        $charities->setCollection($sorted);
+    }
+
+    protected function isAddressComplete($address)
+    {
+        // Check if the address has at least one comma and no consecutive commas, suggesting a complete structure
+        return strpos($address, ',') !== false && !preg_match('/,,/', $address);
+    }
     protected function formatServiceTypeForDisplay($type)
     {
+        // Convert underscores to spaces and capitalize the first letter of each word
         return ucwords(str_replace('_', ' ', $type));
     }
 
-    public function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371)
+    protected function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371)
     {
         $latFrom = deg2rad($latitudeFrom);
         $lonFrom = deg2rad($longitudeFrom);
@@ -184,19 +227,19 @@ class CharityController extends Controller
             'components' => 'country:au', // Restrict to Australia
             'key' => $apiKey
         ]);
-    
+
         $suggestions = json_decode($response->body(), true);
-    
+
         if ($suggestions['status'] == 'OK') {
             // Transforming the response to match expected format
             $formattedSuggestions = array_map(function ($item) {
                 return ['label' => $item['description'], 'value' => $item['description']];
             }, $suggestions['predictions']);
-    
+
             return response()->json($formattedSuggestions);
         } else {
             Log::warning('Google Places API call failed:', ['response' => $suggestions]);
             return response()->json([]);
         }
-    }    
+    }
 }
