@@ -6,6 +6,7 @@ use App\Models\Charity;
 use Illuminate\Http\Request;
 use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class CharityController extends Controller
 {
@@ -171,4 +172,31 @@ class CharityController extends Controller
 
         return response()->json($geocodedCharities->filter());
     }
+
+    public function searchSuggestions(Request $request)
+    {
+        $searchTerm = $request->input('term');
+        $apiKey = env('GOOGLE_MAPS_API_KEY');
+        $response = Http::get("https://maps.googleapis.com/maps/api/place/autocomplete/json", [
+            'input' => $searchTerm,
+            'types' => 'geocode',
+            'language' => 'en',
+            'components' => 'country:au', // Restrict to Australia
+            'key' => $apiKey
+        ]);
+    
+        $suggestions = json_decode($response->body(), true);
+    
+        if ($suggestions['status'] == 'OK') {
+            // Transforming the response to match expected format
+            $formattedSuggestions = array_map(function ($item) {
+                return ['label' => $item['description'], 'value' => $item['description']];
+            }, $suggestions['predictions']);
+    
+            return response()->json($formattedSuggestions);
+        } else {
+            Log::warning('Google Places API call failed:', ['response' => $suggestions]);
+            return response()->json([]);
+        }
+    }    
 }

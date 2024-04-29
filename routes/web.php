@@ -23,6 +23,7 @@ Route::get('/search', [SearchController::class,'index'])->name('search');
 
 Route::get('/support', [CharityController::class, 'index'])->name('support.index');
 Route::get('/support/geocode', [CharityController::class,'geocodeCharities'])->name('support.geocode');
+Route::get('/support-search', [CharityController::class,'searchSuggestions'])->name('support.search');
 
 
 Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');

@@ -127,6 +127,28 @@
     </div>
 @endsection
 @push('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#locationInput').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: '{{ route('support.search') }}',
+                    dataType: 'json',
+                    data: { term: request.term },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                $('#locationInput').val(ui.item.value);
+            }
+        });
+    });
+</script>
+
+
     <div x-data="{ showAlert: false }">
         <script>
             document.addEventListener('DOMContentLoaded', function() {
