@@ -14,51 +14,41 @@ class CharityController extends Controller
     public function index(Request $request)
     {
         // Determine user's location or default to Melbourne
-        $userLocation = $request->filled('search')
-            ? $this->geocodeAddress($request->input('search'))
-            : $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
-
-        $request->session()->put('user_location', $userLocation);
-
-        // Default to Melbourne if geocoding fails
+        $userLocation = $this->getUserLocation($request);
         if (!$userLocation) {
             $userLocation = $this->geocodeAddress("Melbourne, VIC");
         }
+        $request->session()->put('user_location', $userLocation);
 
         // Capture the distance filter from the request
-        $distanceKm = $request->input('distance', 50); // 50 km default
+        $distanceKm = $request->input('distance', 50); // Default to 50 km
 
-        $charities = Charity::all(); // Fetch all charities initially
-
-        // Filter charities by distance from user's location
-        $charities = $charities->filter(function ($charity) use ($userLocation, $distanceKm) {
-            $distance = $this->haversineGreatCircleDistance(
+        // Fetch all charities initially and filter by distance
+        $charities = Charity::all()->filter(function ($charity) use ($userLocation, $distanceKm) {
+            return $this->haversineGreatCircleDistance(
                 $userLocation['lat'],
                 $userLocation['lng'],
                 $charity->latitude,
                 $charity->longitude
-            );
-            return $distance <= $distanceKm;
+            ) <= $distanceKm;
         });
 
         // Optional: filter by service type
         if ($request->has('service_type') && $request->service_type != 'all') {
-            $charities = $charities->where('service_type', $this->mapServiceType($request->service_type));
+            $charities = $charities->filter(function ($charity) use ($request) {
+                return $charity->service_type === $this->mapServiceType($request->service_type);
+            });
         }
 
         // Sort charities by distance
         $sortedCharities = $this->sortByDistance($charities, $userLocation);
 
-        // Paginate manually
-        $perPage = 30;
-        $currentPage = $request->input('page', 1);
-        $pagedCharities = $sortedCharities->slice(($currentPage - 1) * $perPage, $perPage);
-
+        // Paginate results
         $paginatedCharities = new LengthAwarePaginator(
-            $pagedCharities,
+            $sortedCharities->slice(($request->input('page', 1) - 1) * 30, 30),
             $sortedCharities->count(),
-            $perPage,
-            $currentPage,
+            30,
+            $request->input('page', 1),
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
@@ -70,8 +60,19 @@ class CharityController extends Controller
             'serviceTypes' => $serviceTypes,
             'currentType' => $request->service_type ?? 'all',
             'userLocation' => $userLocation,
-            'distanceKm' => $distanceKm, // To pass the distance to the view
+            'distanceKm' => $distanceKm,
         ]);
+    }
+
+    protected function getUserLocation(Request $request)
+    {
+        if ($request->filled('search')) {
+            return $this->geocodeAddress($request->input('search'));
+        } elseif ($sessionLocation = $request->session()->get('user_location')) {
+            return $sessionLocation;
+        } else {
+            return $this->geocodeAddress("Melbourne, VIC");
+        }
     }
 
     protected function geocodeAddress($address)
