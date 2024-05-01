@@ -14,41 +14,51 @@ class CharityController extends Controller
     public function index(Request $request)
     {
         // Determine user's location or default to Melbourne
-        $userLocation = $this->getUserLocation($request);
+        $userLocation = $request->filled('search')
+            ? $this->geocodeAddress($request->input('search'))
+            : $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
+
+        $request->session()->put('user_location', $userLocation);
+
+        // Default to Melbourne if geocoding fails
         if (!$userLocation) {
             $userLocation = $this->geocodeAddress("Melbourne, VIC");
         }
-        $request->session()->put('user_location', $userLocation);
 
         // Capture the distance filter from the request
-        $distanceKm = $request->input('distance', 50); // Default to 50 km
+        $distanceKm = $request->input('distance', 50); // 50 km default
 
-        // Fetch all charities initially and filter by distance
-        $charities = Charity::all()->filter(function ($charity) use ($userLocation, $distanceKm) {
-            return $this->haversineGreatCircleDistance(
+        // Fetch charities within a bounding box
+        $boundingBox = $this->calculateBoundingBox($userLocation, $distanceKm);
+        $charities = Charity::whereBetween('latitude', [$boundingBox['minLat'], $boundingBox['maxLat']])
+            ->whereBetween('longitude', [$boundingBox['minLng'], $boundingBox['maxLng']])
+            ->get();
+
+        // Filter and sort charities by distance
+        $charities = $charities->filter(function ($charity) use ($userLocation, $distanceKm) {
+            $distance = $this->haversineGreatCircleDistance(
                 $userLocation['lat'],
                 $userLocation['lng'],
                 $charity->latitude,
                 $charity->longitude
-            ) <= $distanceKm;
+            );
+            $charity->distance = $distance; // Assign distance to each charity
+            return $distance <= $distanceKm;
         });
 
-        // Optional: filter by service type
-        if ($request->has('service_type') && $request->service_type != 'all') {
-            $charities = $charities->filter(function ($charity) use ($request) {
-                return $charity->service_type === $this->mapServiceType($request->service_type);
-            });
-        }
-
         // Sort charities by distance
-        $sortedCharities = $this->sortByDistance($charities, $userLocation);
+        $charities = $charities->sortBy('distance');
 
-        // Paginate results
+        // Paginate manually
+        $perPage = 30;
+        $currentPage = $request->input('page', 1);
+        $pagedCharities = $charities->slice(($currentPage - 1) * $perPage, $perPage);
+
         $paginatedCharities = new LengthAwarePaginator(
-            $sortedCharities->slice(($request->input('page', 1) - 1) * 30, 30),
-            $sortedCharities->count(),
-            30,
-            $request->input('page', 1),
+            $pagedCharities,
+            $charities->count(),
+            $perPage,
+            $currentPage,
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
@@ -60,8 +70,35 @@ class CharityController extends Controller
             'serviceTypes' => $serviceTypes,
             'currentType' => $request->service_type ?? 'all',
             'userLocation' => $userLocation,
-            'distanceKm' => $distanceKm,
+            'distanceKm' => $distanceKm, // To pass the distance to the view
         ]);
+    }
+
+    protected function calculateBoundingBox($userLocation, $distanceKm)
+    {
+        // Approximate bounding box calculation (not precise, but quick)
+        $latRadians = deg2rad($userLocation['lat']);
+        $lngRadians = deg2rad($userLocation['lng']);
+
+        // Radius of the Earth in km
+        $earthRadius = 6371;
+
+        // Approximate distance in degrees for latitude and longitude
+        $deltaLat = rad2deg($distanceKm / $earthRadius);
+        $deltaLng = rad2deg(asin(sin($distanceKm / ($earthRadius * cos($latRadians)))));
+
+        // Calculate bounding box coordinates
+        $minLat = $userLocation['lat'] - $deltaLat;
+        $maxLat = $userLocation['lat'] + $deltaLat;
+        $minLng = $userLocation['lng'] - $deltaLng;
+        $maxLng = $userLocation['lng'] + $deltaLng;
+
+        return [
+            'minLat' => $minLat,
+            'maxLat' => $maxLat,
+            'minLng' => $minLng,
+            'maxLng' => $maxLng,
+        ];
     }
 
     protected function getUserLocation(Request $request)
@@ -74,6 +111,7 @@ class CharityController extends Controller
             return $this->geocodeAddress("Melbourne, VIC");
         }
     }
+
 
     protected function geocodeAddress($address)
     {
