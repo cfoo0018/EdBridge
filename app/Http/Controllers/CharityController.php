@@ -4,65 +4,75 @@ namespace App\Http\Controllers;
 
 use App\Models\Charity;
 use Illuminate\Http\Request;
-use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\LengthAwarePaginator;
+use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
 
 class CharityController extends Controller
 {
 
-    public function index(Request $request)
-{
-    $query = Charity::query();
-
-    // Check for user location input and geocode if needed
-    if ($request->filled('search')) {
-        $userLocation = $this->geocodeAddress($request->input('search'));
+    public function index(Request $request) {
+        // Determine the user's location or default to Melbourne
+        $userLocation = $request->filled('search')
+            ? $this->geocodeAddress($request->input('search'))
+            : $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
+    
         $request->session()->put('user_location', $userLocation);
-        $request->session()->put('user_state', $this->getStateFromCoordinates($userLocation)); // Save state
-    } else {
-        // Default to Melbourne if no location is given
-        $userLocation = $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
+    
+        // Default to Melbourne if geocoding fails
+        if (!$userLocation) {
+            $userLocation = $this->geocodeAddress("Melbourne, VIC");
+        }
+    
+        // Calculate geographical ranges for proximity filtering
+        $latRange = 50 / 111; // 50 km radius to latitude range
+        $lngRange = 50 / (111 * cos(deg2rad($userLocation['lat']))); // Longitude range conversion
+    
+        $minLat = $userLocation['lat'] - $latRange;
+        $maxLat = $userLocation['lat'] + $latRange;
+        $minLng = $userLocation['lng'] - $lngRange;
+        $maxLng = $userLocation['lng'] + $lngRange;
+    
+        $query = Charity::whereBetween('latitude', [$minLat, $maxLat])
+                        ->whereBetween('longitude', [$minLng, $maxLng]);
+    
+        // Filter by service type if specified
+        if ($request->has('service_type') && $request->service_type != 'all') {
+            $query->where('service_type', $this->mapServiceType($request->service_type));
+        }
+    
+        // Select necessary columns
+        $charities = $query->select('id', 'charity_legal_name', 'full_address', 'service_type', 'latitude', 'longitude', 'charity_website')->get();
+    
+        // Sort by distance
+        $sortedCharities = $this->sortByDistance($charities, $userLocation);
+    
+        // Paginate manually
+        $perPage = 30;
+        $currentPage = $request->input('page', 1);
+        $pagedCharities = $sortedCharities->slice(($currentPage - 1) * $perPage, $perPage);
+    
+        // Return the paged result with pagination links
+        $paginatedCharities = new LengthAwarePaginator(
+            $pagedCharities, 
+            $sortedCharities->count(), 
+            $perPage, 
+            $currentPage,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+    
+        // Fetch service types
+        $serviceTypes = $this->getServiceTypes();
+    
+        return view('charities.index', [
+            'charities' => $paginatedCharities,
+            'serviceTypes' => $serviceTypes,
+            'currentType' => $request->service_type ?? 'all',
+            'userLocation' => $userLocation,
+        ]);
     }
-
-    if ($userLocation) {
-        $state = $this->getStateFromCoordinates($userLocation);
-        $postcodeRange = $this->getPostcodeRangeFromCoordinates($userLocation);
-
-        // Filter by state or postcode range
-        $query->where(function ($q) use ($state, $postcodeRange) {
-            if ($state) {
-                $q->where('state', $state);
-            }
-
-            if ($postcodeRange) {
-                $q->orWhereBetween('postcode', $postcodeRange);
-            }
-        });
-    }
-
-    // Filter by service type
-    if ($request->has('service_type') && $request->service_type != 'all') {
-        $query->where('service_type', $this->mapServiceType($request->service_type));
-    }
-
-    $serviceTypes = $this->getServiceTypes();
-    $query->select('id', 'charity_legal_name', 'full_address', 'service_type', 'charity_website');
-    $charities = $query->paginate(30);
-
-    if ($userLocation) {
-        $this->processCharitiesDistance($charities, $userLocation);
-    }
-
-    return view('charities.index', [
-        'charities' => $charities,
-        'serviceTypes' => $serviceTypes,
-        'currentType' => $request->service_type ?? 'all',
-        'userLocation' => $userLocation,
-    ]);
-}
-
-
+    
     protected function geocodeAddress($address)
     {
         try {
@@ -86,21 +96,19 @@ class CharityController extends Controller
         }
     }
 
-    protected function getStateFromCoordinates($coordinates)
-    {
-        // Fetch the state from coordinates (implement this as needed, e.g., via reverse geocoding)
-        return "VIC"; // Example hard-coded response, replace with actual logic
-    }
-
-    protected function getPostcodeRangeFromCoordinates($coordinates)
-    {
-        $lat = $coordinates['lat'];
-        $lng = $coordinates['lng'];
-
-        // Determine postcode range based on coordinates
-        // This is a placeholder; replace it with logic to convert coordinates to postcode ranges.
-        return [3000, 3999];
-    }
+    protected function sortByDistance($charities, $userLocation) {
+        $transformed = $charities->map(function ($charity) use ($userLocation) {
+            $charity->distance = $this->haversineGreatCircleDistance(
+                $userLocation['lat'], $userLocation['lng'],
+                $charity->latitude, $charity->longitude
+            );
+            return $charity;
+        });
+    
+        $sorted = $transformed->sortBy('distance');
+    
+        return $sorted;
+    }    
 
     protected function getServiceTypes()
     {
@@ -196,24 +204,6 @@ class CharityController extends Controller
 
         $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
         return $angle * $earthRadius;
-    }
-
-    public function geocodeCharities()
-    {
-        $charities = Charity::all(['charity_legal_name', 'full_address']);
-        $geocodedCharities = $charities->map(function ($charity) {
-            $location = $this->geocodeAddress($charity->full_address);
-            if ($location) {
-                return [
-                    'name' => $charity->charity_legal_name,
-                    'address' => $charity->full_address,
-                    'latitude' => $location['lat'],
-                    'longitude' => $location['lng']
-                ];
-            }
-        });
-
-        return response()->json($geocodedCharities->filter());
     }
 
     public function searchSuggestions(Request $request)

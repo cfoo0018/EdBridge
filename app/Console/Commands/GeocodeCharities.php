@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class GeocodeCharities extends Command {
     protected $signature = 'charities:geocode';
-    protected $description = 'Geocode charities and populate missing data';
+    protected $description = 'Geocode charities and populate missing data.';
 
     public function handle() {
         $charities = Charity::all();
@@ -22,6 +22,10 @@ class GeocodeCharities extends Command {
                     $charity->longitude = $geocodeResult['location']['lng'];
                     $charity->state = $geocodeResult['state'];
                     $charity->save();
+
+                    Log::info("Charity {$charity->id} geocoded successfully.", ['location' => $geocodeResult['location'], 'state' => $geocodeResult['state']]);
+                } else {
+                    Log::warning("Failed to geocode charity {$charity->id}.");
                 }
             }
         });
@@ -30,17 +34,23 @@ class GeocodeCharities extends Command {
     }
 
     protected function geocodeAddress($address) {
+        if (!$address) {
+            Log::warning("No address provided for geocoding.");
+            return null;
+        }
+
         try {
             $response = GoogleMaps::load('geocoding')
                 ->setParam(['address' => $address, 'key' => env('GOOGLE_MAPS_API_KEY')])
                 ->get();
 
             $data = json_decode($response, true);
+
             if ($data['status'] === 'OK') {
                 $result = $data['results'][0];
                 $location = $result['geometry']['location'];
-                $state = null;
 
+                $state = null;
                 foreach ($result['address_components'] as $component) {
                     if (in_array('administrative_area_level_1', $component['types'])) {
                         $state = $component['short_name'];
@@ -50,7 +60,7 @@ class GeocodeCharities extends Command {
 
                 return [
                     'location' => $location,
-                    'state',
+                    'state' => $state,
                 ];
             } else {
                 Log::warning('Geocoding failed:', ['address' => $address, 'response' => $data]);

@@ -69,7 +69,7 @@
                     <li class="p-4 hover:bg-gray-50 hidden" data-lat="{{ $charity->latitude ?? 'not set' }}"
                         data-lng="{{ $charity->longitude ?? 'not set' }}" data-name="{{ $charity->charity_legal_name }}"
                         data-website="{{ $charity->charity_website ? (Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website) : '#' }}"
-                        data-service-type="{{ $charity->formatted_service_type }}">
+                        data-service-type="{{ $charity->service_type }}">
                         <!-- Charity details here -->
                     </li>
                 @endforeach
@@ -91,7 +91,7 @@
                                             <p class="text-sm md:text-base text-gray-600 mt-1">
                                                 {{ $charity->full_address ?: 'Address not available' }}
                                                 <br>
-                                                <strong>Service Type: </strong>{{ $charity->formatted_service_type }}
+                                                <strong>Service Type: </strong>{{ $charity->service_type }}
                                             </p>
                                         </div>
                                         <div class="text-right ml-4">
@@ -131,150 +131,194 @@
 @endsection
 
 @push('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#locationInput').autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: '{{ route('support.search') }}',
-                        dataType: 'json',
-                        data: {
-                            term: request.term
-                        },
-                        success: function(data) {
-                            response(data);
-                        }
+<script>
+    $(document).ready(function() {
+        // Autocomplete initialization
+        $('#locationInput').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: '{{ route('support.search') }}',
+                    dataType: 'json',
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                $('#locationInput').val(ui.item.value);
+            }
+        });
+    
+        // View toggling logic
+        const listView = $('#listView');
+        const mapView = $('#mapView');
+        const listViewToggle = $('#listViewToggle');
+        const mapViewToggle = $('#mapViewToggle');
+    
+        function showListView() {
+            listView.removeClass('hidden');
+            mapView.addClass('hidden');
+            localStorage.setItem('preferredView', 'list');
+        }
+    
+        function showMapView() {
+            listView.addClass('hidden');
+            mapView.removeClass('hidden');
+            localStorage.setItem('preferredView', 'map');
+            // map.invalidateSize(); // Ensure the map resizes correctly, This may break the working function**
+        }
+    
+        listViewToggle.on('click', showListView);
+        mapViewToggle.on('click', showMapView);
+    
+        const savedView = localStorage.getItem('preferredView');
+        if (savedView === 'map') {
+            showMapView();
+        } else {
+            showListView();
+        }
+    
+        // Initialize the map with Melbourne coordinates by default
+        const defaultLocation = [-37.8136, 144.9631]; // Melbourne coordinates
+        const map = L.map('map').setView(defaultLocation, 10);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; OpenStreetMap contributors',
+        }).addTo(map);
+    
+        let routingControl = null;
+    
+        // Function to geocode an address and update the map's view
+        function updateMapView(address) {
+            $.ajax({
+                url: `https://nominatim.openstreetmap.org/search`,
+                data: {
+                    format: 'json',
+                    q: address
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.length === 0) {
+                        alert('Address not found!');
+                        return;
+                    }
+    
+                    const newLocation = new L.LatLng(data[0].lat, data[0].lon);
+                    map.setView(newLocation, 12); // Update the map's center and zoom level
+    
+                    // redraw markers and popups
+                    $('li[data-lat][data-lng]').each(function() {
+                        const lat = parseFloat($(this).data('lat'));
+                        const lng = parseFloat($(this).data('lng'));
+                        const name = $(this).data('name');
+                        const website = $(this).data('website');
+                        const serviceType = $(this).data('service-type');
+    
+                        const popupContent = `
+                            <strong>${name}</strong><br>
+                            <p>Service Type: ${serviceType}</p>
+                            <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+                            <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+                        `;
+    
+                        L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
                     });
                 },
-                minLength: 2,
-                select: function(event, ui) {
-                    $('#locationInput').val(ui.item.value);
-                    $('#locationState').val(ui.item.state);
+                error: function(error) {
+                    console.error('Error fetching address:', error);
+                    alert('Error fetching address!');
                 }
             });
-
-            // Slider Functionality
-            const rangeSlider = document.getElementById('rangeSlider');
-            const sliderValue = document.getElementById('sliderValue');
-
-            rangeSlider.addEventListener('input', function() {
-                sliderValue.textContent = rangeSlider.value;
-            });
+        }
+    
+        // Event listener for location input changes
+        $('#locationInput').on('change', function() {
+            const enteredAddress = $(this).val();
+            if (!enteredAddress) {
+                alert('Please enter your postal location in the given input box.');
+                return;
+            }
+    
+            updateMapView(enteredAddress);
         });
-    </script>
-
-    <div x-data="{ showAlert: false }">
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const listView = document.getElementById('listView');
-                const mapView = document.getElementById('mapView');
-                const listViewToggle = document.getElementById('listViewToggle');
-                const mapViewToggle = document.getElementById('mapViewToggle');
-
-                function showListView() {
-                    listView.classList.remove('hidden');
-                    mapView.classList.add('hidden');
-                    localStorage.setItem('preferredView', 'list');
-                }
-
-                function showMapView() {
-                    listView.classList.add('hidden');
-                    mapView.classList.remove('hidden');
-                    localStorage.setItem('preferredView', 'map');
-                }
-
-                listViewToggle.addEventListener('click', showListView);
-                mapViewToggle.addEventListener('click', showMapView);
-
-                const savedView = localStorage.getItem('preferredView');
-                if (savedView === 'map') {
-                    showMapView();
-                } else {
-                    showListView();
-                }
-                const defaultLocation = [-37.8136, 144.9631]; // Melbourne coordinates
-                const defaultZoom = 10;
-                // Map-related functionalities
-                const map = L.map('map').setView(defaultLocation, defaultZoom);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 18,
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                let routingControl = null;
-
-                map.on('popupopen', function(e) {
-                    // Close routing control if it exists
+    
+        map.on('popupopen', function(e) {
+            if (routingControl) {
+                map.removeControl(routingControl);
+                routingControl = null;
+            }
+    
+            const link = $(e.popup._container).find('.get-directions');
+            if (link.length > 0 && !link.hasClass('listener-attached')) {
+                link.addClass('listener-attached').on('click', function(event) {
+                    event.preventDefault();
+    
+                    const lat = link.data('lat');
+                    const lng = link.data('lng');
+                    getGeocodeAndRoute($('#locationInput').val(), new L.LatLng(lat, lng));
+                });
+            }
+        });
+    
+        function getGeocodeAndRoute(address, destinationLatLng) {
+            $.ajax({
+                url: `https://nominatim.openstreetmap.org/search`,
+                data: {
+                    format: 'json',
+                    q: address
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.length === 0) {
+                        alert('Address not found!');
+                        return;
+                    }
+    
+                    const userLocation = new L.LatLng(data[0].lat, data[0].lon);
+    
                     if (routingControl) {
                         map.removeControl(routingControl);
-                        routingControl = null;
                     }
-
-                    const link = e.popup._container.querySelector('.get-directions');
-                    if (link && !link.classList.contains('listener-attached')) {
-                        link.classList.add('listener-attached');
-                        link.addEventListener('click', function(event) {
-                            event.preventDefault();
-                            const enteredAddress = document.getElementById('locationInput').value;
-                            if (!enteredAddress) {
-                                // Show alert if location input is not entered
-                                alert('Please enter your postal location in the given input box.');
-                                return;
-                            }
-                            const lat = link.dataset.lat;
-                            const lng = link.dataset.lng;
-                            getGeocodeAndRoute(enteredAddress, new L.LatLng(lat, lng));
-                        });
-                    }
-                });
-
-                function getGeocodeAndRoute(address, destinationLatLng) {
-                    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data.length === 0) {
-                                alert('Address not found!');
-                                return;
-                            }
-                            const userLocation = new L.LatLng(data[0].lat, data[0].lon);
-                            if (routingControl) {
-                                map.removeControl(routingControl);
-                            }
-                            routingControl = L.Routing.control({
-                                waypoints: [userLocation, destinationLatLng],
-                                routeWhileDragging: true,
-                                showAlternatives: true,
-                                fitSelectedRoutes: true,
-                                createMarker: function(i, waypoint) {
-                                    return L.marker(waypoint.latLng);
-                                }
-                            }).addTo(map);
-                        })
-                        .catch(error => {
-                            console.error('Error fetching address:', error);
-                            alert('Error fetching address!');
-                        });
+    
+                    routingControl = L.Routing.control({
+                        waypoints: [userLocation, destinationLatLng],
+                        routeWhileDragging: true,
+                        showAlternatives: true,
+                        fitSelectedRoutes: true,
+                        createMarker: function(i, waypoint) {
+                            return L.marker(waypoint.latLng);
+                        }
+                    }).addTo(map);
+                },
+                error: function(error) {
+                    console.error('Error fetching address:', error);
+                    alert('Error fetching address!');
                 }
-
-                document.querySelectorAll('li[data-lat][data-lng]').forEach(function(item) {
-                    const lat = parseFloat(item.dataset.lat);
-                    const lng = parseFloat(item.dataset.lng);
-                    const name = item.dataset.name;
-                    const website = item.dataset.website;
-                    const serviceType = item.dataset.serviceType;
-                    const popupContent =
-                        `<strong>${name}</strong><br>
-                    <p>Service Type: ${serviceType}</p>
-                    <p>Website: <a href="${website}" target="_blank">${website}</a></p>
-                    <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>`;
-                    const marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
-                });
             });
-        </script>
-    </div>
+        }
+    
+        // Markers and popups initialization
+        $('li[data-lat][data-lng]').each(function() {
+            const lat = parseFloat($(this).data('lat'));
+            const lng = parseFloat($(this).data('lng'));
+            const name = $(this).data('name');
+            const website = $(this).data('website');
+            const serviceType = $(this).data('service-type');
+    
+            const popupContent = `
+                <strong>${name}</strong><br>
+                <p>Service Type: ${serviceType}</p>
+                <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+                <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+            `;
+    
+            L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
+        });
+    });
+    </script> 
 @endpush
