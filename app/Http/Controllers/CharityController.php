@@ -11,68 +11,69 @@ use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
 
 class CharityController extends Controller
 {
-
-    public function index(Request $request) {
-        // Determine the user's location or default to Melbourne
+    public function index(Request $request)
+    {
+        // Determine user's location or default to Melbourne
         $userLocation = $request->filled('search')
             ? $this->geocodeAddress($request->input('search'))
             : $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
-    
+
         $request->session()->put('user_location', $userLocation);
-    
+
         // Default to Melbourne if geocoding fails
         if (!$userLocation) {
             $userLocation = $this->geocodeAddress("Melbourne, VIC");
         }
-    
-        // Calculate geographical ranges for proximity filtering
-        $latRange = 50 / 111; // 50 km radius to latitude range
-        $lngRange = 50 / (111 * cos(deg2rad($userLocation['lat']))); // Longitude range conversion
-    
-        $minLat = $userLocation['lat'] - $latRange;
-        $maxLat = $userLocation['lat'] + $latRange;
-        $minLng = $userLocation['lng'] - $lngRange;
-        $maxLng = $userLocation['lng'] + $lngRange;
-    
-        $query = Charity::whereBetween('latitude', [$minLat, $maxLat])
-                        ->whereBetween('longitude', [$minLng, $maxLng]);
-    
-        // Filter by service type if specified
+
+        // Capture the distance filter from the request
+        $distanceKm = $request->input('distance', 50); // 50 km default
+
+        $charities = Charity::all(); // Fetch all charities initially
+
+        // Filter charities by distance from user's location
+        $charities = $charities->filter(function ($charity) use ($userLocation, $distanceKm) {
+            $distance = $this->haversineGreatCircleDistance(
+                $userLocation['lat'],
+                $userLocation['lng'],
+                $charity->latitude,
+                $charity->longitude
+            );
+            return $distance <= $distanceKm;
+        });
+
+        // Optional: filter by service type
         if ($request->has('service_type') && $request->service_type != 'all') {
-            $query->where('service_type', $this->mapServiceType($request->service_type));
+            $charities = $charities->where('service_type', $this->mapServiceType($request->service_type));
         }
-    
-        // Select necessary columns
-        $charities = $query->select('id', 'charity_legal_name', 'full_address', 'service_type', 'latitude', 'longitude', 'charity_website')->get();
-    
-        // Sort by distance
+
+        // Sort charities by distance
         $sortedCharities = $this->sortByDistance($charities, $userLocation);
-    
+
         // Paginate manually
         $perPage = 30;
         $currentPage = $request->input('page', 1);
         $pagedCharities = $sortedCharities->slice(($currentPage - 1) * $perPage, $perPage);
-    
-        // Return the paged result with pagination links
+
         $paginatedCharities = new LengthAwarePaginator(
-            $pagedCharities, 
-            $sortedCharities->count(), 
-            $perPage, 
+            $pagedCharities,
+            $sortedCharities->count(),
+            $perPage,
             $currentPage,
             ['path' => $request->url(), 'query' => $request->query()]
         );
-    
+
         // Fetch service types
         $serviceTypes = $this->getServiceTypes();
-    
+
         return view('charities.index', [
             'charities' => $paginatedCharities,
             'serviceTypes' => $serviceTypes,
             'currentType' => $request->service_type ?? 'all',
             'userLocation' => $userLocation,
+            'distanceKm' => $distanceKm, // To pass the distance to the view
         ]);
     }
-    
+
     protected function geocodeAddress($address)
     {
         try {
@@ -96,19 +97,22 @@ class CharityController extends Controller
         }
     }
 
-    protected function sortByDistance($charities, $userLocation) {
+    protected function sortByDistance($charities, $userLocation)
+    {
         $transformed = $charities->map(function ($charity) use ($userLocation) {
             $charity->distance = $this->haversineGreatCircleDistance(
-                $userLocation['lat'], $userLocation['lng'],
-                $charity->latitude, $charity->longitude
+                $userLocation['lat'],
+                $userLocation['lng'],
+                $charity->latitude,
+                $charity->longitude
             );
             return $charity;
         });
-    
+
         $sorted = $transformed->sortBy('distance');
-    
+
         return $sorted;
-    }    
+    }
 
     protected function getServiceTypes()
     {
