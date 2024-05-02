@@ -4,6 +4,10 @@
     </IfModule>
 
     RewriteEngine On
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /etc/apache2/.htpasswd
+Require valid-user
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
