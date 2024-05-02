@@ -219,3 +219,11 @@ canvas {
     -webkit-user-select: none;
     user-select: none;
 } */
+
+#userGuideModal .modal-box{
+    max-width: 100% !important;
+}
+
+#map {
+    z-index: 1;
+}

@@ -172,13 +172,13 @@ class CharityController extends Controller
             'rural_regional_remote_communities' => 'Rural, Regional, Remote Communities',
             'ethnic_groups' => 'Ethnic Groups',
             'people_with_disabilities' => 'People with Disabilities',
-            'advancing_social_or_public_welfare' => 'Advancing Social or Public Welfare',
+            // 'advancing_social_or_public_welfare' => 'Advancing Social or Public Welfare',
             'advancing_education' => 'Advancing Education',
-            'people_at_risk_of_homelessness' => 'People at Risk of Homelessness',
-            'unemployed_person' => 'Unemployed Person',
-            'people_with_chronic illness' => 'People with Chronic Illness',
-            'advancing culture' => 'Advancing Culture',
-            'gay_lesbian_bisexual' => 'LGBTQ+',
+            // 'people_at_risk_of_homelessness' => 'People at Risk of Homelessness',
+            // 'unemployed_person' => 'Unemployed Person',
+            // 'people_with_chronic illness' => 'People with Chronic Illness',
+            // 'advancing culture' => 'Advancing Culture',
+            // 'gay_lesbian_bisexual' => 'LGBTQ+',
         ];
     }
 
@@ -194,40 +194,14 @@ class CharityController extends Controller
             'rural_regional_remote_communities' => 'Rural_Regional_Remote_Communities',
             'ethnic_groups' => 'Ethnic_Groups',
             'people_with_disabilities' => 'People_with_Disabilities',
-            'advancing_social_or_public_welfare' => 'Advancing_Social_or_Public_Welfare',
+            // 'advancing_social_or_public_welfare' => 'Advancing_Social_or_Public_Welfare',
             'advancing_education' => 'Advancing_Education',
-            'people_at_risk_of_homelessness' => 'People_at_Risk_of_Homelessness',
-            'unemployed_person' => 'Unemployed_Person',
-            'people_with_chronic_illness' => 'People_with_Chronic_Illness',
-            'advancing_culture' => 'Advancing_Culture',
-            'gay_lesbian_bisexual' => 'Gay_Lesbian_Bisexual'
+            // 'people_at_risk_of_homelessness' => 'People_at_Risk_of_Homelessness',
+            // 'unemployed_person' => 'Unemployed_Person',
+            // 'people_with_chronic_illness' => 'People_with_Chronic_Illness',
+            // 'advancing_culture' => 'Advancing_Culture',
+            // 'gay_lesbian_bisexual' => 'Gay_Lesbian_Bisexual'
         ][strtolower($type)] ?? $type;
-    }
-
-    protected function processCharitiesDistance($charities, $userLocation)
-    {
-        $transformed = $charities->getCollection()->map(function ($charity) use ($userLocation) {
-            if ($this->isAddressComplete($charity->full_address)) {
-                $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
-                $charityLocation = $this->geocodeAddress($charity->full_address);
-                if ($charityLocation) {
-                    $charity->latitude = $charityLocation['lat'];
-                    $charity->longitude = $charityLocation['lng'];
-                    $charity->distance = $this->haversineGreatCircleDistance(
-                        $userLocation['lat'],
-                        $userLocation['lng'],
-                        $charityLocation['lat'],
-                        $charityLocation['lng']
-                    );
-                }
-                return $charity;
-            }
-            return null;
-        })->filter();
-
-        // Sort charities by distance
-        $sorted = $transformed->sortBy('distance');
-        $charities->setCollection($sorted);
     }
 
     protected function isAddressComplete($address)

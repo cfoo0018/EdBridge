@@ -8,93 +8,21 @@
         <div class="mb-8 text-center">
             <h1 class="text-3xl md:text-4xl font-Fredoka text-Second">Support Service Directory</h1>
             <p class="text-lg text-gray-600 mt-2">Find the nearest support services based on your location.</p>
+            <!-- User Guide Button -->
+            <button class="btn" onclick="userGuideModal.showModal()">User Guide<i class="fas fa-question-circle text-Second"></i></button>
         </div>
-
-        <!-- User Guide Section -->
-        <div class="bg-gray-100 rounded-lg shadow-lg mb-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
-                <div>
-                    <h2 class="text-2xl font-Fredoka mb-4 text-center lg:text-left">User Guide</h2>
-
-                    <p class="text-base text-gray-700 text-center lg:text-left">
-                        The <strong>Support Service Directory</strong> provides an intuitive way to find services near your
-                        location.
-                        Here's how to use it effectively:
-                    </p>
-
-                    <!-- Sections for each feature -->
-                    <div class="mt-6">
-                        <h3 class="text-xl font-Fredoka mb-2">Using the Search Form:</h3>
-                        <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>Location Input:</strong> Enter your current location or postal address to localize
-                                services.</li>
-                            <li><strong>Search Button:</strong> Click the <em>Search</em> button to retrieve nearby
-                                services.</li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-6">
-                        <h3 class="text-xl font-Fredoka mb-2">Filtering Services:</h3>
-                        <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>Category Dropdown:</strong> Choose a service type, such as Youth or Adults, to
-                                reload the page with matching results.</li>
-                            <li><strong>Distance Slider:</strong> Adjust to specify a maximum distance (in km) for services
-                                from your location.</li>
-                            <li><strong>View Toggle Buttons:</strong> Switch between:
-                                <ul class="list-disc pl-6 text-base text-gray-700">
-                                    <li><strong>List View: <i class="fas fa-list text-Second"></i></strong> Displays
-                                        services in a textual list format with essential details.</li>
-                                    <li><strong>Map View: <i class="fas fa-map-marker-alt text-Second"></i></strong> Shows
-                                        services as markers on a map, with pop-up information on clicking.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="mt-6">
-                        <h3 class="text-xl font-Fredoka mb-2">Interacting with the Results:</h3>
-                        <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>List View:</strong> Includes:
-                                <ul class="list-disc pl-6 text-base text-gray-700">
-                                    <li><strong>Name:</strong> The service or organization's name.</li>
-                                    <li><strong>Address:</strong> Full address or indication if unavailable.</li>
-                                    <li><strong>Service Type:</strong> The type of support offered.</li>
-                                    <li><strong>Distance:</strong> The distance from your current location.</li>
-                                    <li><strong>Website:</strong> A link to the service's website, if available.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Map View:</strong> Markers reveal a pop-up with:
-                                <ul class="list-disc pl-6 text-base text-gray-700">
-                                    <li><strong>Name and Service Type:</strong> For quick identification.</li>
-                                    <li><strong>Website:</strong> A link to the service's website.</li>
-                                    <li><strong>Directions:</strong> A button to get directions from your current location
-                                        to the service.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <!-- Search Form -->
         <form action="{{ route('support.index') }}" method="GET" class="mb-4">
             <!-- Location Input and Search Button -->
             <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
-                <!-- Location Input -->
                 <div class="flex-grow">
                     <input type="text" name="search" id="locationInput" placeholder="Enter your postal address"
                         class="w-full p-4 rounded-lg border-2 border-gray-200"
                         value="{{ request()->filled('search') ? request()->search : '' }}">
                 </div>
-
-                <!-- Search Button -->
-                <button type="submit" class="bg-Button hover:bg-blue-700 text-white font-Fredoka py-2 px-4 rounded-lg">
-                    Search
-                </button>
+                <button type="submit"
+                    class="bg-Button hover:bg-blue-700 text-white font-Fredoka py-2 px-4 rounded-lg">Search</button>
             </div>
 
             <!-- Dropdown, Slider, and View Toggles -->
@@ -111,9 +39,11 @@
 
                 <!-- Category Dropdown -->
                 <div class="relative flex-grow lg:w-1/3">
-                    <select onchange="window.location.href = this.value;" class="block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500 transition-all duration-300">
+                    <select onchange="window.location.href = this.value;"
+                        class="block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500 transition-all duration-300">
                         @foreach ($serviceTypes as $key => $name)
-                            <option value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'distance' => request()->input('distance')]) }}"
+                            <option
+                                value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'distance' => request()->input('distance')]) }}"
                                 {{ $currentType === $key ? 'selected' : '' }}>
                                 {{ $name }}
                             </option>
@@ -121,12 +51,7 @@
                     </select>
 
                     <!-- Dropdown Indicator Icon -->
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-800">
-                        {{-- <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M4.293 7.293a 1 1 0 0 1 1.414-1.414L10 10.586l4.293-4.293a 1 1 0 0 1 1.414 1.414l-5-5z" />
-                        </svg> --}}
-                    </div>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-800"></div>
                 </div>
 
                 <!-- Distance Slider -->
@@ -137,14 +62,13 @@
                         class="slider w-full appearance-none bg-gray-200 h-2 rounded-full mt-2 transition-colors duration-300"
                         id="rangeSlider">
                 </div>
-
             </div>
         </form>
 
         <!-- Views Container -->
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col lg:flex-row gap-8 z-1">
             <!-- Map View -->
-            <div id="mapView" class="w-full sm:h-screen" style="height: 800px">
+            <div id="mapView" class="w-full sm:h-screen z-1" style="height: 800px">
                 @foreach ($charities as $charity)
                     <li class="p-4 hover:bg-gray-50 hidden" data-lat="{{ $charity->latitude ?? 'not set' }}"
                         data-lng="{{ $charity->longitude ?? 'not set' }}" data-name="{{ $charity->charity_legal_name }}"
@@ -153,7 +77,7 @@
                         <!-- Charity details here -->
                     </li>
                 @endforeach
-                <div id="map" class="w-full h-full"></div>
+                <div id="map" class="w-full h-full z-1"></div>
             </div>
 
             <!-- List View -->
@@ -166,17 +90,16 @@
                                     <div class="flex items-start justify-between">
                                         <div class="flex-1">
                                             <h2 class="font-Fredoka text-xl md:text-2xl text-gray-800">
-                                                {{ $charity->charity_legal_name }}
-                                            </h2>
+                                                {{ $charity->charity_legal_name }}</h2>
                                             <p class="text-sm md:text-base text-gray-600 mt-1">
                                                 {{ $charity->full_address ?: 'Address not available' }}
                                                 <br>
-                                                <strong>Service Type: </strong>{{ $charity->formatted_service_type }}
+                                                <strong>Service Type:</strong> {{ $charity->formatted_service_type }}
                                             </p>
                                         </div>
                                         <div class="text-right ml-4">
                                             <div class="text-sm md:text-base font-medium text-gray-800 mb-2">
-                                                <strong>Distance: </strong>
+                                                <strong>Distance:</strong>
                                                 @if (isset($charity->distance))
                                                     {{ round($charity->distance, 2) }} km
                                                 @else
@@ -200,14 +123,85 @@
                             @endif
                         @endforeach
                     </ul>
+
                     <!-- Pagination Links -->
-                    <div class="px-4 py-3">
-                        {{ $charities->links() }}
-                    </div>
+                    <div class="px-4 py-3">{{ $charities->links() }}</div>
                 </div>
             </div>
         </div>
     </div>
+<!-- DaisyUI Modal Box -->
+<dialog id="userGuideModal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box w-full">
+        <h3 class="font-Overpass text-lg">User Guide</h3>
+        <div class="py-4">
+            <!-- User Guide Content -->
+            <div class="bg-gray-100 rounded-lg shadow-lg mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
+                    <div>
+                        <p class="text-base text-gray-700 text-center lg:text-left">
+                            The <strong>Support Service Directory</strong> provides an intuitive way to find services near your location.
+                            Here's how to use it effectively:
+                        </p>
+
+                        <!-- Sections for each feature -->
+                        <div class="mt-6">
+                            <h3 class="text-xl font-Fredoka mb-2">Using the Search Form:</h3>
+                            <ul class="list-disc pl-6 text-base text-gray-700">
+                                <li><strong>Location Input:</strong> Enter your current location or postal address to localize services.</li>
+                                <li><strong>Search Button:</strong> Click the <em>Search</em> button to retrieve nearby services.</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-6">
+                            <h3 class="text-xl font-Fredoka mb-2">Filtering Services:</h3>
+                            <ul class="list-disc pl-6 text-base text-gray-700">
+                                <li><strong>Category Dropdown:</strong> Choose a service type, such as Youth or Adults, to reload the page with matching results.</li>
+                                <li><strong>Distance Slider:</strong> Adjust to specify a maximum distance (in km) for services from your location.</li>
+                                <li><strong>View Toggle Buttons:</strong> Switch between:
+                                    <ul class="list-disc pl-6 text-base text-gray-700">
+                                        <li><strong>List View <i class="fas fa-list text-Second"></i>:</strong> Displays services in a textual list format with essential details.</li>
+                                        <li><strong>Map View <i class="fas fa-map-marker-alt text-Second"></i>:</strong> Shows services as markers on a map, with pop-up information on clicking.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="mt-6">
+                            <h3 class="text-xl font-Fredoka mb-2">Interacting with the Results:</h3>
+                            <ul class="list-disc pl-6 text-base text-gray-700">
+                                <li><strong>List View <i class="fas fa-list text-Second"></i>:</strong> Includes:
+                                    <ul class="list-disc pl-6 text-base text-gray-700">
+                                        <li><strong>Name:</strong> The service or organization's name.</li>
+                                        <li><strong>Address:</strong> Full address or indication if unavailable.</li>
+                                        <li><strong>Service Type:</strong> The type of support offered.</li>
+                                        <li><strong>Distance:</strong> The distance from your current location.</li>
+                                        <li><strong>Website:</strong> A link to the service's website, if available.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Map View <i class="fas fa-map-marker-alt text-Second"></i>:</strong> Markers reveal a pop-up with:
+                                    <ul class="list-disc pl-6 text-base text-gray-700">
+                                        <li><strong>Name and Service Type:</strong> For quick identification.</li>
+                                        <li><strong>Website:</strong> A link to the service's website.</li>
+                                        <li><strong>Directions:</strong> A button to get directions from your current location to the service.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </div>
+    </div>
+</dialog>
 @endsection
 
 @push('script')
@@ -274,7 +268,7 @@
             // Function to compute the distance between two coordinates using the haversine formula
             function haversineDistance(lat1, lon1, lat2, lon2, radius = 6371) {
                 const dLat = deg2rad(lat2 - lat1);
-                const dLon = deg2rad(lon2 - lon1);
+                const dLon = deg2rad(lon2 - lat1);
                 const a = Math.pow(Math.sin(dLat / 2), 2) +
                     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.pow(Math.sin(dLon / 2), 2);
                 return 2 * radius * Math.asin(Math.sqrt(a));
@@ -315,11 +309,11 @@
                                 const serviceType = $(this).data('service-type');
 
                                 const popupContent = `
-                                <strong>${name}</strong><br>
-                                <p>Service Type: ${serviceType}</p>
-                                <p>Website: <a href="${website}" target="_blank">${website}</a></p>
-                                <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
-                            `;
+                            <strong>${name}</strong><br>
+                            <p>Service Type: ${serviceType}</p>
+                            <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+                            <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+                        `;
 
                                 L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
                             });
@@ -417,11 +411,11 @@
                 const serviceType = $(this).data('service-type');
 
                 const popupContent = `
-                <strong>${name}</strong><br>
-                <p>Service Type: ${serviceType}</p>
-                <p>Website: <a href="${website}" target="_blank">${website}</a></p>
-                <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
-            `;
+            <strong>${name}</strong><br>
+            <p>Service Type: ${serviceType}</p>
+            <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+            <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+        `;
 
                 L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
             });
