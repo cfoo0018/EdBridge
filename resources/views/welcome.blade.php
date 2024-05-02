@@ -12,7 +12,7 @@
                     <p id="typewriter-text" class="mb-5 font-Overpass-Mono text-xl blur-xs text-white"></p>
                     <p class="font-Fredoka text-lg text-white">Empower your journey.</p>
                     <p class="mb-10 font-Fredoka text-lg text-white">Find warm support and resources with us!</p>
-                    <a href="{{ route('resourcehub') }}" class="font-Fredoka"><button  class="button text-white">
+                    <a href="{{ route('resourcehub') }}" class="font-Fredoka"><button  class="special-button text-white">
                         Explore Resources
                     </button>
                     </a>
