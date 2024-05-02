@@ -128,14 +128,13 @@
         });
 
         $(document).ready(function() {
-            // Initialize ripples effect
             $('.hero').ripples({
                 resolution: 512,
                 dropRadius: 20,
                 perturbance: 0.04,
             });
 
-            // Reapply background styles
+            // Now apply styles directly after
             $('.hero').css({
                 'background-size': 'cover',
                 'background-position': 'center',
