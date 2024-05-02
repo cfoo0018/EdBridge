@@ -3,7 +3,7 @@
 @section('title', 'BridgeEd')
 @section('content')
     <div class="w-full">
-        <div class="hero min-h-screen bg-cover bg-center"
+        <div class="hero min-h-screen bg-cover bg-center relative"
             style="background-image: url('../../images/landingpageheader.webp');">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content text-center text-neutral-content">
@@ -29,8 +29,8 @@
             <div class="features max-w-[1280px] mx-auto">
 
                 <div id="resource-hub" class="feature mb-20 pt-20 flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center" data-aos="fade-left">
-                        <img src="{{ asset('images/platform.png') }}" class="w-[400px] rounded-md mx-auto" alt="Resource Hub">
+                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-left">
+                        <img src="{{ asset('images/platform.png') }}" class="w-[30rem] rounded-md mx-auto" alt="Resource Hub">
                     </div>
                     <div class="w-full lg:w-1/2">
                         <div class="feature-text p-4" data-aos="fade-right">
@@ -42,10 +42,10 @@
                 </div>                
     
                 <div id="support-directory" class="feature mb-20 flex flex-col lg:flex-row-reverse">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center" data-aos="fade-right">
-                        <img src="{{ asset('images/navigation.png')}}" class="w-[400px] rounded-md" alt="Support Service Directory">
+                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-right">
+                        <img src="{{ asset('images/navigation.png')}}" class="w-[30rem] rounded-md" alt="Support Service Directory">
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-full lg:w-1/2">
                         <div class="feature-text p-4" data-aos="fade-left">
                             <h1 class="text-5xl font-Overpass mb-10">Support Service Directory</h1>
                             <p>Access essential support services tailored for tertiary education, including tutoring and counseling. Our Support Service Directory provides comprehensive resources to help students find the support they need, including financial assistance, youth and adult services, resources for individuals with disabilities, and education-related support.</p>
@@ -55,10 +55,10 @@
                 </div>
     
                 <div id="education-pathways" class="feature mb-20 flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center" data-aos="fade-left">
-                        <img src="{{ asset('images/guidepost.png') }}" class="w-[400px] rounded-md" alt="Personalized Education Pathways">
+                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-left">
+                        <img src="{{ asset('images/guidepost.png') }}" class="w-[30rem] rounded-md " alt="Personalized Education Pathways">
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-full lg:w-1/2">
                         <div class="feature-text p-4" data-aos="fade-right">
                             <h1 class="text-5xl font-Overpass mb-10">Personalized Education Pathways</h1>
                             <p>Discover personalized learning pathways that cater to the unique needs and goals of students. Our platform offers tailored quizzes to help identify the most suitable courses and learning options. Additionally, we provide specialized IT pathways to support students in building technical skills and advancing their careers in the digital age.</p>
@@ -68,10 +68,10 @@
                 </div>
     
                 <div id="financial-aid" class="feature mb-23 flex flex-col lg:flex-row-reverse">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center" data-aos="fade-right">
-                        <img src="{{ asset('images/scholarship.png')}}" class="w-[400px] rounded-md" alt="Financial Aid & Scholarship Portal">
+                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-right">
+                        <img src="{{ asset('images/scholarship.png')}}" class="w-[30rem] rounded-md" alt="Financial Aid & Scholarship Portal">
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-full lg:w-1/2">
                         <div class="feature-text p-4" data-aos="fade-left">
                             <h1 class="text-5xl font-Overpass mb-10">Scholarship Portal</h1>
                             <p>Navigate a comprehensive portal for financial aid and scholarships. Discover opportunities for grants, bursaries, and loans tailored to support students from diverse backgrounds. The portal provides guidance on applying for scholarships, managing educational expenses, and accessing resources for different levels of need. This includes assistance programs for first-generation students, international students, and those pursuing specific fields of study.</p>

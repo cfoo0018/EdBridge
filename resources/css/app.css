@@ -406,3 +406,9 @@ button:focus::after {
         opacity: 0;
     }
 }
+
+@media (max-width: 768px) {
+    button::before, button::after {
+        display: none;
+    }
+}
