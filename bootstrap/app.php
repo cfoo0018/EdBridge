@@ -51,6 +51,6 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-ini_set('memory_limit', '256M');  // Increase to 256MB,
+ini_set('memory_limit', '1G');
 
 return $app;

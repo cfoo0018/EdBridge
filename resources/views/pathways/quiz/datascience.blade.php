@@ -4,39 +4,210 @@
 
 @section('content')
 
-<!-- Quiz Title -->
-<div id="datascience-quiz" class="mx-auto md:w-2/3 text-left mt-24 md:mt-36 px-4 md:px-0">
-    <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl mb-2">Data Science Knowledge Quest</h1>
-        <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-10"/>
-    </div>
-    <p class="text-xl">Welcome to the Knowledge Quest! This quest is designed to help you gauge your understanding of the key concepts covered in the course and identify areas for improvement in your knowledge journey.</p>
-</div>
-
-<div class="divider"></div>
-
-<div class="mockup-window border border-base-300 w-4/5 md:w-2/3 mx-auto mb-12">
-    
-    <div id="question-container" class="flex flex-col justify-center text-center px-8 border-t border-base-300">
-        <div>
-            <ul id="question-numbers" class="steps pt-4">
-            </ul>
+    <!-- Quiz Title -->
+    <div id="datascience-quiz" class="mx-auto md:w-2/3 text-left mt-24 md:mt-36 px-4 md:px-0">
+        <div class="flex space-x-4 mb-2">
+            <h1 class="font-Overpass font-bold text-4xl mb-2">Data Science Knowledge Quest</h1>
+            <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-10" />
         </div>
-        <!-- Question -->
-        <div class="py-4 md:py-12">
-            <h3 id="type" class="font-Overpass md:text-lg text-gray-400 mb-2"></h3>
-            <p id="question" class="text-lg md:text-4xl mb-4 md:mb-12 font-semibold md:font-normal"></p>
-            <!-- Answer -->
-            <div id="answer-buttons" class="md:px-16 space-y-4 md:space-y-6 mb-4"></div>
+        <p class="text-xl">Welcome to the Knowledge Quest! This quest is designed to help you gauge your understanding of the
+            key concepts covered in the course and identify areas for improvement in your knowledge journey.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="mockup-window border border-base-300 w-4/5 md:w-2/3 mx-auto mb-12">
+
+        <div id="question-container" class="flex flex-col justify-center text-center px-8 border-t border-base-300">
+            <div>
+                <ul id="question-numbers" class="steps pt-4">
+                </ul>
+            </div>
+            <!-- Question -->
+            <div class="py-4 md:py-12">
+                <h3 id="type" class="font-Overpass md:text-lg text-gray-400 mb-2"></h3>
+                <p id="question" class="text-lg md:text-4xl mb-4 md:mb-12 font-semibold md:font-normal"></p>
+                <!-- Answer -->
+                <div id="answer-buttons" class="md:px-16 space-y-4 md:space-y-6 mb-4"></div>
+            </div>
+        </div>
+        <!-- Result -->
+        <div id="result-div"
+            class="flex flex-col justify-center items-center text-center px-8 py-16 border-t border-base-300">
+
+            {{-- <canvas id="birthday"></canvas> --}}
+        </div>
+        <!-- Navigate Buttons -->
+        <div id="nav-btn"
+            class="flex flex-col md:flex-row justify-center md:py-4 md:space-x-12 border-t border-base-300 p-3 m-3">
+            <button id="submit-btn" class="btn btn-outline hover:bg-Button mb-1">Submit Answer</button>
+            <button id="restart-btn" class="btn btn-outline hover:bg-Button">Restart Quiz</button>
+            <button id="skip-btn" class="btn btn-outline btn-error">Skip Question</button>
         </div>
     </div>
-    <!-- Result -->
-    <div id="result-div" class="flex flex-col justify-center items-center text-center px-8 py-16 border-t border-base-300"></div>
-    <!-- Navigate Buttons -->
-    <div id="nav-btn" class="flex flex-col md:flex-row justify-center md:py-4 md:space-x-12 border-t border-base-300 p-3 m-3">
-        <button id="submit-btn" class="btn btn-outline hover:bg-Button mb-1">Submit Answer</button>
-        <button id="restart-btn" class="btn btn-outline hover:bg-Button">Restart Quiz</button>
-        <button id="skip-btn" class="btn btn-outline btn-error">Skip Question</button>
-    </div>
-</div>
 @endsection
+
+@push('script')
+    {{-- <script>
+        //01000001 01010011
+        // helper functions
+        const PI2 = Math.PI * 2
+        const random = (min, max) => Math.random() * (max - min + 1) + min | 0
+        const timestamp = _ => new Date().getTime()
+
+        // container
+        class Birthday {
+            constructor() {
+                this.resize()
+
+                // create a lovely place to store the firework
+                this.fireworks = []
+                this.counter = 0
+
+            }
+
+            resize() {
+                this.width = canvas.width = window.innerWidth
+                let center = this.width / 2 | 0
+                this.spawnA = center - center / 4 | 0
+                this.spawnB = center + center / 4 | 0
+
+                this.height = canvas.height = window.innerHeight
+                this.spawnC = this.height * .1
+                this.spawnD = this.height * .5
+
+            }
+
+            onClick(evt) {
+                let x = evt.clientX || evt.touches && evt.touches[0].pageX
+                let y = evt.clientY || evt.touches && evt.touches[0].pageY
+
+                let count = random(3, 10)
+                for (let i = 0; i < count; i++) this.fireworks.push(new Firework(
+                    random(this.spawnA, this.spawnB),
+                    this.height,
+                    x,
+                    y,
+                    random(0, 260),
+                    random(30, 110)))
+
+                this.counter = -1
+
+            }
+
+            update(delta) {
+                ctx.globalCompositeOperation = 'hard-light'
+                ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`
+                ctx.fillRect(0, 0, this.width, this.height)
+
+                ctx.globalCompositeOperation = 'lighter'
+                for (let firework of this.fireworks) firework.update(delta)
+
+                // if enough time passed... create new new firework
+                this.counter += delta * 3 // each second
+                if (this.counter >= 1) {
+                    this.fireworks.push(new Firework(
+                        random(this.spawnA, this.spawnB),
+                        this.height,
+                        random(0, this.width),
+                        random(this.spawnC, this.spawnD),
+                        random(0, 360),
+                        random(30, 110)))
+                    this.counter = 0
+                }
+
+                // remove the dead fireworks
+                if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+
+            }
+        }
+
+        class Firework {
+            constructor(x, y, targetX, targetY, shade, offsprings) {
+                this.dead = false
+                this.offsprings = offsprings
+
+                this.x = x
+                this.y = y
+                this.targetX = targetX
+                this.targetY = targetY
+
+                this.shade = shade
+                this.history = []
+            }
+            update(delta) {
+                if (this.dead) return
+
+                let xDiff = this.targetX - this.x
+                let yDiff = this.targetY - this.y
+                if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) { // is still moving
+                    this.x += xDiff * 2 * delta
+                    this.y += yDiff * 2 * delta
+
+                    this.history.push({
+                        x: this.x,
+                        y: this.y
+                    })
+
+                    if (this.history.length > 20) this.history.shift()
+
+                } else {
+                    if (this.offsprings && !this.madeChilds) {
+
+                        let babies = this.offsprings / 2
+                        for (let i = 0; i < babies; i++) {
+                            let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
+                            let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0
+
+                            birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
+
+                        }
+
+                    }
+                    this.madeChilds = true
+                    this.history.shift()
+                }
+
+                if (this.history.length === 0) this.dead = true
+                else if (this.offsprings) {
+                    for (let i = 0; this.history.length > i; i++) {
+                        let point = this.history[i]
+                        ctx.beginPath()
+                        ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
+                        ctx.arc(point.x, point.y, 1, 0, PI2, false)
+                        ctx.fill()
+                    }
+                } else {
+                    ctx.beginPath()
+                    ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
+                    ctx.arc(this.x, this.y, 1, 0, PI2, false)
+                    ctx.fill()
+                }
+
+            }
+        }
+
+        let canvas = document.getElementById('birthday')
+        let ctx = canvas.getContext('2d')
+        //01000001 01010011
+        let then = timestamp()
+
+        let birthday = new Birthday
+        window.onresize = () => birthday.resize()
+        document.onclick = evt => birthday.onClick(evt)
+        document.ontouchstart = evt => birthday.onClick(evt)
+
+        ;
+        (function loop() {
+            requestAnimationFrame(loop)
+
+            let now = timestamp()
+            let delta = now - then
+
+            then = now
+            birthday.update(delta / 1000)
+
+
+        })()
+    </script> --}}
+@endpush

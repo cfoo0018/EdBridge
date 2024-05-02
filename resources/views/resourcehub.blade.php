@@ -143,9 +143,9 @@
 
     <!-- Search Results and Pagination -->
     <div class="mx-auto p-4" style="max-width: 1200px;">
-        @if (session('no-results'))
+        {{-- @if (session('no-results'))
             <div class="alert alert-warning">{{ session('no-results') }}</div>
-        @endif
+        @endif --}}
 
         @isset($videos)
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">

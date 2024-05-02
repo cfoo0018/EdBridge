@@ -61,3 +61,4 @@ class YouTubeController extends Controller
 
         return view('resourcehub', compact('videos', 'nextPageToken', 'prevPageToken', 'query', 'level') + ['allowedCourses' => $this->allowedCourses]);
     }
+}

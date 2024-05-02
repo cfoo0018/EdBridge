@@ -21,9 +21,11 @@ Route::get('/', function () {
 
 Route::get('/search', [SearchController::class,'index'])->name('search');
 
-Route::get('/support', [CharityController::class, 'index'])->name('support.index');
-Route::get('/support/geocode', [CharityController::class,'geocodeCharities'])->name('support.geocode');
-
+Route::prefix('support')->group(function() {
+    Route::get('/', [CharityController::class, 'index'])->name('support.index');
+    Route::get('/geocode', [CharityController::class, 'geocodeCharities'])->name('support.geocode');
+    Route::get('/search', [CharityController::class, 'searchSuggestions'])->name('support.search');
+});
 
 Route::get('/resourcehub', [YouTubeController::class, 'index'])->name('resourcehub');
 Route::get('/resourcehub/search', [YouTubeController::class, 'search'])->name('youtube.search');
