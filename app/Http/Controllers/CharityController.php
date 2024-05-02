@@ -14,25 +14,26 @@ class CharityController extends Controller
     public function index(Request $request)
     {
         // Determine user's location or default to Melbourne
-        $userLocation = $request->filled('search')
-            ? $this->geocodeAddress($request->input('search'))
-            : $request->session()->get('user_location') ?? $this->geocodeAddress("Melbourne, VIC");
-
-        $request->session()->put('user_location', $userLocation);
-
-        // Default to Melbourne if geocoding fails
-        if (!$userLocation) {
-            $userLocation = $this->geocodeAddress("Melbourne, VIC");
-        }
+        $userLocation = $this->getUserLocation($request);
 
         // Capture the distance filter from the request
         $distanceKm = $request->input('distance', 50); // 50 km default
 
+        // Capture the service type filter from the request
+        $serviceType = $request->input('service_type', 'all');
+        $serviceTypeDb = $this->mapServiceType($serviceType, true);
+        // dd($serviceTypeDb);
         // Fetch charities within a bounding box
         $boundingBox = $this->calculateBoundingBox($userLocation, $distanceKm);
-        $charities = Charity::whereBetween('latitude', [$boundingBox['minLat'], $boundingBox['maxLat']])
-            ->whereBetween('longitude', [$boundingBox['minLng'], $boundingBox['maxLng']])
-            ->get();
+        $charitiesQuery = Charity::whereBetween('latitude', [$boundingBox['minLat'], $boundingBox['maxLat']])
+            ->whereBetween('longitude', [$boundingBox['minLng'], $boundingBox['maxLng']]);
+
+        // Apply category filter if not 'all'
+        if ($serviceType !== 'all') {
+            $charitiesQuery = $charitiesQuery->where('service_type', $serviceTypeDb);
+        }
+
+        $charities = $charitiesQuery->get();
 
         // Filter and sort charities by distance
         $charities = $charities->filter(function ($charity) use ($userLocation, $distanceKm) {
@@ -48,6 +49,11 @@ class CharityController extends Controller
 
         // Sort charities by distance
         $charities = $charities->sortBy('distance');
+
+        // Format service type for display
+        $charities->each(function ($charity) {
+            $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
+        });
 
         // Paginate manually
         $perPage = 30;
@@ -68,9 +74,9 @@ class CharityController extends Controller
         return view('charities.index', [
             'charities' => $paginatedCharities,
             'serviceTypes' => $serviceTypes,
-            'currentType' => $request->service_type ?? 'all',
+            'currentType' => $serviceType,
             'userLocation' => $userLocation,
-            'distanceKm' => $distanceKm, // To pass the distance to the view
+            'distanceKm' => $distanceKm,
         ]);
     }
 

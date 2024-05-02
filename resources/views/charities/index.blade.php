@@ -11,66 +11,74 @@
         </div>
 
         <!-- User Guide Section -->
-        <div class="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
-            <h2 class="text-2xl font-Fredoka mb-4 text-center">User Guide</h2>
+        <div class="bg-gray-100 rounded-lg shadow-lg mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
+                <div>
+                    <h2 class="text-2xl font-Fredoka mb-4 text-center lg:text-left">User Guide</h2>
 
-            <p class="text-base text-gray-700 text-center">
-                The <strong>Support Service Directory</strong> provides an intuitive way to find services near your
-                location.
-                Here's how to use it effectively:
-            </p>
+                    <p class="text-base text-gray-700 text-center lg:text-left">
+                        The <strong>Support Service Directory</strong> provides an intuitive way to find services near your
+                        location.
+                        Here's how to use it effectively:
+                    </p>
 
-            <!-- Sections for each feature -->
-            <div class="mt-6">
-                <h3 class="text-xl font-Fredoka mb-2">Using the Search Form:</h3>
-                <ul class="list-disc pl-6 text-base text-gray-700">
-                    <li><strong>Location Input:</strong> Enter your current location or postal address to localize services.
-                    </li>
-                    <li><strong>Search Button:</strong> Click the <em>Search</em> button to retrieve nearby services.</li>
-                </ul>
-            </div>
-
-            <div class="mt-6">
-                <h3 class="text-xl font-Fredoka mb-2">Filtering Services:</h3>
-                <ul class="list-disc pl-6 text-base text-gray-700">
-                    <li><strong>Category Dropdown:</strong> Choose a service type, such as Youth or Adults, to reload the
-                        page with matching results.</li>
-                    <li><strong>Distance Slider:</strong> Adjust to specify a maximum distance (in km) for services from
-                        your location.</li>
-                    <li><strong>View Toggle Buttons:</strong> Switch between:
+                    <!-- Sections for each feature -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-Fredoka mb-2">Using the Search Form:</h3>
                         <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>List View: <i class="fas fa-list text-Second"></i></strong> Displays services in a
-                                textual list format with essential details.</li>
-                            <li><strong>Map View: <i class="fas fa-map-marker-alt text-Second"></i></strong> Shows services
-                                as markers on a map, with pop-up information on clicking.</li>
+                            <li><strong>Location Input:</strong> Enter your current location or postal address to localize
+                                services.</li>
+                            <li><strong>Search Button:</strong> Click the <em>Search</em> button to retrieve nearby
+                                services.</li>
                         </ul>
-                    </li>
-                </ul>
-            </div>
+                    </div>
 
-            <div class="mt-6">
-                <h3 class="text-xl font-Fredoka mb-2">Interacting with the Results:</h3>
-                <ul class="list-disc pl-6 text-base text-gray-700">
-                    <li><strong>List View:</strong> Includes:
+                    <div class="mt-6">
+                        <h3 class="text-xl font-Fredoka mb-2">Filtering Services:</h3>
                         <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>Name:</strong> The service or organization's name.</li>
-                            <li><strong>Address:</strong> Full address or indication if unavailable.</li>
-                            <li><strong>Service Type:</strong> The type of support offered.</li>
-                            <li><strong>Distance:</strong> The distance from your current location.</li>
-                            <li><strong>Website:</strong> A link to the service's website, if available.</li>
+                            <li><strong>Category Dropdown:</strong> Choose a service type, such as Youth or Adults, to
+                                reload the page with matching results.</li>
+                            <li><strong>Distance Slider:</strong> Adjust to specify a maximum distance (in km) for services
+                                from your location.</li>
+                            <li><strong>View Toggle Buttons:</strong> Switch between:
+                                <ul class="list-disc pl-6 text-base text-gray-700">
+                                    <li><strong>List View: <i class="fas fa-list text-Second"></i></strong> Displays
+                                        services in a textual list format with essential details.</li>
+                                    <li><strong>Map View: <i class="fas fa-map-marker-alt text-Second"></i></strong> Shows
+                                        services as markers on a map, with pop-up information on clicking.</li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    <li><strong>Map View:</strong> Markers reveal a pop-up with:
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mt-6">
+                        <h3 class="text-xl font-Fredoka mb-2">Interacting with the Results:</h3>
                         <ul class="list-disc pl-6 text-base text-gray-700">
-                            <li><strong>Name and Service Type:</strong> For quick identification.</li>
-                            <li><strong>Website:</strong> A link to the service's website.</li>
-                            <li><strong>Directions:</strong> A button to get directions from your current location to the
-                                service.</li>
+                            <li><strong>List View:</strong> Includes:
+                                <ul class="list-disc pl-6 text-base text-gray-700">
+                                    <li><strong>Name:</strong> The service or organization's name.</li>
+                                    <li><strong>Address:</strong> Full address or indication if unavailable.</li>
+                                    <li><strong>Service Type:</strong> The type of support offered.</li>
+                                    <li><strong>Distance:</strong> The distance from your current location.</li>
+                                    <li><strong>Website:</strong> A link to the service's website, if available.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Map View:</strong> Markers reveal a pop-up with:
+                                <ul class="list-disc pl-6 text-base text-gray-700">
+                                    <li><strong>Name and Service Type:</strong> For quick identification.</li>
+                                    <li><strong>Website:</strong> A link to the service's website.</li>
+                                    <li><strong>Directions:</strong> A button to get directions from your current location
+                                        to the service.</li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
 
         <!-- Search Form -->
         <form action="{{ route('support.index') }}" method="GET" class="mb-4">
@@ -103,11 +111,9 @@
 
                 <!-- Category Dropdown -->
                 <div class="relative flex-grow lg:w-1/3">
-                    <select onchange="window.location.href = this value;"
-                        class="block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500 transition-all duration-300">
+                    <select onchange="window.location.href = this.value;" class="block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 pr-8 rounded-full leading-tight focus:outline-none focus:bg-white focus:border-gray-500 transition-all duration-300">
                         @foreach ($serviceTypes as $key => $name)
-                            <option
-                                value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'distance' => request()->input('distance')]) }}"
+                            <option value="{{ route('support.index', ['service_type' => $key, 'search' => request()->input('search'), 'distance' => request()->input('distance')]) }}"
                                 {{ $currentType === $key ? 'selected' : '' }}>
                                 {{ $name }}
                             </option>
@@ -143,7 +149,7 @@
                     <li class="p-4 hover:bg-gray-50 hidden" data-lat="{{ $charity->latitude ?? 'not set' }}"
                         data-lng="{{ $charity->longitude ?? 'not set' }}" data-name="{{ $charity->charity_legal_name }}"
                         data-website="{{ $charity->charity_website ? (Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website) : '#' }}"
-                        data-service-type="{{ $charity->service_type }}">
+                        data-service-type="{{ $charity->formatted_service_type }}">
                         <!-- Charity details here -->
                     </li>
                 @endforeach
@@ -165,7 +171,7 @@
                                             <p class="text-sm md:text-base text-gray-600 mt-1">
                                                 {{ $charity->full_address ?: 'Address not available' }}
                                                 <br>
-                                                <strong>Service Type: </strong>{{ $charity->service_type }}
+                                                <strong>Service Type: </strong>{{ $charity->formatted_service_type }}
                                             </p>
                                         </div>
                                         <div class="text-right ml-4">
