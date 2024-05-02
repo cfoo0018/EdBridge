@@ -408,5 +408,12 @@ canvas {
     }
 } */
 .hero {
-    background: url('/public/images/landingpageheader.webp') no-repeat center center/cover;
+    background: url('/public/images/landingpageheader.webp');
+    background-size: cover;
+    background-position: center; /* Centers the image in the section */
+    background-repeat: no-repeat; 
+}
+
+.hero canvas{
+    max-width: 100% !important;
 }
