@@ -3,8 +3,7 @@
 @section('title', 'BridgeEd')
 @section('content')
     <div class="w-full">
-        <div class="hero min-h-screen bg-cover bg-center relative"
-            style="background-image: url('../../images/landingpageheader.webp');">
+        <div class="hero min-h-screen bg-cover bg-center relative">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content text-center text-neutral-content">
                 <div class="max-w-lg mx-auto">
@@ -110,6 +109,7 @@
     </div>
 @endsection
 @push('script')
+    <script src="https://cdn.jsdelivr.net/gh/sirxemic/jquery.ripples/dist/jquery.ripples-min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const scrollDownButton = document.getElementById('scroll-down-button');
@@ -125,6 +125,21 @@
                     }
                 });
             }
+        });
+
+        $(document).ready(function() {
+            // Initialize ripples effect
+            $('.hero').ripples({
+                resolution: 512,
+                dropRadius: 20,
+                perturbance: 0.04,
+            });
+
+            // Reapply background styles
+            $('.hero').css({
+                'background-size': 'cover',
+                'background-position': 'center',
+            });
         });
     </script>
 @endpush
