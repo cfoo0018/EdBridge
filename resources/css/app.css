@@ -407,3 +407,6 @@ canvas {
         display: none;
     }
 } */
+.hero {
+    background: url('/public/images/landingpageheader.webp') no-repeat center center/cover;
+}
