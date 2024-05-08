@@ -1,11 +1,11 @@
-<?php
+//<?php
 
-namespace App\Console\Commands;
+//namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Charity;
-use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
-use Illuminate\Support\Facades\Log;
+//use Illuminate\Console\Command;
+//use App\Models\Charity;
+//use GoogleMaps\Facade\GoogleMapsFacade as GoogleMaps;
+//use Illuminate\Support\Facades\Log;
 
 // class GeocodeCharities extends Command {
 //     protected $signature = 'charities:geocode';
