@@ -6,11 +6,14 @@
         <div class="hero min-h-screen bg-cover bg-center relative">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content text-center text-neutral-content">
-                <div class="max-w-lg mx-auto">
-                    <h1 class="my-5 text-7xl font-bold font-Overpass text-white">Bridge Ed</h1>
+                <div class="mx-auto">
+                    <div id="changing-text" class="font-Overpass text-4xl text-white font-bold backdrop:blur-sm mb-10">
+                        <p>Access quality education, regardless of your background.</p>
+                        <p>Empowering your journey with free resources and dedicated support.</p>
+                        <p>Start building your future with us today!</p>
+                    </div>
+                    <h1 class="my-5 text-7xl font-bold font-Overpass text-white">BridgeEd</h1>
                     <p id="typewriter-text" class="mb-5 font-Overpass-Mono text-xl blur-xs text-white"></p>
-                    <p class="font-Fredoka text-lg text-white">Empower your journey.</p>
-                    <p class="mb-10 font-Fredoka text-lg text-white">Find warm support and resources with us!</p>
                     <a href="{{ route('resourcehub') }}" class="font-Fredoka"><button class="special-button text-white">
                             Explore Resources
                         </button>
@@ -139,6 +142,53 @@
                 'background-size': 'cover',
                 'background-position': 'center',
             });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const texts = document.querySelectorAll('#changing-text p');
+            let index = 0;
+
+            // Initially show the first element
+            texts[index].style.display = 'block';
+            setTimeout(() => texts[index].classList.add('active'), 50);
+
+            setInterval(function() {
+                // Fade out the current text
+                texts[index].classList.remove('active');
+                setTimeout(() => {
+                    texts[index].style.display = 'none';
+                    index = (index + 1) % texts.length;
+                    texts[index].style.display = 'block';
+                    setTimeout(() => texts[index].classList.add('active'), 50);
+                }, 2000); 
+            }, 5000); 
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const typeWriterText = document.getElementById('typewriter-text');
+            const originalText = 'Connecting Paths, Unlocking Potential.';
+            const text = '"' + originalText + '"'; // Including quotes directly in the text
+            let index = 0;
+
+            function typeWriterEffect() {
+                if (index < text.length) {
+                    typeWriterText.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriterEffect, 100); // typing speed
+                } else {
+                    setTimeout(clearText, 2000); // Wait 
+                }
+            }
+
+            function clearText() {
+                typeWriterText.innerHTML = ''; // Clear the text
+                index = 0; // Reset index
+                typeWriterEffect(); // Start the effect again
+            }
+
+            typeWriterEffect(); // Initiate the typewriter effect
         });
     </script>
 @endpush
