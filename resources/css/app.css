@@ -432,3 +432,23 @@ canvas {
     height: 100%;
     object-fit: contain; /* Ensures the image is scaled correctly within the element */
 }
+
+#changing-text p {
+    display: none;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#changing-text p.active {
+    display: block;
+    opacity: 1;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

@@ -222,32 +222,6 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const typeWriterText = document.getElementById('typewriter-text');
-            const originalText = 'Connecting Paths, Unlocking Potential.';
-            const text = '"' + originalText + '"'; // Including quotes directly in the text
-            let index = 0;
-
-            function typeWriterEffect() {
-                if (index < text.length) {
-                    typeWriterText.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeWriterEffect, 100); // typing speed
-                } else {
-                    setTimeout(clearText, 2000); // Wait 
-                }
-            }
-
-            function clearText() {
-                typeWriterText.innerHTML = ''; // Clear the text
-                index = 0; // Reset index
-                typeWriterEffect(); // Start the effect again
-            }
-
-            typeWriterEffect(); // Initiate the typewriter effect
-        });
-    </script>
 
     <script>
         function openVideoModal(videoId) {
