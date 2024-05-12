@@ -16,8 +16,8 @@ class ScholarshipController extends Controller
         if ($request->has('provider')) {
             $scholarships->where('provider', $request->provider);
         }
-
-        return view('scholarships.index', ['scholarships' => $scholarships->get()]);
+        $scholarships = Scholarship::paginate(10);
+        return view('scholarships.index', compact('scholarships'));
     }
 
     // Display the specified scholarship.
