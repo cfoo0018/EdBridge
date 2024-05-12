@@ -17,8 +17,8 @@
             <nav class="flex self-center space-x-4 text-white font-Fredoka py-4">
                 <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Home</a>
                 <a href="{{ route('resourcehub') }}" class="{{ Route::is('resourcehub') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Resource Hub</a>
-                <a href="{{ route('support.index') }}" class="{{ Route::is('support.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support</a>
-                <a href="{{ route('pathways') }}" class="{{ Route::is('pathways') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Pathways</a>
+                <a href="{{ route('support.index') }}" class="{{ Route::is('support.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support Services</a>
+                <a href="{{ route('pathways') }}" class="{{ Route::is('pathways') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Education Pathways</a>
                 {{-- <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Accessibility</a>
                 <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Financial Aid</a>  --}}
             </nav>    
@@ -41,8 +41,8 @@
         <nav class="text-center">
             <a href="{{ route('home') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Home</a>
             <a href="{{ route('resourcehub') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Resource Hub</a>
-            <a href="{{ route('support.index') }}"class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support</a>
-            <a href="{{ route('pathways') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Pathways</a>
+            <a href="{{ route('support.index') }}"class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support Services</a>
+            <a href="{{ route('pathways') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Education Pathways</a>
             {{-- <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Accessibility</a>
             <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Financial Aid</a>  --}}
         </nav>
