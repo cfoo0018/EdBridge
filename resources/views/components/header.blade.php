@@ -19,8 +19,8 @@
                 <a href="{{ route('resourcehub') }}" class="{{ Route::is('resourcehub') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Resource Hub</a>
                 <a href="{{ route('support.index') }}" class="{{ Route::is('support.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support</a>
                 <a href="{{ route('pathways') }}" class="{{ Route::is('pathways') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Pathways</a>
-                {{-- <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Accessibility</a>
-                <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Financial Aid</a>  --}}
+                {{-- <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Accessibility</a>--}}
+                <a href="{{ route('scholarships.index') }}" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Scholarships</a>  
             </nav>    
         </div>
     </div>

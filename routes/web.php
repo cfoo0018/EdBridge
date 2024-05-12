@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CharityController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CharityController;
 use App\Http\Controllers\YouTubeController;
+use App\Http\Controllers\ScholarshipController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,10 @@ Route::get('/businessinformation', function () {
 Route::get('/businessinformation/quiz', function () {
     return view('pathways.quiz.businessinformation');
 })->name('businessinformationquiz');
+
+
+Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarships.index');
+Route::get('/scholarships/{id}', [ScholarshipController::class,'show'])->name('scholarships.show');
 
 Route::fallback(function () {
     return response()->view('404', [], 404);
