@@ -12,18 +12,29 @@
     </div>
     
     <!-- Navigation Links (Hidden on small screens, visible on medium and larger screens) -->
-    <div class="hidden md:flex justify-center items-center static h-fit">
+    {{-- <div class="hidden md:flex justify-center items-center static h-fit">
         <div class="z-50 px-4 flex fixed top-8 self-center backdrop-blur-sm bg-Button/50 rounded-full">
             <nav class="flex self-center space-x-4 text-white font-Fredoka py-4">
                 <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Home</a>
                 <a href="{{ route('resourcehub') }}" class="{{ Route::is('resourcehub') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Resource Hub</a>
                 <a href="{{ route('support.index') }}" class="{{ Route::is('support.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support</a>
                 <a href="{{ route('pathways') }}" class="{{ Route::is('pathways') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Pathways</a>
-                {{-- <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Accessibility</a>--}}
                 <a href="{{ route('scholarships.index') }}" class="{{ Route::is('scholarships.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Scholarships</a>  
             </nav>    
         </div>
+    </div> --}}
+    <div class="hidden md:flex justify-center items-center static h-fit">
+        <div class="z-50 px-4 flex fixed top-8 self-center backdrop-blur-sm bg-Button/50 rounded-full">
+            <nav class="flex self-center space-x-4 text-white font-Fredoka py-4">
+                <a href="{{ route('home') }}" class="{{ request()->is('home*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Home</a>
+                <a href="{{ route('resourcehub') }}" class="{{ request()->is('resourcehub*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Resource Hub</a>
+                <a href="{{ route('support.index') }}" class="{{ request()->is('support*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support</a>
+                <a href="{{ route('pathways') }}" class="{{ request()->is('pathways*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Pathways</a>
+                <a href="{{ route('scholarships.index') }}" class="{{ request()->is('scholarships*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Scholarships</a>  
+            </nav>    
+        </div>
     </div>
+    
 </header>
 
 <!-- Mobile Navigation Menu (Initially hidden, shown when the hamburger menu is clicked) -->
