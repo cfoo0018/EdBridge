@@ -20,7 +20,7 @@
                 <a href="{{ route('support.index') }}" class="{{ Route::is('support.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support</a>
                 <a href="{{ route('pathways') }}" class="{{ Route::is('pathways') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Pathways</a>
                 {{-- <a href="#" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Accessibility</a>--}}
-                <a href="{{ route('scholarships.index') }}" class="hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Scholarships</a>  
+                <a href="{{ route('scholarships.index') }}" class="{{ Route::is('scholarships.index') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Scholarships</a>  
             </nav>    
         </div>
     </div>
@@ -43,8 +43,8 @@
             <a href="{{ route('resourcehub') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Resource Hub</a>
             <a href="{{ route('support.index') }}"class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support</a>
             <a href="{{ route('pathways') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Pathways</a>
-            {{-- <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Accessibility</a>
-            <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Financial Aid</a>  --}}
+            {{-- <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Accessibility</a> --}}
+            <a href="{{ route('scholarships.index') }}" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Financial Aid</a> 
         </nav>
     </div>
 </div>

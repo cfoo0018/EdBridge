@@ -2,78 +2,80 @@
 @section('title', 'BridgeEd - Scholarships')
 
 @section('content')
-    <div class="container mx-auto px-4 mt-40">
-        <h1 class="text-3xl md:text-4xl font-bold font-fredoka text-Second text-center">Find Your Scholarships</h1>
-        <ul>
+    <div class="container mx-auto px-4 mt-20 sm:mt-40 md:mt-40">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-Fredoka text-Second text-center">Find Your Scholarships</h1>
+
+        <div class="mb-4 flex flex-col md:flex-row items-center justify-between">
+            <form action="{{ route('scholarships.index') }}" method="GET" class="flex items-center mb-2 md:mb-0">
+                @csrf
+                <label for="provider" class="font-Fredoka mb-2 mr-2 text-Second">Filter by Provider:</label>
+                <select id="provider" name="provider"
+                    class="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="">All Providers</option>
+                    @foreach ($providers as $provider)
+                        <option value="{{ $provider }}" {{ request('provider') == $provider ? 'selected' : '' }}>
+                            {{ $provider }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+            <!-- Filter by international student -->
+            <form action="{{ route('scholarships.index') }}" method="GET" class="flex items-center mb-2 md:mb-0 ml-0 md:ml-4">
+                @csrf
+                <label for="international" class="font-Fredoka mb-2 mr-2 text-Second">International Student:</label>
+                <select id="international" name="international"
+                    class="block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="">All</option>
+                    <option value="1" {{ request('international') == '1' ? 'selected' : '' }}>Yes</option>
+                    <option value="0" {{ request('international') == '0' ? 'selected' : '' }}>No</option>
+                </select>
+            </form>
+            <!-- Sort by icon -->
+            <a href="{{ route('scholarships.index', ['sort' => 'provider']) }}" class="text-Second hover:text-blue-700 ml-0 md:ml-4">
+                Sort by Provider <i class="fas fa-sort-alpha-down ml-1"></i>
+            </a>
+        </div>
+        
+        <!-- Scholarship listings -->
+        <ul id="scholarshipsList">
             @foreach ($scholarships as $scholarship)
-                <li class="mb-4 p-4 bg-white shadow-lg rounded flex items-start">
-                    <div class="w-1/3">
-                        <div class="image-wrapper">
-                            @if (strtolower($scholarship->provider) == 'monash university')
-                                <img src="{{ asset('images/monash.png') }}" alt="Monash University"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'The University of Melbourne' ||
-                                    strtolower($scholarship->provider) == 'the university of melbourne')
-                                <img src="{{ asset('images/uniMelb.png') }}" alt="The University of Melbourne"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'la trobe university' || strtolower($scholarship->provider) == 'latrobe')
-                                <img src="{{ asset('images/latrobe.png') }}" alt="La Trobe University"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'rmit university' || strtolower($scholarship->provider) == 'rmit')
-                                <img src="{{ asset('images/RMIT.avif') }}" alt="RMIT University"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Swinburne University of Technology' ||
-                                    strtolower($scholarship->provider) == 'swinburne university of technology')
-                                <img src="{{ asset('images/swinburne.svg') }}" alt="Swinburne University of Technology"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'CQUniversity Australia' ||
-                                    strtolower($scholarship->provider) == 'cquniversity australia')
-                                <img src="{{ asset('images/cqu.png') }}" alt="CQUniversity Australia"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Holmesglen Institute' ||
-                                    strtolower($scholarship->provider) == 'holmesglen institute')
-                                <img src="{{ asset('images/holmesglen.png') }}" alt="Holmesglen Institute"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Deakin University' ||
-                                    strtolower($scholarship->provider) == 'deakin university')
-                                <img src="{{ asset('images/deakin.jpeg') }}" alt="Deakin University"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Australian Women Graduates' ||
-                                    strtolower($scholarship->provider) == 'australian women graduates')
-                                <img src="{{ asset('images/gwv.png') }}" alt="Australian Women Graduates"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Victoria University (VU)' ||
-                                    strtolower($scholarship->provider) == 'victoria university (vu)')
-                                <img src="{{ asset('images/vic.png') }}" alt="Victoria University (VU)"
-                                    class="h-full w-auto object-contain">
-                            @elseif(strtolower($scholarship->provider) == 'Kangan Institute, TAFE VIC' ||
-                                    strtolower($scholarship->provider) == 'kangan institute, tafe vic')
-                                <img src="{{ asset('images/kangan.jpeg') }}" alt="RMIT University"
-                                    class="h-full w-auto object-contain">
-                            @endif
+                <li class="mb-4 p-4 bg-white shadow-lg rounded flex flex-col md:flex-row items-start scholarship-item"
+                    data-provider="{{ strtolower($scholarship->provider) }}">
+                    <div class="w-full md:w-1/3 p-4 flex justify-center items-center">
+                        <div class="image-wrapper max-w-xs mx-auto">
+                            @include('components.scholarship-logo', [
+                                'provider' => strtolower($scholarship->provider),
+                            ])
                         </div>
                     </div>
                     <!-- Scholarship details -->
-                    <div class="flex-1 pl-4">
+                    <div class="flex-1 px-2 md:pl-4">
                         <div class="mb-2">
-                            <h3 class="text-lg font-bold text-Second hover:text-blue-700">{{ $scholarship->title }}</h3>
+                            <h3 class="text-md sm:text-lg font-bold text-Second hover:text-blue-700">
+                                {{ $scholarship->title }}</h3>
                             <span class="text-gray-600">{{ $scholarship->provider }}</span>
                         </div>
                         <div class="mb-4">
                             <ul class="space-y-1">
-                                <li><strong>Amount: </strong><span>${{ $scholarship->amount }}</span></li>
-                                <li><strong>Gender: </strong><span>{{ $scholarship->gender }}</span></li>
-                                <li><strong>Closing Date: </strong><span>{{ $scholarship->closing_date }}</span></li>
-                                <li><strong>Student Type: </strong><span>{{ $scholarship->student_type }}</span></li>
+                                <li><strong>Amount: </strong>
+                                    <span>{{ $scholarship->amount ? '$' . $scholarship->amount : 'Not available' }}</span>
+                                </li>
+                                <li><strong>Gender: </strong>
+                                    <span>{{ $scholarship->gender ? $scholarship->gender : 'Not available' }}</span>
+                                </li>
+                                <li><strong>Closing Date: </strong>
+                                    <span>{{ $scholarship->closing_date ? $scholarship->closing_date : 'Not available' }}</span>
+                                </li>
+                                <li><strong>Student Type: </strong>
+                                    <span>{{ $scholarship->student_type ? $scholarship->student_type : 'Not available' }}</span>
+                                </li>
                             </ul>
                         </div>
                         <div class="flex items-center justify-between">
                             <a href="{{ route('scholarships.show', $scholarship->id) }}"
                                 class="text-white bg-Second hover:bg-blue-700 rounded px-4 py-2">View scholarship</a>
-                            <div class="lg:hidden w-24 h-24">
-                                <img src="{{ asset('images/monash.avif') }}" alt="Monash University"
-                                    class="object-cover w-full h-full">
-                            </div>
                         </div>
                     </div>
                 </li>
