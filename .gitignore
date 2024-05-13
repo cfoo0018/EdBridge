@@ -4,7 +4,7 @@
 /public/storage
 /storage/*.key
 /storage/framework/cache/*
-vendor/
+/vendor/
 .env
 .env.backup
 .env.production
@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Ignore virtual environment directories
+venv/
+model/venv/

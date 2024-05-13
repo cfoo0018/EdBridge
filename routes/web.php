@@ -5,6 +5,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CharityController;
 use App\Http\Controllers\YouTubeController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\QuestionnaireController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/search', [SearchController::class,'index'])->name('search');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-Route::prefix('support')->group(function() {
+Route::prefix('support')->group(function () {
     Route::get('/', [CharityController::class, 'index'])->name('support.index');
     Route::get('/geocode', [CharityController::class, 'geocodeCharities'])->name('support.geocode');
     Route::get('/search', [CharityController::class, 'searchSuggestions'])->name('support.search');
@@ -69,6 +70,8 @@ Route::get('/resourcehub/search', [YouTubeController::class, 'search'])->name('y
 
 Route::prefix('pathways')->group(function () {
     Route::view('/', 'pathways.pathways')->name('pathways');
+    Route::get('/questionnaire', [QuestionnaireController::class, 'index'])->name('questionnaire');
+    Route::post('/submit', [QuestionnaireController::class, 'submit'])->name('submit');
 
     Route::prefix('roadmaps')->group(function () {
         Route::view('/datascience', 'pathways.roadmaps.datascience')->name('datascience');
@@ -86,7 +89,7 @@ Route::prefix('pathways')->group(function () {
 });
 
 Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarships.index');
-Route::get('/scholarships/{id}', [ScholarshipController::class,'show'])->name('scholarships.show');
+Route::get('/scholarships/{id}', [ScholarshipController::class, 'show'])->name('scholarships.show');
 
 Route::fallback(function () {
     return response()->view('404', [], 404);
