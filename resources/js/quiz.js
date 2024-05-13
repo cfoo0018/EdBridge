@@ -13,7 +13,7 @@ const restartButton = document.getElementById("restart-btn");
 const resultDiv = document.getElementById('result-div');
 const navButton = document.getElementById('nav-btn');
 
-let shuffledQuestions, currentQuestionIndex, score, questions;
+let shuffledQuestions, currentQuestionIndex, score, questions, subject;
 
 const datascienceQuestions = [
     {
@@ -273,12 +273,16 @@ startQuiz();
 function setQuestions(){
     if (datascience){ 
         questions = datascienceQuestions;
+        subject = 'Data Science';
     } else if (cybersecurity){
         questions = cybersecurityQuestions;
+        subject = 'Cybersecurity';
     } else if (software){
         questions = softwareQuestions;
+        subject = 'Software Development';
     } else {
         questions = businessQuestions;
+        subject = 'Business Information Systems';
     }
 }
 
@@ -405,19 +409,19 @@ function produceResult(){
         image.src = '/images/trophy.png';
         image.alt = 'Trophy';
         performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}`;
-        feedback.innerText = "Your flawless score showcases a deep understanding of data science principles. Your dedication to mastering the material is evident. Keep pushing boundaries and exploring new challenges to continue excelling in the field of data science.";
+        feedback.innerText = `Your flawless score showcases a deep understanding of ${subject} principles. Your dedication to mastering the material is evident. Keep pushing boundaries and exploring new challenges to continue excelling in the field of data science.`;
     } else if (score > shuffledQuestions.length/2 && score < shuffledQuestions.length) {
         title.innerText = 'Good Job!';
         image.src = '/images/smiley.png';
         image.alt = 'Smiley';
         performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}`;
-        feedback.innerText = 'Your score indicates a solid grasp of data science fundamentals. Keep up the good work by exploring advanced topics and applying your knowledge to real-world scenarios.';
+        feedback.innerText = `Your score indicates a solid grasp of ${subject} fundamentals. Keep up the good work by exploring advanced topics and applying your knowledge to real-world scenarios.`;
     } else {
         title.innerText = 'Better Luck Next Time!';
         image.src = '/images/sad.png';
         image.alt = 'Sad';
         performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}.`;
-        feedback.innerText = 'Your score suggests some areas for improvement in understanding data science concepts. Take time to review and practice foundational material to strengthen your knowledge and skills';
+        feedback.innerText = `Your score suggests some areas for improvement in understanding ${subject} concepts. Take time to review and practice foundational material to strengthen your knowledge and skills.`;
     }
 
     resultDiv.appendChild(title);
