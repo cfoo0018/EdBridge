@@ -7,10 +7,16 @@
 <!-- Roadmap Title -->
 <div id="roadmap_title" class="md:text-center flex flex-col items-center mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl">Cyber Security Pathway</h1>
+        <h1 class="font-Overpass font-bold text-4xl text-Second">Cyber Security Pathway</h1>
         <img src="{{ asset('images/hackerlogo.png') }}" alt="cyber security" class=" h-10"/>
     </div>
-    <p class="text-xl">The guide to understanding cyber security pathway</p>
+    <p class="text-xl mb-4">The guide to understanding cyber security pathway</p>
+    <button class="btn btn-warning border-black">
+        <a href="{{ asset('pdf/CybersecurityRoadmap.pdf') }}" class="flex size-fit flex-row space-x-2 items-center justify-center">
+            <p>Download Roadmap</p>
+            <img src="{{ asset('images/download.png') }}" alt="cyber security" class=" h-6"/>
+        </a>
+    </button>
 </div>
 
 <div class="divider"></div>
@@ -137,10 +143,10 @@
                         <p class="mb-3">Objective : Explore cryptographic techniques for data protection and secure communication.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            Encryption Algorithms and Methods
-                            Public Key Infrastructure (PKI)
-                            Digital Signatures and Certificates
-                            Secure Communication Protocols (SSL/TLS)
+                            <li>Encryption Algorithms and Methods</li>
+                            <li>Public Key Infrastructure (PKI)</li>
+                            <li>Digital Signatures and Certificates</li>
+                            <li>Secure Communication Protocols (SSL/TLS)</li>
                         </ul>
                     </div>
                 </div>
@@ -163,10 +169,10 @@
                         <p class="mb-3">Objective : Learn about network security measures and techniques for ethical hacking.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            Network Security Protocols (VPN, SSH)
-                            Penetration Testing Methodologies
-                            Vulnerability Assessment and Management
-                            Incident Response and Forensics Basics
+                            <li>Network Security Protocols (VPN, SSH)</li>
+                            <li>Penetration Testing Methodologies</li>
+                            <li>Vulnerability Assessment and Management</li>
+                            <li>Incident Response and Forensics Basics</li>
                         </ul>
                     </div>
                 </div>
@@ -189,10 +195,10 @@
                         <p class="mb-3">Objective : Understand security challenges and solutions in cloud computing and virtual environments.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            Cloud Computing Models (IaaS, PaaS, SaaS)
-                            Cloud Security Best Practices
-                            Virtualization Technologies and Security Considerations
-                            Identity and Access Management (IAM) in Cloud Environments
+                            <li>Cloud Computing Models (IaaS, PaaS, SaaS)</li>
+                            <li>Cloud Security Best Practices</li>
+                            <li>Virtualization Technologies and Security Considerations</li>
+                            <li>Identity and Access Management (IAM) in Cloud Environments</li>
                         </ul>
                     </div>
                 </div>
@@ -215,10 +221,10 @@
                         <p class="mb-3">Objective : Prepare for a career in cybersecurity and explore opportunities for professional growth.</p>
                         <p>Topics Covered :</p>
                         <ul class="list-disc ml-8">
-                            Building a Cybersecurity Portfolio (showcasing projects and certifications)
-                            Resume Writing and Interview Preparation
-                            Certifications (CISSP, CEH, CompTIA Security+)
-                            Continuing Education and Professional Networking
+                            <li>Building a Cybersecurity Portfolio (showcasing projects and certifications)</li>
+                            <li>Resume Writing and Interview Preparation</li>
+                            <li>Certifications (CISSP, CEH, CompTIA Security+)</li>
+                            <li>Continuing Education and Professional Networking</li>
                         </ul>
                     </div>
                 </div>
@@ -237,9 +243,11 @@
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-9"/>
     </div>
     <p class="mb-4">Are you ready to take on the cyber security pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
-    <a href="{{ route('cybersecurityquiz') }}" class="md:flex md:justify-center">
-        <button class="btn btn-outline hover:bg-Button">Play</button>
-    </a>
+    <button class="btn btn-outline hover:bg-Button">
+        <a href="{{ route('cybersecurityquiz') }}" class="md:flex md:justify-center size-fit">
+            Play
+        </a>
+    </button>
 </div>
 
 @endsection

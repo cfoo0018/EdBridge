@@ -7,10 +7,16 @@
 <!-- Roadmap Title -->
 <div id="roadmap_title" class="md:text-center flex flex-col items-center mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl">Software Development Pathway</h1>
+        <h1 class="font-Overpass font-bold text-4xl text-Second">Software Development Pathway</h1>
         <img src="{{ asset('images/codinglogo.png') }}" alt="coding" class=" h-10"/>
     </div>
-    <p class="text-xl">The guide to understanding software development pathway</p>
+    <p class="text-xl mb-4">The guide to understanding software development pathway</p>
+    <button class="btn btn-warning border-black">
+        <a href="{{ asset('pdf/SoftwareRoadmap.pdf') }}" class="flex size-fit flex-row space-x-2 items-center justify-center">
+            <p>Download Roadmap</p>
+            <img src="{{ asset('images/download.png') }}" alt="cyber security" class=" h-6"/>
+        </a>
+    </button>
 </div>
 
 <div class="divider"></div>
@@ -229,9 +235,12 @@
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-9"/>
     </div>
     <p class="mb-4">Are you ready to take on the software development pathway? Test and improve your knowledge on this current pathway by taking on this quest!</p>
-    <a href="{{ route('softwaredevelopmentquiz') }}" class="md:flex md:justify-center">
-        <button class="btn btn-outline hover:bg-Button">Play</button>
-    </a>
+    <button class="btn btn-outline hover:bg-Button">
+        <a href="{{ route('softwaredevelopmentquiz') }}" class="md:flex md:justify-center size-fit">
+            Play
+        </a>
+    </button>
+    
 </div>
 
 @endsection
