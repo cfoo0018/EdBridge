@@ -11,11 +11,14 @@ class YouTubeController extends Controller
     private $allowedCourses = [
         'STEM Education',
         'Biology',
-        'Computer Science',
         'Mathematics',
         'Physics',
         'Psychology',
-        'Sociology'
+        'Sociology',
+        'Data Science',
+        'Cybersecurity',
+        'Business Information Systems',
+        'Software Development',
     ];
 
     public function __construct(YouTubeService $youTubeService)
