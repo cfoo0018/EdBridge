@@ -2,9 +2,10 @@
 @section('title', 'BridgeEd - Scholarships')
 
 @section('content')
-    <div class="container mx-auto px-4 mt-20 sm:mt-40 md:mt-40">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-Fredoka text-Second text-center">Find Your Scholarships</h1>
-
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-Fredoka text-Second text-center mt-20 sm:mt-40 md:mt-36">Find Your Scholarships</h1>
+    <p class="text-lg text-center mb-2">Discover opportunities with our Scholarship Portal, connecting you to scholarships offered by universities in Victoria.</p>
+    <div class="divider"></div>
+    <div class="container mx-auto px-4 mt-12">
         <div class="mb-4 flex flex-col md:flex-row items-center justify-between">
             <form action="{{ route('scholarships.index') }}" method="GET" class="flex items-center mb-2 md:mb-0">
                 @csrf
@@ -21,7 +22,8 @@
                 </select>
             </form>
             <!-- Filter by international student -->
-            <form action="{{ route('scholarships.index') }}" method="GET" class="flex items-center mb-2 md:mb-0 ml-0 md:ml-4">
+            <form action="{{ route('scholarships.index') }}" method="GET"
+                class="flex items-center mb-2 md:mb-0 ml-0 md:ml-4">
                 @csrf
                 <label for="international" class="font-Fredoka mb-2 mr-2 text-Second">International Student:</label>
                 <select id="international" name="international"
@@ -33,11 +35,12 @@
                 </select>
             </form>
             <!-- Sort by icon -->
-            <a href="{{ route('scholarships.index', ['sort' => 'provider']) }}" class="text-Second hover:text-blue-700 ml-0 md:ml-4">
+            <a href="{{ route('scholarships.index', ['sort' => 'provider']) }}"
+                class="text-Second hover:text-blue-700 ml-0 md:ml-4">
                 Sort by Provider <i class="fas fa-sort-alpha-down ml-1"></i>
             </a>
         </div>
-        
+
         <!-- Scholarship listings -->
         <ul id="scholarshipsList">
             @foreach ($scholarships as $scholarship)

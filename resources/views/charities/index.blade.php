@@ -3,33 +3,21 @@
 
 @section('content')
     <!-- Main Content -->
-    <div class="py-8 px-4 md:px-8 lg:px-16 mt-20">
-        
-        <!-- Support Service Directory Title -->
-        <!-- <div id="support-title" class="mx-auto md:w-3/5 text-left mt-24 md:mt-36 px-4 md:px-0">
-            <div class="flex space-x-4 mb-2">
-                <h1 class="font-Overpass font-bold text-4xl text-Second">Support Service</h1>
-                <img src="{{ asset('images/handshake.png') }}" alt="support" class=" h-9"/>
-            </div>
-            <p class="text-xl">Find the nearest free support services based on your location.</p>
-            <button class="btn" onclick="userGuideModal.showModal()">User Guide<i class="fas fa-question-circle text-Second"></i></button>
-        </div> -->
-        
-        <!-- Title and Description -->
-        <div class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-Fredoka text-Second">Support Service Directory</h1>
-            <p class="text-lg text-gray-600 mt-2">Find the nearest support services based on your location.</p>
-            <!-- User Guide Button -->
-            <button class="btn" onclick="userGuideModal.showModal()">User Guide<i
-                    class="fas fa-question-circle text-Second"></i></button>
-        </div>
-
+    <div class="mb-8 text-center mt-40">
+        <h1 class="text-3xl md:text-4xl font-Fredoka text-Second">Support Service Directory</h1>
+        <p class="text-lg text-gray-600 mt-2 mb-8">Find the nearest support services based on your location.</p>
+        <!-- User Guide Button -->
+        <button class="btn" onclick="userGuideModal.showModal()">User Guide<i
+                class="fas fa-question-circle text-Second"></i></button>
+    </div>
+    <div class="divider"></div>
+    <div class="py-8 px-4 md:px-8 lg:px-16 ">
         <!-- Search Form -->
         <form action="{{ route('support.index') }}" method="GET" class="mb-4 bg-white p-4 rounded-lg shadow">
             <!-- Location Input and Search Button -->
             <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <div class="flex-grow">
-                    <input type="text" name="search" id="locationInput" placeholder="Enter your postal address"
+                    <input type="text" name="search" id="locationInput" placeholder="Enter your address"
                         class="form-input w-full p-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         value="{{ request()->filled('search') ? request()->search : '' }}">
                 </div>

@@ -4,10 +4,10 @@
 
 @section('content')
 <!-- Pathway Title -->
-<div class="bg-white text-Second text-center py-12 mt-40">
-    <h1 class="text-3xl md:text-5xl font-bold mb-3">Unlock Your Future in IT with AI!</h1>
+<div class="bg-white text-center py-12 mt-40">
+    <h1 class="text-3xl md:text-5xl font-Fredoka mb-3 text-Second">Unlock Your Future in IT with AI!</h1>
     <p class="text-xl mb-6">Discover which IT career path fits you best with our AI-driven guidance system.</p>
-    <a href="{{ route('questionnaire') }}" class="inline-block bg-Second text-white font-bold px-8 py-4 rounded-lg hover:bg-gray-100 hover:text-Second transition-colors duration-300">
+    <a href="{{ route('questionnaire') }}" class="inline-block bg-Second text-white font-Overpass px-8 py-4 rounded-lg hover:bg-gray-100 hover:text-Second transition-colors duration-300">
         Start Your Journey
     </a>
 </div>
