@@ -4,19 +4,20 @@
 
 @section('content')
 <!-- Pathway Title -->
-<div id="pathway-title" class="mx-auto md:w-3/5 text-left mt-24 md:mt-36 px-4 md:px-0">
-    <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl text-Second">IT Pathways</h1>
-        <img src="{{ asset('images/roadmap.png') }}" alt="pathway" class=" h-10"/>
-    </div>
-    <p class="text-xl">Welcome to our IT pathways guide! Explore diverse avenues in technology with us. From software development and cybersecurity to data science and AI, uncover your passion and potential in the dynamic world of IT.</p>
-    <a href="{{ route('questionnaire') }}" class="mt-6 inline-block bg-Second text-white px-6 py-2 rounded shadow hover:bg-blue-600 transition-colors duration-300">
-        Discover Your IT Pathway with AI
+<div class="bg-white text-Second text-center py-12 mt-40">
+    <h1 class="text-3xl md:text-5xl font-bold mb-3">Unlock Your Future in IT with AI!</h1>
+    <p class="text-xl mb-6">Discover which IT career path fits you best with our AI-driven guidance system.</p>
+    <a href="{{ route('questionnaire') }}" class="inline-block bg-Second text-white font-bold px-8 py-4 rounded-lg hover:bg-gray-100 hover:text-Second transition-colors duration-300">
+        Start Your Journey
     </a>
 </div>
 
 <div class="divider"></div>
-
+<!-- Introduction to Pathways -->
+<div class="mt-12 px-4 text-center">
+    <h2 class="text-3xl font-Fredoka text-Second">Explore Predefined Pathways</h2>
+    <p class="text-lg mt-4">Each pathway below represents a focused direction in IT. If you're unsure where to start, let our <span class="text-Second font-Fredoka"> <a href="{{ route('questionnaire') }}"> AI </a></span> guide help match you with a pathway that aligns with your interests and skills.</p>
+</div>
 <div id="pathway-div" class="w-4/5 mx-auto mt-12 space-y-12 md:space-y-24 mb-16">
     <div class="flex flex-col md:flex-row md:space-x-24 md:space-y-0 space-y-12 justify-center">
         <a href="{{ route('softwaredevelopment') }}" class="group">

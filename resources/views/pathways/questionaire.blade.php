@@ -4,7 +4,8 @@
 
 @section('content')
     <div class="container max-w-[1080px] mx-auto bg-white p-6 rounded shadow mt-40 mb-10">
-        <h1 class="text-2xl font-bold mb-6">Answer the following questions to know your interest in IT!</h1>
+        <h1 class="text-3xl font-Overpass text-Second text-center mb-8">Discover Your IT Career Path</h1>
+    <p class="text-lg text-gray-600 text-center mb-6">Answer the questions below to find out which IT pathway aligns with your interests and skills.</p>
         <form method="POST" action="{{ route('submit') }}" class="space-y-6">
             @csrf
             @php

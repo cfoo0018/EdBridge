@@ -65,7 +65,7 @@ public function submit(Request $request)
 
     try {
         // Make a POST request to your Flask API
-        $response = Http::post('http://127.0.0.1:5000/predict', $data);
+        $response = Http::post('http://170.64.216.76:5000/predict', $data);
 
         // Check if the request was successful
         if ($response->successful()) {
