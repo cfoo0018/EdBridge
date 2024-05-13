@@ -7,7 +7,7 @@
 <!-- Quiz Title -->
 <div id="cybersecurity-quiz" class="mx-auto md:w-2/3 text-left mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 id="quiz-1" class="font-Overpass font-bold text-4xl mb-2">Cyber Security Knowledge Quest</h1>
+        <h1 id="quiz-1" class="font-Overpass font-bold text-4xl mb-2 text-Second">Cyber Security Knowledge Quest</h1>
         <img src="{{ asset('images/quest.png') }}" alt="quiz" class=" h-10"/>
     </div>
     <p class="text-xl">Welcome to the Knowledge Quest! This quest is designed to help you gauge your understanding of the key concepts covered in the course and identify areas for improvement in your knowledge journey.</p>

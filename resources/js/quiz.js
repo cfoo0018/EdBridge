@@ -13,7 +13,30 @@ const restartButton = document.getElementById("restart-btn");
 const resultDiv = document.getElementById('result-div');
 const navButton = document.getElementById('nav-btn');
 
-let shuffledQuestions, currentQuestionIndex, score, questions, subject;
+let shuffledQuestions, currentQuestionIndex, score, questions, subject, resultLink;
+
+const linksDict = {
+    "datascience": [
+        "/resourcehub/search?course=Data+Science&duration=&level=beginner", 
+        "/resourcehub/search?course=Data+Science&duration=&level=intermediate", 
+        "/resourcehub/search?course=Data+Science&duration=&level=advanced",
+    ],
+    "cybersecurity": [
+        "/resourcehub/search?course=Cybersecurity&duration=&level=beginner", 
+        "/resourcehub/search?course=Cybersecurity&duration=&level=intermediate", 
+        "/resourcehub/search?course=Cybersecurity&duration=&level=advanced",
+    ],
+    "software": [
+        "/resourcehub/search?course=Software+Development&duration=&level=beginner", 
+        "/resourcehub/search?course=Software+Development&duration=&level=intermediate", 
+        "/resourcehub/search?course=Software+Development&duration=&level=advanced",
+    ],
+    "business": [
+        "/resourcehub/search?course=Business+Information+Systems&duration=&level=beginner", 
+        "/resourcehub/search?course=Business+Information+Systems&duration=&level=intermediate", 
+        "/resourcehub/search?course=Business+Information+Systems&duration=&level=advanced",
+    ]
+}
 
 const datascienceQuestions = [
     {
@@ -274,15 +297,19 @@ function setQuestions(){
     if (datascience){ 
         questions = datascienceQuestions;
         subject = 'Data Science';
+        resultLink = linksDict.datascience;
     } else if (cybersecurity){
         questions = cybersecurityQuestions;
         subject = 'Cybersecurity';
+        resultLink = linksDict.cybersecurity;
     } else if (software){
         questions = softwareQuestions;
         subject = 'Software Development';
+        resultLink = linksDict.software;
     } else {
         questions = businessQuestions;
         subject = 'Business Information Systems';
+        resultLink = linksDict.business;
     }
 }
 
@@ -400,34 +427,43 @@ function produceResult(){
     title.classList.add('text-3xl', 'font-semibold', 'font-Overpass');
     const image = document.createElement('img');
     image.classList.add('max-h-24', 'p-6');
-    const performance = document.createElement('p');
-    performance.classList.add('text-lg', 'mb-2');
     const feedback = document.createElement('p');
     feedback.classList.add('text-pretty');
     if (score == shuffledQuestions.length) {
+        resultLink = resultLink[2];
         title.innerText = 'Congratulations!';
         image.src = '/images/trophy.png';
         image.alt = 'Trophy';
-        performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}`;
-        feedback.innerText = `Your flawless score showcases a deep understanding of ${subject} principles. Your dedication to mastering the material is evident. Keep pushing boundaries and exploring new challenges to continue excelling in the field of data science.`;
+        feedback.innerText = `Your flawless performance showcases a deep understanding of ${subject} principles. Your dedication to mastering the material is evident. Keep pushing boundaries and exploring new challenges to continue excelling in the field of data science.`;
     } else if (score > shuffledQuestions.length/2 && score < shuffledQuestions.length) {
+        resultLink = resultLink[1];
         title.innerText = 'Good Job!';
         image.src = '/images/smiley.png';
         image.alt = 'Smiley';
-        performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}`;
-        feedback.innerText = `Your score indicates a solid grasp of ${subject} fundamentals. Keep up the good work by exploring advanced topics and applying your knowledge to real-world scenarios.`;
+        feedback.innerText = `Your performance indicates a solid grasp of ${subject} fundamentals. Keep up the good work by exploring advanced topics and applying your knowledge to real-world scenarios.`;
     } else {
-        title.innerText = 'Better Luck Next Time!';
-        image.src = '/images/sad.png';
+        resultLink = resultLink[0];
+        title.innerText = 'Nice Try!';
+        image.src = '/images/happy-face.png';
         image.alt = 'Sad';
-        performance.innerText = `You scored ${score} out of ${shuffledQuestions.length}.`;
-        feedback.innerText = `Your score suggests some areas for improvement in understanding ${subject} concepts. Take time to review and practice foundational material to strengthen your knowledge and skills.`;
+        feedback.innerText = `Your performance suggests some areas for improvement in understanding ${subject} concepts. Take time to review and practice foundational material to strengthen your knowledge and skills.`;
     }
+
+    // Call to action (Resource Hub)
+    const calltoaction = document.createElement('a');
+    const calltoactionImg = document.createElement('img');
+    calltoaction.href = resultLink;
+    calltoaction.classList.add('text-pretty', 'mt-8', 'font-semibold', 'link', 'link-info', 'flex', 'md:space-x-4', 'flex-col', 'md:flex-row', 'items-center');
+    calltoaction.innerText = `Click here to learn more about ${subject} in our Resource Hub`;
+    calltoactionImg.src = '/images/bookshelf.png';
+    calltoactionImg.alt = 'books';
+    calltoactionImg.classList.add('h-7', 'px-2');
+    calltoaction.appendChild(calltoactionImg);
 
     resultDiv.appendChild(title);
     resultDiv.appendChild(image);
-    resultDiv.appendChild(performance);
     resultDiv.appendChild(feedback);
+    resultDiv.appendChild(calltoaction);
 }
 
 function resetResult(){

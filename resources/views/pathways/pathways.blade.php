@@ -6,7 +6,7 @@
 <!-- Pathway Title -->
 <div id="pathway-title" class="mx-auto md:w-3/5 text-left mt-24 md:mt-36 px-4 md:px-0">
     <div class="flex space-x-4 mb-2">
-        <h1 class="font-Overpass font-bold text-4xl text-Button">IT Pathways</h1>
+        <h1 class="font-Overpass font-bold text-4xl text-Second">IT Pathways</h1>
         <img src="{{ asset('images/roadmap.png') }}" alt="pathway" class=" h-10"/>
     </div>
     <p class="text-xl">Welcome to our IT pathways guide! Explore diverse avenues in technology with us. From software development and cybersecurity to data science and AI, uncover your passion and potential in the dynamic world of IT.</p>
