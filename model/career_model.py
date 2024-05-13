@@ -7,8 +7,8 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the trained model and encoder
-model = load_model('career_path_model.h5')
-encoder = joblib.load('onehotencoder.pkl')
+model = load_model('/var/www/html/EdBridge/model/career_path_model.h5')
+encoder = joblib.load('/var/www/html/EdBridge/model/onehotencoder.pkl')
 
 @app.route('/predict', methods=['POST'])
 def predict():
