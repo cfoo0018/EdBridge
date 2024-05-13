@@ -26,87 +26,139 @@
             </div>
             <div id="scroll-down-button"class="scrolldown"></div>
         </div>
-
+        <div class="about-us bg-light-blue-100 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl leading-9 fond-Overpass text-Second sm:text-4xl sm:leading-10">
+                        Our Commitment to Your Future
+                    </h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-600 sm:mt-4">
+                        At <span class="text-Second">BridgeEd</span>, we believe everyone deserves a chance to succeed.
+                        We're here to bridge the gap between
+                        <span class="text-Second">potential and opportunity</span>, providing tailored resources and support to help you <span class="text-Second">overcome educational
+                        barriers.</span> Discover our journey towards making education accessible for all.
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="bg-Bg">
-            <div id="features" class="features max-w-[1280px] mx-auto">
-
-                <div id="resource-hub" class="feature mb-20 pt-20 flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-left">
-                        <img src="{{ asset('images/platform.png') }}" class="w-[30rem] rounded-md mx-auto"
-                            alt="Resource Hub">
+            <div id="features" class="features max-w-[1280px] mx-auto px-4 py-10">
+                <!-- Resource Hub Section -->
+                <div id="resource-hub" class="feature mb-20 pt-20 flex flex-col lg:flex-row items-center gap-8">
+                    <div class="neu-inset p-3">
+                        <img src="{{ asset('images/platform.png') }}" class="feature-image" alt="Resource Hub">
                     </div>
-                    <div class="w-full lg:w-1/2">
-                        <div class="feature-text p-4" data-aos="fade-right">
-                            <h1 class="text-5xl font-Overpass mb-10">Resource Hub</h1>
-                            <p>Explore a curated collection of educational resources designed to support vulnerable
-                                students. Our Resource Hub offers a range of materials, including STEM and IT-related
-                                courses, to empower and guide students in their educational journey.</p>
-                            <a
-                                href="{{ route('resourcehub') }}"class="mt-4 btn bg-Second text-white hover:text-Second hover:bg-white hover:border-Second">Explore
-                                More</a>
+                    <div class="neu p-6 w-full lg:w-1/2">
+                        <h1 class="text-4xl font-Overpass mb-5 text-Second">Education Resource Hub</h1>
+                        <p class="mb-10">Explore a curated collection of educational resources designed to support vulnerable students.</p>
+                        <a href="{{ route('resourcehub') }}" class="neu-btn mt-10">Explore Our Resources</a>
+                    </div>
+                </div>
+        
+                <!-- Support Service Directory Section -->
+                <div id="support-directory" class="feature mb-20 flex flex-col lg:flex-row-reverse items-center gap-8">
+                    <div class="neu-inset p-3">
+                        <img src="{{ asset('images/navigation.png') }}" class="feature-image" alt="Support Service Directory">
+                    </div>
+                    <div class="neu p-6 w-full lg:w-1/2">
+                        <h1 class="text-4xl font-Overpass mb-5 text-Second">Support Service Directory</h1>
+                        <p class="mb-10">Access essential support services tailored for tertiary education, including tutoring and counseling.</p>
+                        <a href="{{ route('support.index') }}" class="neu-btn mt-10">Find Support Services</a>
+                    </div>
+                </div>
+        
+                <!-- Education Pathways Section -->
+                <div id="education-pathways" class="feature mb-20 flex flex-col lg:flex-row items-center gap-8">
+                    <div class="neu-inset p-3">
+                        <img src="{{ asset('images/guidepost.png') }}" class="feature-image" alt="Personalized Education Pathways">
+                    </div>
+                    <div class="neu p-6 w-full lg:w-1/2">
+                        <h1 class="text-4xl font-Overpass mb-5 text-Second">Personalized Education Pathways</h1>
+                        <p class="mb-10">Discover personalized learning pathways that cater to the unique needs and goals of students.</p>
+                        <a href="{{ route('pathways') }}" class="neu-btn mt-10">Explore Learning Pathways</a>
+                    </div>
+                </div>
+        
+                <!-- Financial Aid & Scholarship Portal Section -->
+                <div id="financial-aid" class="feature mb-23 flex flex-col lg:flex-row-reverse items-center gap-8">
+                    <div class="neu-inset p-3">
+                        <img src="{{ asset('images/scholarship.png') }}" class="feature-image" alt="Financial Aid & Scholarship Portal">
+                    </div>
+                    <div class="neu p-6 w-full lg:w-1/2">
+                        <h1 class="text-4xl font-Overpass mb-5 text-Second">Scholarship Portal</h1>
+                        <p class="mb-10">Navigate a comprehensive portal for financial aid and scholarships tailored to diverse backgrounds.</p>
+                        <a href="{{ route('scholarships.index') }}" class="neu-btn mt-10 bg-Second">Apply Scholarship</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="team-section bg-white py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-Overpass text-Second">Meet Our Team</h2>
+                    <p class="text-lg text-gray-600 mt-4">Driven by passion and expertise, our team<span
+                            class="text-Second">(SaveTheKids)</span> is dedicated to making quality education accessible to
+                        everyone.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Team Member Cards -->
+                    <div
+                        class="team-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                        <div class="bg-cover bg-center h-60 w-full"
+                            style="background-image: url('{{ asset('images/data_m.png') }}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">MDS</h3>
+                            <p class="text-Second">AI/DS/Web Development Lead</p>
+                            <p class="text-gray-500 mt-3">Driving innovation through data and development to empower
+                                educational equity.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="team-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                        <div class="bg-cover bg-center h-60 w-full"
+                            style="background-image: url('{{ asset('images/hacker.png') }}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">MCS</h3>
+                            <p class="text-Second">Cyber Security Lead</p>
+                            <p class="text-gray-500 mt-3">Safeguarding our platforms to ensure a secure and reliable
+                                learning environment for all.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="team-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                        <div class="bg-cover bg-center h-60 w-full"
+                            style="background-image: url('{{ asset('images/data_f.png') }}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">MDS</h3>
+                            <p class="text-Second">Data Visualization Lead</p>
+                            <p class="text-gray-500 mt-3">Transforming data into visual stories that enlighten and guide our
+                                educational strategies.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="team-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                        <div class="bg-cover bg-center h-60 w-full"
+                            style="background-image: url('{{ asset('images/bis_f.png') }}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">MBIS</h3>
+                            <p class="text-Second">Business Analyst</p>
+                            <p class="text-gray-500 mt-3">Bridging technology and business to create sustainable solutions
+                                for educational challenges.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="team-card group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                        <div class="bg-cover bg-center h-60 w-full"
+                            style="background-image: url('{{ asset('images/developer.png') }}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">MIT</h3>
+                            <p class="text-Second">Web Developer</p>
+                            <p class="text-gray-500 mt-3">Enhancing user experiences through seamless, cutting-edge web
+                                interfaces.</p>
                         </div>
                     </div>
                 </div>
-
-                <div id="support-directory" class="feature mb-20 flex flex-col lg:flex-row-reverse">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-right">
-                        <img src="{{ asset('images/navigation.png') }}" class="w-[30rem] rounded-md"
-                            alt="Support Service Directory">
-                    </div>
-                    <div class="w-full lg:w-1/2">
-                        <div class="feature-text p-4" data-aos="fade-left">
-                            <h1 class="text-5xl font-Overpass mb-10">Support Service Directory</h1>
-                            <p>Access essential support services tailored for tertiary education, including tutoring and
-                                counseling. Our Support Service Directory provides comprehensive resources to help students
-                                find the support they need, including financial assistance, youth and adult services,
-                                resources for individuals with disabilities, and education-related support.</p>
-                            <a href="{{ route('support.index') }}"
-                                class="mt-4 btn bg-Second text-white hover:text-Second hover:bg-white hover:border-Second">Explore
-                                More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="education-pathways" class="feature mb-20 flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-left">
-                        <img src="{{ asset('images/guidepost.png') }}" class="w-[30rem] rounded-md "
-                            alt="Personalized Education Pathways">
-                    </div>
-                    <div class="w-full lg:w-1/2">
-                        <div class="feature-text p-4" data-aos="fade-right">
-                            <h1 class="text-5xl font-Overpass mb-10">Personalized Education Pathways</h1>
-                            <p>Discover personalized learning pathways that cater to the unique needs and goals of students.
-                                Our platform offers tailored quizzes to help identify the most suitable courses and learning
-                                options. Additionally, we provide specialized IT pathways to support students in building
-                                technical skills and advancing their careers in the digital age.</p>
-                            <a href="{{ route('pathways') }}"
-                                class="mt-4 btn bg-Second text-white hover:text-Second hover:bg-white hover:border-Second">Explore
-                                More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="financial-aid" class="feature mb-23 flex flex-col lg:flex-row-reverse">
-                    <div class="w-full lg:w-1/2 flex items-center justify-center p-3" data-aos="fade-right">
-                        <img src="{{ asset('images/scholarship.png') }}" class="w-[30rem] rounded-md"
-                            alt="Financial Aid & Scholarship Portal">
-                    </div>
-                    <div class="w-full lg:w-1/2">
-                        <div class="feature-text p-4" data-aos="fade-left">
-                            <h1 class="text-5xl font-Overpass mb-10">Scholarship Portal</h1>
-                            <p>Navigate a comprehensive portal for financial aid and scholarships. Discover opportunities
-                                for grants, bursaries, and loans tailored to support students from diverse backgrounds. The
-                                portal provides guidance on applying for scholarships, managing educational expenses, and
-                                accessing resources for different levels of need. This includes assistance programs for
-                                first-generation students, international students, and those pursuing specific fields of
-                                study.</p>
-                            <a href="{{ route('home') }}"
-                                class="mt-4 btn bg-Second text-white hover:text-Second hover:bg-white hover:border-Second">Explore
-                                More</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -161,8 +213,8 @@
                     index = (index + 1) % texts.length;
                     texts[index].style.display = 'block';
                     setTimeout(() => texts[index].classList.add('active'), 50);
-                }, 2000); 
-            }, 5000); 
+                }, 2000);
+            }, 5000);
         });
     </script>
     <script>

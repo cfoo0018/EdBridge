@@ -452,3 +452,50 @@ canvas {
     bottom: 0;
     left: 0;
 }
+
+.neu {
+    background: #e0e5ec;
+    border-radius: 20px;
+    box-shadow: 
+        8px 8px 15px #a3b1c6, 
+        -8px -8px 15px #ffffff;
+}
+
+.neu-inset {
+    background: #e0e5ec;
+    border-radius: 20px;
+    box-shadow: 
+        inset 8px 8px 15px #a3b1c6, 
+        inset -8px -8px 15px #ffffff;
+}
+
+.neu-btn {
+    border: none;
+    outline: none;
+    background: #e0e5ec;
+    color: #31344b;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+    box-shadow: 
+        5px 5px 10px #a3b1c6, 
+        -5px -5px 10px #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.neu-btn:hover {
+    background: #109CDE;
+    color:white;
+}
+
+.feature-image {
+    width: 100%;
+    height: auto;
+    max-width: 30rem;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.feature-image:hover {
+    transform: scale(1.05);
+}

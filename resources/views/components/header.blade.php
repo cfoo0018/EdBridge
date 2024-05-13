@@ -63,7 +63,6 @@
             </nav>
         </div>
     </div>
-
 </header>
 
 <!-- Mobile Navigation Menu (Initially hidden, shown when the hamburger menu is clicked) -->
@@ -83,14 +82,16 @@
             <a href="{{ route('home') }}"
                 class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Home</a>
             <a href="{{ route('resourcehub') }}"
-                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Resource Hub</a>
+                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Education Resource Hub</a>
             <a
-                href="{{ route('support.index') }}"class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support</a>
+                href="{{ route('support.index') }}"class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Support
+                Service Directory</a>
             <a href="{{ route('pathways') }}"
-                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Pathways</a>
+                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">IT
+                Career Pathways</a>
             {{-- <a href="/" class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Accessibility</a> --}}
             <a href="{{ route('scholarships.index') }}"
-                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Financial Aid</a>
+                class="glow-effect block text-xl font-semibold hover:text-gray-300 my-5">Find Scholarships</a>
         </nav>
     </div>
 </div>

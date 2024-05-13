@@ -15,28 +15,29 @@ class CharityController extends Controller
     {
         // Determine user's location or default to Melbourne
         $userLocation = $this->getUserLocation($request);
-
-        // Capture the distance filter from the request
-        $distanceKm = $request->input('distance', 50); // 50 km default
-
+    
+        // Capture the minimum and maximum distance filters from the request
+        $minDistanceKm = $request->input('minDistance', 0); // Default minimum distance
+        $maxDistanceKm = $request->input('maxDistance', 100); // Default maximum distance
+    
         // Capture the service type filter from the request
         $serviceType = $request->input('service_type', 'all');
         $serviceTypeDb = $this->mapServiceType($serviceType, true);
-        // dd($serviceTypeDb);
-        // Fetch charities within a bounding box
-        $boundingBox = $this->calculateBoundingBox($userLocation, $distanceKm);
+    
+        // Fetch charities within a bounding box calculated using the maximum distance
+        $boundingBox = $this->calculateBoundingBox($userLocation, $maxDistanceKm);
         $charitiesQuery = Charity::whereBetween('latitude', [$boundingBox['minLat'], $boundingBox['maxLat']])
             ->whereBetween('longitude', [$boundingBox['minLng'], $boundingBox['maxLng']]);
-
+    
         // Apply category filter if not 'all'
         if ($serviceType !== 'all') {
             $charitiesQuery = $charitiesQuery->where('service_type', $serviceTypeDb);
         }
-
+    
         $charities = $charitiesQuery->get();
-
-        // Filter and sort charities by distance
-        $charities = $charities->filter(function ($charity) use ($userLocation, $distanceKm) {
+    
+        // Filter charities by minimum and maximum distance
+        $charities = $charities->filter(function ($charity) use ($userLocation, $minDistanceKm, $maxDistanceKm) {
             $distance = $this->haversineGreatCircleDistance(
                 $userLocation['lat'],
                 $userLocation['lng'],
@@ -44,22 +45,22 @@ class CharityController extends Controller
                 $charity->longitude
             );
             $charity->distance = $distance; // Assign distance to each charity
-            return $distance <= $distanceKm;
+            return $distance >= $minDistanceKm && $distance <= $maxDistanceKm;
         });
-
+    
         // Sort charities by distance
         $charities = $charities->sortBy('distance');
-
+    
         // Format service type for display
         $charities->each(function ($charity) {
             $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
         });
-
+    
         // Paginate manually
         $perPage = 30;
         $currentPage = $request->input('page', 1);
         $pagedCharities = $charities->slice(($currentPage - 1) * $perPage, $perPage);
-
+    
         $paginatedCharities = new LengthAwarePaginator(
             $pagedCharities,
             $charities->count(),
@@ -67,18 +68,20 @@ class CharityController extends Controller
             $currentPage,
             ['path' => $request->url(), 'query' => $request->query()]
         );
-
+    
         // Fetch service types
         $serviceTypes = $this->getServiceTypes();
-
+    
         return view('charities.index', [
             'charities' => $paginatedCharities,
             'serviceTypes' => $serviceTypes,
             'currentType' => $serviceType,
             'userLocation' => $userLocation,
-            'distanceKm' => $distanceKm,
+            'minDistanceKm' => $minDistanceKm,
+            'maxDistanceKm' => $maxDistanceKm
         ]);
     }
+    
 
     protected function calculateBoundingBox($userLocation, $distanceKm)
     {
