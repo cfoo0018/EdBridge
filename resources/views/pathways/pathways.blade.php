@@ -4,7 +4,18 @@
 
 @section('content')
 <!-- Pathway Title -->
-<div class="bg-white text-center py-12 mt-40">
+<!-- Resource Hub Title -->
+<div id="resourcehub-title" class="mx-auto md:w-3/5 mt-24 md:mt-36 px-4 md:px-0 text-center">
+    <div class="flex space-x-4 mb-2 flex-row justify-center">
+        <h1 class="font-Fredoka sm:text-3xl md:text-4xl text-2xl text-Second">IT Education Pathway</h1>
+        <img src="{{ asset('images/roadmap.png') }}" alt="books" class=" h-10"/>
+    </div>
+    <p class="text-xl">
+    Navigate your educational journey with our personalized IT Pathway, guiding you towards your academic and career goals in the tech industry.</p>
+</div>
+<div class="divider"></div>
+
+<div class="bg-white text-center py-6">
     <h1 class="text-3xl md:text-5xl font-Fredoka mb-3 text-Second">Unlock Your Future in IT with AI!</h1>
     <p class="text-xl mb-6">Discover which IT career path fits you best with our AI-driven guidance system.</p>
     <a href="{{ route('questionnaire') }}" class="inline-block bg-Second text-white font-Overpass px-8 py-4 rounded-lg hover:bg-gray-100 hover:text-Second transition-colors duration-300">
@@ -12,56 +23,63 @@
     </a>
 </div>
 
-<div class="divider"></div>
 <!-- Introduction to Pathways -->
-<div class="mt-12 px-4 text-center">
-    <h2 class="text-3xl font-Fredoka text-Second">Explore Predefined Pathways</h2>
-    <p class="text-lg mt-4">Each pathway below represents a focused direction in IT. If you're unsure where to start, let our <span class="text-Second font-Fredoka"> <a href="{{ route('questionnaire') }}"> AI </a></span> guide help match you with a pathway that aligns with your interests and skills.</p>
-</div>
-<div id="pathway-div" class="w-4/5 mx-auto mt-12 space-y-12 md:space-y-24 mb-16">
-    <div class="flex flex-col md:flex-row md:space-x-24 md:space-y-0 space-y-12 justify-center">
-        <a href="{{ route('softwaredevelopment') }}" class="group">
-            <div class="card md:card-side bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
-                <figure><img src="{{ asset('images/coding.jpg') }}" alt="Coding" class="md:size-72"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Software Development Pathway</h2>
-                    <p>Learn more about software development.</p>
-                    <span class="text-blue-500 hover:text-blue-700 group-hover:underline">Explore Pathway</span>
-                </div>
+
+
+<!-- Pathway Cards -->
+<div class="mx-auto px-4">
+    <div class="border-2 border-slate-300 rounded-3xl bg-stone-100 py-8 md:p-20 md:mx-36 md:my-10">
+        <div class="text-center md:mb-10">
+            <h2 class="text-3xl font-Fredoka text-Second font-semibold">Explore Predefined Pathways</h2>
+        </div>
+            <div id="pathway-div" class="flex flex-wrap gap-8 md:gap-y-16 md:gap-x-36 justify-center font-semibold mt-12 mb-16 px-4">
+                <!-- 1st Row -->
+                    <!-- Software Card -->
+                    <a href="{{ route('softwaredevelopment') }}" class="group">
+                        <div class="card bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+                            <figure><img src="{{ asset('images/information.png') }}" alt="Coding"/></figure>
+                            <div class="card-body justify-between flex flex-wrap">
+                                <h2 class="card-title">Software Development Pathway</h2>
+                                <span class="text-Button hover:text-Second group-hover:underline">Explore Pathway</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Business Card -->
+                    <a href="{{ route('businessinformation') }}" class="group">
+                        <div class="card bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+                            <figure><img src="{{ asset('images/bis_f.png') }}" alt="Business Information"/></figure>
+                            <div class="card-body justify-between flex flex-wrap">
+                                <h2 class="card-title">Business Information Systems Pathway</h2>
+                                <span class="text-Button hover:text-Second group-hover:underline">Explore Pathway</span>
+                            </div>
+                        </div>
+                    </a>
+                <!-- 2nd Row -->
+                    <!-- Data Card -->
+                    <a href="{{ route('datascience') }}" class="group">
+                        <div class="card bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+                            <figure><img src="{{ asset('images/data-science.png') }}" alt="Data Science"/></figure>
+                            <div class="card-body justify-between flex flex-wrap">
+                                <h2 class="card-title">Data Science Pathway</h2>
+                                <span class="text-Button hover:text-Second group-hover:underline">Explore Pathway</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Cyber Card -->
+                    <a href="{{ route('cybersecurity') }}" class="group">
+                        <div class="card bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+                            <figure><img src="{{ asset('images/hacker.png') }}" alt="Cyber Security"/></figure>
+                            <div class="card-body justify-between flex flex-wrap">
+                                <h2 class="card-title">Cyber Security Pathway</h2>
+                                <span class="text-Button hover:text-Second group-hover:underline">Explore Pathway</span>
+                            </div>
+                        </div>
+                    </a>
             </div>
-        </a>
-        <a href="{{ route('businessinformation') }}" class="group">
-            <div class="card md:card-side bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl w-full">
-                <figure><img src="{{ asset('images/businessinformation.jpg') }}" alt="Business Information" class="md:size-72"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Business Information Systems Pathway</h2>
-                    <p>Learn more about Business Information Systems.</p>
-                    <span class="text-blue-500 hover:text-blue-700 group-hover:underline">Explore Pathway</span>
-                </div>
-            </div>
-        </a>
+        </div>
     </div>
-    <div class="flex flex-col md:flex-row md:space-x-24 md:space-y-0 space-y-12 justify-center">
-        <a href="{{ route('datascience') }}" class="group">
-            <div class="card md:card-side bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
-                <figure><img src="{{ asset('images/datascience.jpg') }}" alt="Data Science" class="md:size-72"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Data Science Pathway</h2>
-                    <p>Learn more about data science.</p>
-                    <span class="text-blue-500 hover:text-blue-700 group-hover:underline">Explore Pathway</span>
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('cybersecurity') }}" class="group">
-            <div class="card md:card-side bg-base-200 shadow-xl transition-shadow duration-300 hover:shadow-2xl w-full">
-                <figure><img src="{{ asset('images/cybersecurity.webp') }}" alt="Cyber Security" class="md:size-72"/></figure>
-                <div class="card-body">
-                    <h2 class="card-title">Cyber Security Pathway</h2>
-                    <p>Learn more about cyber security.</p>
-                    <span class="text-blue-500 hover:text-blue-700 group-hover:underline">Explore Pathway</span>
-                </div>
-            </div>
-        </a>
-    </div>
 </div>
+
+
+
 @endsection
