@@ -246,6 +246,7 @@
     </dialog>
 @endsection
 
+
 @push('script')
     <script>
         $(document).ready(function() {
