@@ -76,7 +76,6 @@
                     <input type="hidden" id="maxDistance" name="maxDistance" value="{{ request('maxDistance', 100) }}">
                 </div>
             </div>
-    </div>
     </form>
 
     <!-- Views Container -->
