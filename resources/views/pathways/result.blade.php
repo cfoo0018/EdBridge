@@ -9,7 +9,7 @@
 
         @if ($careerPath === 'Artificial Intelligence')
             <img src="{{ asset('images/AI.png') }}" alt="Artificial Intelligence Pathway" class="w-full h-auto mb-4">
-            <a href="{{ route('ai') }}" class="bg-Second hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 text-center block mb-4">Go to AI Roadmap</a>
+            <a href="#" class="bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 text-center block mb-4 cursor-not-allowed">Sorry, This AI roadmap is not available!</a>
         @elseif ($careerPath === 'Data Science')
             <img src="{{ asset('images/data-science.png') }}" alt="Data Science Pathway" class="w-full h-auto mb-4">
             <a href="{{ route('datascience') }}" class="bg-Second hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 text-center block mb-4">Go to Data Science Roadmap</a>
