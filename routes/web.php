@@ -94,3 +94,7 @@ Route::get('/scholarships/{id}', [ScholarshipController::class, 'show'])->name('
 Route::fallback(function () {
     return response()->view('404', [], 404);
 });
+
+Route::get('/500', function () {
+    return view('500');
+});
