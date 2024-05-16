@@ -4,7 +4,7 @@
 @section('content')
     <!-- Main Content -->
     <div class="mb-8 text-center mt-40">
-        <h1 class="text-3xl md:text-4xl font-Fredoka text-Second">Support Service Directory</h1>
+        <h1 class="text-3xl md:text-5xl font-Fredoka text-Second">Support Service Directory</h1>
         <p class="text-lg text-gray-600 mt-2 mb-8">Find the nearest support services based on your location.</p>
         <!-- User Guide Button -->
         <button class="btn" onclick="userGuideModal.showModal()">User Guide<i

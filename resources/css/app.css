@@ -453,8 +453,8 @@ canvas {
 .neu-btn {
     border: none;
     outline: none;
-    background: #e0e5ec;
-    color: #31344b;
+    background: #109CDE;
+    color: #ffffff;
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 1em;
@@ -465,8 +465,8 @@ canvas {
 }
 
 .neu-btn:hover {
-    background: #109CDE;
-    color:white;
+    background:  #e0e5ec;
+    color:#109CDE;
 }
 
 .feature-image {

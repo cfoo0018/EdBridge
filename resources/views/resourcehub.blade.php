@@ -6,8 +6,8 @@
     <!-- Resource Hub Title -->
     <div id="resourcehub-title" class="mx-auto md:w-3/5 mt-24 md:mt-36 px-4 md:px-0 text-center">
         <div class="flex space-x-4 mb-2 flex-row justify-center">
-            <h1 class="font-Fredoka sm:text-3xl md:text-4xl text-2xl text-Second">Resource Hub</h1>
-            <img src="{{ asset('images/bookshelf.png') }}" alt="books" class=" h-9"/>
+            <h1 class="font-Fredoka sm:text-3xl md:text-5xl text-2xl text-Second">Resource Hub</h1>
+            {{-- <img src="{{ asset('images/bookshelf.png') }}" alt="books" class="h-12"/> --}}
         </div>
         <p class="text-xl">Welcome to the Resource Hub, your gateway to free STEM education resources tailored for low socioeconomic status (SES) students, offering free tutorials and courses to support your academic journey.</p>
     </div>

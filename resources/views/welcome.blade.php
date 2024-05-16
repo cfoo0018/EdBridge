@@ -29,7 +29,7 @@
         <div class="about-us bg-light-blue-100 py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
-                    <h2 class="text-3xl leading-9 fond-Overpass text-Second sm:text-4xl sm:leading-10">
+                    <h2 class="text-4xl leading-9 fond-Overpass text-Second sm:text-4xl sm:leading-10 md:text-5xl">
                         Our Commitment to Your Future
                     </h2>
                     <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-600 sm:mt-4">
@@ -51,7 +51,7 @@
                     <div class="neu p-6 w-full lg:w-1/2">
                         <h1 class="text-4xl font-Overpass mb-5 text-Second">Education Resource Hub</h1>
                         <p class="mb-10">Explore a curated collection of educational resources designed to support vulnerable students.</p>
-                        <a href="{{ route('resourcehub') }}" class="neu-btn mt-10">Explore Our Resources</a>
+                        <a href="{{ route('resourcehub') }}" class="neu-btn mt-10 font-semibold">Explore Our Resources</a>
                     </div>
                 </div>
         
@@ -63,7 +63,7 @@
                     <div class="neu p-6 w-full lg:w-1/2">
                         <h1 class="text-4xl font-Overpass mb-5 text-Second">Support Service Directory</h1>
                         <p class="mb-10">Access essential support services tailored for tertiary education, including tutoring and counseling.</p>
-                        <a href="{{ route('support.index') }}" class="neu-btn mt-10">Find Support Services</a>
+                        <a href="{{ route('support.index') }}" class="neu-btn mt-10 font-semibold">Find Support Services</a>
                     </div>
                 </div>
         
@@ -73,9 +73,9 @@
                         <img src="{{ asset('images/guidepost.png') }}" class="feature-image" alt="Personalized Education Pathways">
                     </div>
                     <div class="neu p-6 w-full lg:w-1/2">
-                        <h1 class="text-4xl font-Overpass mb-5 text-Second">Personalized Education Pathways</h1>
+                        <h1 class="text-4xl font-Overpass mb-5 text-Second ">Personalized Education Pathways</h1>
                         <p class="mb-10">Discover personalized learning pathways that cater to the unique needs and goals of students.</p>
-                        <a href="{{ route('pathways') }}" class="neu-btn mt-10">Explore Learning Pathways</a>
+                        <a href="{{ route('pathways') }}" class="neu-btn mt-10 font-semibold">Explore Learning Pathways</a>
                     </div>
                 </div>
         
@@ -87,7 +87,7 @@
                     <div class="neu p-6 w-full lg:w-1/2">
                         <h1 class="text-4xl font-Overpass mb-5 text-Second">Scholarship Portal</h1>
                         <p class="mb-10">Navigate a comprehensive portal for financial aid and scholarships tailored to diverse backgrounds.</p>
-                        <a href="{{ route('scholarships.index') }}" class="neu-btn mt-10 bg-Second">Apply Scholarship</a>
+                        <a href="{{ route('scholarships.index') }}" class="neu-btn mt-10 font-semibold bg-Second">Apply Scholarship</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
         <div class="team-section bg-white py-20">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-Overpass text-Second">Meet Our Team</h2>
+                    <h2 class="text-4xl font-Overpass text-Second md:text-5xl">Meet Our Team</h2>
                     <p class="text-lg text-gray-600 mt-4">Driven by passion and expertise, our team<span
                             class="text-Second">(SaveTheKids)</span> is dedicated to making quality education accessible to
                         everyone.</p>

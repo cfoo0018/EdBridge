@@ -2,8 +2,8 @@
 @section('title', 'BridgeEd - Scholarships')
 
 @section('content')
-    <h1 class="text-2xl sm:text-3xl md:text-4xl font-Fredoka text-Second text-center mt-20 sm:mt-40 md:mt-36">Find Your Scholarships</h1>
-    <p class="text-lg text-center mb-2">Discover opportunities with our Scholarship Portal, connecting you to scholarships offered by universities in Victoria.</p>
+    <h1 class="text-2xl sm:text-3xl md:text-5xl font-Fredoka text-Second text-center mt-20 sm:mt-40 md:mt-36 mb-2">Find Your Scholarships</h1>
+    <p class="text-lg text-center">Discover opportunities with our Scholarship Portal, connecting you to scholarships offered by universities in Victoria.</p>
     <div class="divider"></div>
     <div class="container mx-auto px-4 mt-12">
         <div class="mb-4 flex flex-col md:flex-row items-center justify-between">
@@ -40,10 +40,10 @@
                     class="text-Second hover:text-blue-700 ml-0 md:ml-4">
                     Sort by Provider <i class="fas fa-sort-alpha-down ml-1"></i>
                 </a>
-                <a href="{{ route('scholarships.index', ['sort' => 'amount']) }}"
+                {{-- <a href="{{ route('scholarships.index', ['sort' => 'amount']) }}"
                     class="text-Second hover:text-blue-700 ml-4">
                     Sort by Amount <i class="fas fa-sort-numeric-down ml-1"></i>
-                </a>
+                </a> --}}
             </div>
         </div>
         <!-- Amount filter slider -->
