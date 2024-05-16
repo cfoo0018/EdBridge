@@ -538,3 +538,7 @@ canvas {
         transform: translateY(-10px);
     }
 }
+
+.noUi-connect {
+    background: #109CDE!important;
+}

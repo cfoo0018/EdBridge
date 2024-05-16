@@ -1,5 +1,5 @@
 @extends('layout.layout')
-
+@section('title', 'BridgeEd - Scholarship Details')
 @section('content')
 <div class="container mx-auto px-4 py-8 mt-20">
     <div class="max-w-2xl mx-auto">
