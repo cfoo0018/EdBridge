@@ -33,14 +33,14 @@
             <path
                 d="M66.76 106V22H107.32C114.28 22 119.78 23.12 123.82 25.36C127.9 27.56 130.8 30.4 132.52 33.88C134.28 37.36 135.16 41 135.16 44.8C135.16 48.52 134.5 51.94 133.18 55.06C131.9 58.18 129.48 60.56 125.92 62.2C128.84 63.32 131.18 64.92 132.94 67C134.7 69.08 135.96 71.36 136.72 73.84C137.52 76.28 137.92 78.6 137.92 80.8C137.92 83.84 137.4 86.86 136.36 89.86C135.32 92.86 133.66 95.58 131.38 98.02C129.14 100.42 126.16 102.36 122.44 103.84C118.76 105.28 114.24 106 108.88 106H66.76ZM85.72 88.12H109.72C112 88.12 113.8 87.7 115.12 86.86C116.44 86.02 117.36 85 117.88 83.8C118.44 82.6 118.72 81.44 118.72 80.32C118.72 78.92 118.4 77.56 117.76 76.24C117.16 74.88 115.98 73.76 114.22 72.88C112.46 72 109.88 71.56 106.48 71.56H85.72V88.12ZM85.72 54.52H105.52C109.12 54.52 111.74 53.86 113.38 52.54C115.02 51.18 115.84 49.36 115.84 47.08C115.84 45.92 115.64 44.78 115.24 43.66C114.84 42.54 114.04 41.62 112.84 40.9C111.64 40.14 109.84 39.76 107.44 39.76H85.72V54.52ZM152.43 106V44.68H170.43V50.32C171.35 48.44 172.99 46.8 175.35 45.4C177.71 43.96 179.99 43.24 182.19 43.24C186.95 43.24 190.95 45.04 194.19 48.64L191.79 64.96C189.95 63.32 188.19 62.18 186.51 61.54C184.87 60.86 183.03 60.52 180.99 60.52C178.71 60.52 176.79 61 175.23 61.96C173.67 62.92 172.47 64.34 171.63 66.22C170.83 68.1 170.43 70.4 170.43 73.12V106H152.43ZM204.112 106V44.68H222.112V106H204.112ZM213.112 39.28C210.312 39.28 207.892 38.26 205.852 36.22C203.812 34.18 202.792 31.76 202.792 28.96C202.792 26.2 203.792 23.84 205.792 21.88C207.792 19.88 210.232 18.88 213.112 18.88C216.072 18.88 218.532 19.86 220.492 21.82C222.452 23.74 223.432 26.12 223.432 28.96C223.432 31.84 222.432 34.28 220.432 36.28C218.432 38.28 215.992 39.28 213.112 39.28ZM262.403 107.44C254.443 107.44 248.243 104.64 243.803 99.04C239.403 93.4 237.203 85.48 237.203 75.28C237.203 69 238.283 63.46 240.443 58.66C242.603 53.82 245.583 50.04 249.383 47.32C253.223 44.6 257.643 43.24 262.643 43.24C267.763 43.24 271.763 45.28 274.643 49.36V27.4L292.643 19.36V106H274.643V100.84C272.443 105.24 268.363 107.44 262.403 107.44ZM265.523 90.04C267.883 90.04 269.743 89.78 271.103 89.26C272.463 88.7 273.643 87.8 274.643 86.56V64.48C273.643 63.28 272.323 62.34 270.683 61.66C269.043 60.98 267.323 60.64 265.523 60.64C262.243 60.64 259.703 61.9 257.903 64.42C256.103 66.9 255.203 70.52 255.203 75.28C255.203 78.6 255.583 81.36 256.343 83.56C257.103 85.72 258.243 87.34 259.763 88.42C261.283 89.5 263.203 90.04 265.523 90.04ZM334.153 131.56L323.713 116.08C329.833 115.6 334.413 115 337.453 114.28C340.533 113.56 342.573 112.54 343.573 111.22C344.573 109.94 345.073 108.16 345.073 105.88V103.96C342.353 106.28 338.553 107.44 333.673 107.44C328.153 107.44 323.453 106.18 319.573 103.66C315.693 101.14 312.733 97.48 310.693 92.68C308.653 87.88 307.633 82.08 307.633 75.28C307.633 68.84 308.713 63.22 310.873 58.42C313.033 53.62 316.053 49.9 319.933 47.26C323.853 44.58 328.433 43.24 333.673 43.24C336.153 43.24 338.353 43.56 340.273 44.2C342.233 44.84 343.833 45.8 345.073 47.08V44.68H363.073V97.96C363.073 104.08 362.613 109.18 361.693 113.26C360.813 117.34 359.293 120.62 357.133 123.1C354.973 125.62 352.013 127.52 348.253 128.8C344.533 130.08 339.833 131 334.153 131.56ZM336.313 90.04C338.073 90.04 339.673 89.76 341.113 89.2C342.553 88.64 343.873 87.8 345.073 86.68V64.24C344.113 63.16 342.873 62.3 341.353 61.66C339.873 60.98 338.313 60.64 336.673 60.64C333.073 60.64 330.333 61.88 328.453 64.36C326.573 66.84 325.633 70.48 325.633 75.28C325.633 78.52 326.033 81.24 326.833 83.44C327.633 85.6 328.813 87.24 330.373 88.36C331.973 89.48 333.953 90.04 336.313 90.04ZM405.819 107.44C399.739 107.44 394.499 106.16 390.099 103.6C385.739 101.04 382.379 97.36 380.019 92.56C377.699 87.76 376.539 82 376.539 75.28C376.539 68.76 377.719 63.1 380.079 58.3C382.479 53.5 385.859 49.8 390.219 47.2C394.619 44.56 399.819 43.24 405.819 43.24C411.019 43.24 415.699 44.3 419.859 46.42C424.059 48.5 427.379 51.7 429.819 56.02C432.299 60.3 433.539 65.72 433.539 72.28C433.539 73.4 433.519 74.8 433.479 76.48C433.439 78.12 433.299 79.76 433.059 81.4H394.059C394.059 83.6 394.539 85.52 395.499 87.16C396.459 88.76 397.819 90 399.579 90.88C401.339 91.76 403.419 92.2 405.819 92.2C408.939 92.2 411.539 91.7 413.619 90.7C415.739 89.7 417.779 88.04 419.739 85.72L430.059 96.04C427.179 99.52 423.759 102.3 419.799 104.38C415.839 106.42 411.179 107.44 405.819 107.44ZM394.299 67.96H416.379C416.059 65.84 415.439 64.08 414.519 62.68C413.599 61.28 412.379 60.24 410.859 59.56C409.339 58.84 407.499 58.48 405.339 58.48C402.419 58.48 399.959 59.32 397.959 61C395.959 62.68 394.739 65 394.299 67.96ZM478.908 106V22H540.228V40H497.868V53.68H521.148V71.68H497.868V87.88H542.628V106H478.908ZM574.005 107.44C566.045 107.44 559.845 104.64 555.405 99.04C551.005 93.4 548.805 85.48 548.805 75.28C548.805 69 549.885 63.46 552.045 58.66C554.205 53.82 557.185 50.04 560.985 47.32C564.825 44.6 569.245 43.24 574.245 43.24C579.365 43.24 583.365 45.28 586.245 49.36V27.4L604.245 19.36V106H586.245V100.84C584.045 105.24 579.965 107.44 574.005 107.44ZM577.125 90.04C579.485 90.04 581.345 89.78 582.705 89.26C584.065 88.7 585.245 87.8 586.245 86.56V64.48C585.245 63.28 583.925 62.34 582.285 61.66C580.645 60.98 578.925 60.64 577.125 60.64C573.845 60.64 571.305 61.9 569.505 64.42C567.705 66.9 566.805 70.52 566.805 75.28C566.805 78.6 567.185 81.36 567.945 83.56C568.705 85.72 569.845 87.34 571.365 88.42C572.885 89.5 574.805 90.04 577.125 90.04Z"
                 fill="white" />
-            <defs>
+            {{-- <defs>
                 <filter id="filter0_f_28_35" x="1.71094" y="149.784" width="669.559" height="32.11"
                     filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix" />
                     <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                     <feGaussianBlur stdDeviation="1.5" result="effect1_foregroundBlur_28_35" />
                 </filter>
-            </defs>
+            </defs> --}}
         </svg>
 
     </div>
@@ -53,7 +53,7 @@
         <div>
             @yield('content')
         </div>
-        
+
         {{-- <footer> --}}
         @include('components.footer')
         {{-- </footer> --}}
@@ -81,107 +81,6 @@
     @yield('scripts')
     @stack('script')
     <!-- Scripts -->
-    {{-- <script>
-        // Constants for the view modes
-        const listView = document.getElementById('listView');
-        const mapView = document.getElementById('mapView');
-        const listViewToggle = document.getElementById('listViewToggle');
-        const mapViewToggle = document.getElementById('mapViewToggle');
-
-        // Function to show the list view and hide the map view
-        function showListView() {
-            listView.style.display = 'block';
-            mapView.style.display = 'none';
-            localStorage.setItem('preferredView', 'list'); // Save the state
-        }
-
-        // Function to show the map view and hide the list view
-        function showMapView() {
-            mapView.style.display = 'block';
-            listView.style.display = 'none';
-            localStorage.setItem('preferredView', 'map'); // Save the state
-        }
-
-        // Event listeners for the buttons
-        listViewToggle.addEventListener('click', showListView);
-        mapViewToggle.addEventListener('click', showMapView);
-
-        // Check local storage for the preferred view on document load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedView = localStorage.getItem('preferredView');
-            if (savedView === 'map') {
-                showMapView();
-            } else {
-                showListView();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const map = L.map('map').setView([-23.6980, 133.8807], 4);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            let routingControl = null;
-
-            map.on('popupopen', function(e) {
-                const link = e.popup._container.querySelector('.get-directions');
-                if (link && !link.classList.contains('listener-attached')) {
-                    link.classList.add('listener-attached');
-                    link.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        const enteredAddress = document.getElementById('locationInput').value;
-                        const lat = link.dataset.lat;
-                        const lng = link.dataset.lng;
-                        getGeocodeAndRoute(enteredAddress, new L.LatLng(lat, lng));
-                    });
-                }
-            });
-
-            function getGeocodeAndRoute(address, destinationLatLng) {
-                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.length === 0) {
-                            alert('Address not found!');
-                            return;
-                        }
-                        const userLocation = new L.LatLng(data[0].lat, data[0].lon);
-                        if (routingControl) {
-                            map.removeControl(routingControl);
-                        }
-                        routingControl = L.Routing.control({
-                            waypoints: [userLocation, destinationLatLng],
-                            routeWhileDragging: true,
-                            showAlternatives: true,
-                            fitSelectedRoutes: true,
-                            createMarker: function(i, waypoint) {
-                                return L.marker(waypoint.latLng);
-                            }
-                        }).addTo(map);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching address:', error);
-                        alert('Error fetching address!');
-                    });
-            }
-
-            document.querySelectorAll('li[data-lat][data-lng]').forEach(function(item) {
-                const lat = parseFloat(item.dataset.lat);
-                const lng = parseFloat(item.dataset.lng);
-                const name = item.dataset.name;
-                const popupContent =
-                    `<strong>${name}</strong><br><a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>`;
-                const marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
-            });
-        });
-    </script> --}}
 
     <script>
         $(function() {
@@ -262,23 +161,24 @@
                 // First time loading, show the loading screen then main content
                 setTimeout(() => {
                     // Start hiding the loading screen
-                    loadingScreen.style.opacity = '0';
-                    loadingScreen.style.visibility = 'hidden';
+                    if (loadingScreen) {
+                        loadingScreen.style.opacity = '0';
+                        loadingScreen.style.visibility = 'hidden';
+                    }
 
                     setTimeout(() => {
                         // Remove loading screen and show main content after fade out
-                        loadingScreen.style.display = 'none';
+                        if (loadingScreen) loadingScreen.style.display = 'none';
                         mainContent.style.opacity = 1;
                         mainContent.style.visibility = 'visible';
                     }, 500); // Matches the CSS transition time
-                }, 3000); // Adjust as needed for your desired loading screen display time
+                }, 3000);
 
                 // Mark that the site has loaded before
                 sessionStorage.setItem('hasLoadedBefore', 'true');
             }
         });
     </script>
-
     <!-- <script src="{{ asset('/js/quiz.js') }} "></script> -->
 </body>
 
