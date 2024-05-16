@@ -13,13 +13,12 @@
     </div>
     <div class="divider"></div>
 
-    <!-- resource hub div -->
-
     <form action="{{ route('youtube.search') }}" method="GET" class="md:mt-12 mb-4 p-4">
         <div class="flex flex-wrap items-center justify-center gap-4 md:w-3/5 mx-auto">
             <!-- Course Selection -->
-            <div class="w-full md:w-1/4">
-                <select name="course" class="select select-bordered w-full">
+            <div class="w-full md:w-1/4 text-center">
+                <label for="course" class="block mb-2 text-sm font-medium text-gray-900">Course</label>
+                <select id="course" name="course" class="select select-bordered w-full">
                     @foreach ($allowedCourses as $course)
                         <option value="{{ $course }}" {{ request('course') === $course ? 'selected' : '' }}>
                             {{ $course }}
@@ -27,39 +26,37 @@
                     @endforeach
                 </select>
             </div>
-
+    
             <!-- Duration Selection -->
-            <div class="w-full md:w-1/4">
-                <select name="duration" class="select select-bordered w-full">
+            <div class="w-full md:w-1/4 text-center">
+                <label for="duration" class="block mb-2 text-sm font-medium text-gray-900">Duration</label>
+                <select id="duration" name="duration" class="select select-bordered w-full">
                     <option value="">Any duration</option>
-                    <option value="short" {{ request('duration') == 'short' ? 'selected' : '' }}>Short (&lt; 4 minutes)
-                    </option>
-                    <option value="medium" {{ request('duration') == 'medium' ? 'selected' : '' }}>Medium (4-20 minutes)
-                    </option>
-                    <option value="long" {{ request('duration') == 'long' ? 'selected' : '' }}>Long (&gt; 20 minutes)
-                    </option>
+                    <option value="short" {{ request('duration') == 'short' ? 'selected' : '' }}>Short (&lt; 4 minutes)</option>
+                    <option value="medium" {{ request('duration') == 'medium' ? 'selected' : '' }}>Medium (4-20 minutes)</option>
+                    <option value="long" {{ request('duration') == 'long' ? 'selected' : '' }}>Long (&gt; 20 minutes)</option>
                 </select>
             </div>
-
+    
             <!-- Level Selection -->
-            <div class="w-full md:w-1/4">
-                <select name="level" class="select select-bordered w-full">
+            <div class="w-full md:w-1/4 text-center">
+                <label for="level" class="block mb-2 text-sm font-medium text-gray-900">Difficulty Level</label>
+                <select id="level" name="level" class="select select-bordered w-full">
                     <option value="">Select difficulty</option>
                     <option value="beginner" {{ request('level') == 'beginner' ? 'selected' : '' }}>Beginner</option>
-                    <option value="intermediate" {{ request('level') == 'intermediate' ? 'selected' : '' }}>Intermediate
-                    </option>
+                    <option value="intermediate" {{ request('level') == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
                     <option value="advanced" {{ request('level') == 'advanced' ? 'selected' : '' }}>Advanced</option>
                 </select>
             </div>
-
+    
             <!-- Search Button -->
-            <div class="w-full md:w-auto">
-                <button type="submit"
-                    class="btn btn-ghost bg-Button text-white font-bold py-2 px-4 rounded">Search</button>
+            <div class="w-full md:w-auto text-center mt-6">
+                <button type="submit" class="btn btn-ghost bg-Button text-white font-bold py-2 px-4 rounded">Search</button>
             </div>
         </div>
     </form>
-
+    
+    
     <!-- Search Results and Pagination -->
     <div class="mx-auto p-4" style="max-width: 1200px;">
         {{-- @if (session('no-results'))
