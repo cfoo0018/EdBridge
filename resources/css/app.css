@@ -184,25 +184,6 @@
     @apply bg-Second;
 }
 
-@media (min-width: 768px) {
-    #pathway-div .card {
-        max-width: 288px;
-    }
-}
-
-@media (min-width: 1024px) {
-    #pathway-div .card {
-        max-width: 520px;
-        max-height: 288px;
-    }
-}
-
-@media (min-width: 768px) {
-    #pathway-div figure {
-        min-width: 255px;
-        height: 288px;
-    }
-}
 canvas {
     display: block;
     max-width: 80%;

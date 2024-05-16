@@ -21,17 +21,16 @@
                     class="{{ Route::is('home') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Home</a>
                 <a href="{{ route('resourcehub') }}"
                     class="{{ request()->is('resourcehub*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1 flex flex-col justify-center">
-                    <div>Education</div>
                     <div>Resource Hub</div>
                 </a>
                 <a href="{{ route('support.index') }}"
                     class="{{ request()->is('support*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1 flex flex-col justify-center">
                     <div>Support </div>
-                    <div>Service Directory</div>
+                    <div>Services</div>
                 </a>
                 <a href="{{ route('pathways') }}"
                     class="{{ request()->is('pathways*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1 flex flex-col justify-center">
-                    <div>IT Career</div>
+                    <div>IT</div>
                     <div>Pathways</div>
                 </a>
                 <a href="{{ route('scholarships.index') }}"
@@ -49,14 +48,14 @@
                 <a href="{{ route('home') }}"
                     class="{{ Route::is('home') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Home</a>
                 <a href="{{ route('resourcehub') }}"
-                    class="{{ request()->is('resourcehub*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Education
+                    class="{{ request()->is('resourcehub*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">
                     Resource Hub</a>
                 <a href="{{ route('support.index') }}"
                     class="{{ request()->is('support*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Support
-                    Service Directory</a>
+                    Services</a>
                 <a href="{{ route('pathways') }}"
                     class="{{ request()->is('pathways*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">IT
-                    Career Pathways</a>
+                    Pathways</a>
                 <a href="{{ route('scholarships.index') }}"
                     class="{{ request()->is('scholarships*') ? 'bg-Button' : '' }} hover:backdrop-blur-none hover:bg-Button rounded-3xl px-4 py-1">Find
                     Scholarships</a>
