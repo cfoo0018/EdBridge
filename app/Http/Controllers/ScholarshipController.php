@@ -25,6 +25,15 @@ class ScholarshipController extends Controller
                 $query->where('for_international_students', false);
             }
         }
+
+        // Filtering by international student
+        if ($request->has('gender')) {
+            if ($request->gender === '1') {
+                $query->where('gender', 'Female');
+            } elseif ($request->gender === '0') {
+                $query->where('gender', 'Co-Ed');
+            }
+        }
     
         // Filtering by amount
         if ($request->has('amount_min') && $request->has('amount_max')) {

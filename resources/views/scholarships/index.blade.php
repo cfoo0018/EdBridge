@@ -34,6 +34,19 @@
                     <option value="0" {{ request('international') == '0' ? 'selected' : '' }}>No</option>
                 </select>
             </form>
+            <!-- Filter for woman -->
+            <form action="{{ route('scholarships.index') }}" method="GET"
+                class="flex items-center mb-2 md:mb-0 ml-0 md:ml-4">
+                @csrf
+                <label for="gender" class="font-Fredoka mb-2 mr-2 text-Second">Gender:</label>
+                <select id="gender" name="gender"
+                    class="block py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                    onchange="this.form.submit()">
+                    <option value="">All</option>
+                    <option value="1" {{ request('gender') == 'Female' ? 'gender' : '' }}>Female</option>
+                    <option value="0" {{ request('gender') == 'Co-Ed' ? 'gender' : '' }}>Others</option>
+                </select>
+            </form>
             <!-- Sort by provider and amount -->
             <div class="flex items-center">
                 <a href="{{ route('scholarships.index', ['sort' => 'provider']) }}"
