@@ -15,27 +15,27 @@ class CharityController extends Controller
     {
         // Determine user's location or default to Melbourne
         $userLocation = $this->getUserLocation($request);
-    
+
         // Capture the minimum and maximum distance filters from the request
         $minDistanceKm = $request->input('minDistance', 0); // Default minimum distance
         $maxDistanceKm = $request->input('maxDistance', 100); // Default maximum distance
-    
+
         // Capture the service type filter from the request
         $serviceType = $request->input('service_type', 'all');
         $serviceTypeDb = $this->mapServiceType($serviceType, true);
-    
+
         // Fetch charities within a bounding box calculated using the maximum distance
         $boundingBox = $this->calculateBoundingBox($userLocation, $maxDistanceKm);
         $charitiesQuery = Charity::whereBetween('latitude', [$boundingBox['minLat'], $boundingBox['maxLat']])
             ->whereBetween('longitude', [$boundingBox['minLng'], $boundingBox['maxLng']]);
-    
+
         // Apply category filter if not 'all'
         if ($serviceType !== 'all') {
             $charitiesQuery = $charitiesQuery->where('service_type', $serviceTypeDb);
         }
-    
+
         $charities = $charitiesQuery->get();
-    
+
         // Filter charities by minimum and maximum distance
         $charities = $charities->filter(function ($charity) use ($userLocation, $minDistanceKm, $maxDistanceKm) {
             $distance = $this->haversineGreatCircleDistance(
@@ -47,20 +47,20 @@ class CharityController extends Controller
             $charity->distance = $distance; // Assign distance to each charity
             return $distance >= $minDistanceKm && $distance <= $maxDistanceKm;
         });
-    
+
         // Sort charities by distance
         $charities = $charities->sortBy('distance');
-    
+
         // Format service type for display
         $charities->each(function ($charity) {
             $charity->formatted_service_type = $this->formatServiceTypeForDisplay($charity->service_type);
         });
-    
+
         // Paginate manually
         $perPage = 30;
         $currentPage = $request->input('page', 1);
         $pagedCharities = $charities->slice(($currentPage - 1) * $perPage, $perPage);
-    
+
         $paginatedCharities = new LengthAwarePaginator(
             $pagedCharities,
             $charities->count(),
@@ -68,10 +68,10 @@ class CharityController extends Controller
             $currentPage,
             ['path' => $request->url(), 'query' => $request->query()]
         );
-    
+
         // Fetch service types
         $serviceTypes = $this->getServiceTypes();
-    
+
         return view('charities.index', [
             'charities' => $paginatedCharities,
             'serviceTypes' => $serviceTypes,
@@ -81,7 +81,7 @@ class CharityController extends Controller
             'maxDistanceKm' => $maxDistanceKm
         ]);
     }
-    
+
 
     protected function calculateBoundingBox($userLocation, $distanceKm)
     {
@@ -112,15 +112,51 @@ class CharityController extends Controller
 
     protected function getUserLocation(Request $request)
     {
-        if ($request->filled('search')) {
-            return $this->geocodeAddress($request->input('search'));
-        } elseif ($sessionLocation = $request->session()->get('user_location')) {
-            return $sessionLocation;
-        } else {
+        try {
+            if ($request->filled('search')) {
+                $address = $request->input('search');
+                if ($this->isAddressComplete($address)) {
+                    $location = $this->geocodeAddress($address);
+                    if ($location && $this->isInAustralia($location)) {
+                        return $location;
+                    } else {
+                        Log::warning('Address not in Australia or incomplete address input', ['address' => $address]);
+                        return $this->geocodeAddress("Melbourne, VIC");
+                    }
+                } else {
+                    Log::warning('Incomplete address input', ['address' => $address]);
+                    return $this->geocodeAddress("Melbourne, VIC");
+                }
+            } elseif ($sessionLocation = $request->session()->get('user_location')) {
+                if ($this->isInAustralia($sessionLocation)) {
+                    return $sessionLocation;
+                } else {
+                    Log::warning('Session location not in Australia', ['sessionLocation' => $sessionLocation]);
+                    return $this->geocodeAddress("Melbourne, VIC");
+                }
+            } else {
+                return $this->geocodeAddress("Melbourne, VIC");
+            }
+        } catch (\Exception $e) {
+            Log::error('Error in getUserLocation:', ['error' => $e->getMessage()]);
             return $this->geocodeAddress("Melbourne, VIC");
         }
     }
+    
+    protected function isInAustralia($location)
+    {
+        if (!isset($location['components'])) {
+            return false;
+        }
 
+        foreach ($location['components'] as $component) {
+            if (in_array('country', $component['types']) && $component['short_name'] === 'AU') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     protected function geocodeAddress($address)
     {
