@@ -20,7 +20,7 @@
 
 
     <!-- Pathway Cards -->
-    <div class="mx-auto px-4">
+    <div class="mx-auto px-4 max-w-[1280px]">
         <div class="border-2 border-slate-300 rounded-3xl bg-stone-100 py-8 md:p-20 md:mx-36 md:my-10">
             <div class="text-center lg:mb-10">
                 <h2 class="text-3xl font-Fredoka text-Second font-semibold">Explore Predefined Pathways</h2>

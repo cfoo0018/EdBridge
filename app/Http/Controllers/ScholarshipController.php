@@ -9,6 +9,11 @@ class ScholarshipController extends Controller
 {
     public function index(Request $request)
     {
+        // Save filter visibility state to the session
+        if ($request->has('showFilters')) {
+            session(['showFilters' => $request->get('showFilters')]);
+        }
+
         $query = Scholarship::query();
 
         // Filtering by provider
@@ -36,7 +41,7 @@ class ScholarshipController extends Controller
             $query->orderBy($request->sort, 'asc');
         }
 
-        $scholarships = $query->paginate(10);
+        $scholarships = $query->paginate(9);
         $providers = Scholarship::select('provider')->distinct()->pluck('provider');
         $amountRange = Scholarship::selectRaw('MIN(amount) as min_amount, MAX(amount) as max_amount')->first();
 

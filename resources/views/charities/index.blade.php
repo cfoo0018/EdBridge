@@ -11,7 +11,7 @@
                 class="fas fa-question-circle text-Second"></i></button>
     </div>
     <div class="divider"></div>
-    <div class="py-8 px-4 md:px-8 lg:px-16 ">
+    <div class="py-8 px-4 md:px-8 lg:px-16 max-w-[1280px] mx-auto">
         <!-- Search Form -->
         <form id="searchForm" action="{{ route('support.index') }}" method="GET"
             class="mb-4 bg-white p-4 rounded-lg shadow">
