@@ -19,7 +19,7 @@
             <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <div class="flex-grow">
                     <input type="text" name="search" id="locationInput" placeholder="Enter your address"
-                        class="form-input w-full p-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        class="form-input w-full p-4 rounded-lg border-2 border-gray-300 focus:border-Second focus:ring-Second"
                         value="{{ request()->filled('search') ? request()->search : '' }}">
                 </div>
                 <button type="submit"
@@ -31,10 +31,10 @@
             <!-- Dropdown, Slider, and View Toggles -->
             <div class="mt-4 flex flex-col lg:flex-row gap-6">
                 <!-- View Toggle Buttons with Icons and Text Labels -->
-                <div class="flex items-center gap-4 text-Second lg:w-1/5">
+                <div class="flex items-center gap-4 text-Second lg:w-1/4">
                     <div class="tooltip" data-tooltip="Switch to list view">
                         <button id="listViewToggle"
-                            class="hover:bg-gray-100 focus:outline-none py-2 px-4 rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
+                            class="hover:bg-gray-100 focus:outline-none py-2 px-2 rounded-lg text-lgtransition-colors flex items-center justify-center gap-2">
                             <i class="fas fa-list"></i> List View
                         </button>
                     </div>
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Distance Slider with Min and Max Selection -->
-                <div class="w-full lg:w-1/4">
+                <div class="w-full lg:w-1/3 p-4">
                     <label for="distance-range" class="block font-semibold text-gray-800 mb-10">Distance Range (km):</label>
                     <div id="distance-range" class="w-full"></div>
                     <div class="flex justify-between mt-2">
