@@ -13,8 +13,7 @@
     <div class="divider"></div>
     <div class="py-8 px-4 md:px-8 lg:px-16 max-w-[1280px] mx-auto">
         <!-- Search Form -->
-        <form id="searchForm" action="{{ route('support.index') }}" method="GET"
-            class="mb-4 bg-white p-4 rounded-lg shadow">
+        <form id="searchForm" action="{{ route('support.index') }}" method="GET" class="mb-8 bg-white p-6 rounded-lg shadow-lg">
             <!-- Location Input and Search Button -->
             <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <div class="flex-grow">
@@ -27,14 +26,14 @@
                     Search
                 </button>
             </div>
-
+        
             <!-- Dropdown, Slider, and View Toggles -->
-            <div class="mt-4 flex flex-col lg:flex-row gap-6">
+            <div class="mt-6 flex flex-col lg:flex-row gap-6 text-center">
                 <!-- View Toggle Buttons with Icons and Text Labels -->
                 <div class="flex items-center gap-4 text-Second lg:w-1/4">
                     <div class="tooltip" data-tooltip="Switch to list view">
                         <button id="listViewToggle"
-                            class="hover:bg-gray-100 focus:outline-none py-2 px-2 rounded-lg text-lgtransition-colors flex items-center justify-center gap-2">
+                            class="hover:bg-gray-100 focus:outline-none py-2 px-4 rounded-lg text-lg transition-colors flex items-center justify-center gap-2">
                             <i class="fas fa-list"></i> List View
                         </button>
                     </div>
@@ -45,13 +44,13 @@
                         </button>
                     </div>
                 </div>
-
+        
                 <!-- Category Dropdown -->
                 <div class="relative flex-grow lg:w-1/3">
                     <label for="serviceType" class="block font-semibold text-gray-800 mb-2">Filter by Service Type:</label>
                     <select id="serviceType" name="service_type" onchange="updateServiceType()"
-                        class="form-select block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 transition-all duration-300">
-                        {{-- <option value="">All Services</option> --}}
+                        class="form-select block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-Second transition-all duration-300">
+                        <option value="">All Services</option>
                         @foreach ($serviceTypes as $key => $name)
                             <option value="{{ $key }}" {{ $currentType === $key ? 'selected' : '' }}>
                                 {{ $name }}
@@ -63,10 +62,10 @@
                         {{-- <i class="fas fa-chevron-down"></i> --}}
                     </div>
                 </div>
-
+        
                 <!-- Distance Slider with Min and Max Selection -->
                 <div class="w-full lg:w-1/3 p-4">
-                    <label for="distance-range" class="block font-semibold text-gray-800 mb-10">Distance Range (km):</label>
+                    <label for="distance-range" class="block font-semibold text-gray-800 mb-2">Distance Range (km):</label>
                     <div id="distance-range" class="w-full"></div>
                     <div class="flex justify-between mt-2">
                         <span id="minDistanceValue">{{ request('minDistance', 0) }} km</span>
@@ -76,72 +75,73 @@
                     <input type="hidden" id="maxDistance" name="maxDistance" value="{{ request('maxDistance', 100) }}">
                 </div>
             </div>
-    </form>
+        </form>
+        
 
-    <!-- Views Container -->
-    <div class="flex flex-col lg:flex-row gap-8 z-1">
-        <!-- Map View -->
-        <div id="mapView" class="w-full sm:h-screen z-1" style="height: 800px">
-            @foreach ($charities as $charity)
-                <li class="p-4 hover:bg-gray-50 hidden" data-lat="{{ $charity->latitude ?? 'not set' }}"
-                    data-lng="{{ $charity->longitude ?? 'not set' }}" data-name="{{ $charity->charity_legal_name }}"
-                    data-website="{{ $charity->charity_website ? (Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website) : '#' }}"
-                    data-service-type="{{ $charity->formatted_service_type }}">
-                    <!-- Charity details here -->
-                </li>
-            @endforeach
-            <div id="map" class="w-full h-full z-1"></div>
-        </div>
+        <!-- Views Container -->
+        <div class="flex flex-col lg:flex-row gap-8 z-1">
+            <!-- Map View -->
+            <div id="mapView" class="w-full sm:h-screen z-1" style="height: 800px">
+                @foreach ($charities as $charity)
+                    <li class="p-4 hover:bg-gray-50 hidden" data-lat="{{ $charity->latitude ?? 'not set' }}"
+                        data-lng="{{ $charity->longitude ?? 'not set' }}" data-name="{{ $charity->charity_legal_name }}"
+                        data-website="{{ $charity->charity_website ? (Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website) : '#' }}"
+                        data-service-type="{{ $charity->formatted_service_type }}">
+                        <!-- Charity details here -->
+                    </li>
+                @endforeach
+                <div id="map" class="w-full h-full z-1"></div>
+            </div>
 
-        <!-- List View -->
-        <div id="listView" class="hidden w-full">
-            <div class="overflow-auto h-96 lg:h-full bg-white rounded-xl shadow-lg">
-                <ul class="divide-y divide-gray-200">
-                    @foreach ($charities as $charity)
-                        @if ($charity)
-                            <li class="p-4 hover:bg-gray-50">
-                                <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <h2 class="font-Fredoka text-xl md:text-2xl text-gray-800">
-                                            {{ $charity->charity_legal_name }}</h2>
-                                        <p class="text-sm md:text-base text-gray-600 mt-1">
-                                            {{ $charity->full_address ?: 'Address not available' }}
-                                            <br>
-                                            <strong>Service Type:</strong> {{ $charity->formatted_service_type }}
-                                        </p>
-                                    </div>
-                                    <div class="text-right ml-4">
-                                        <div class="text-sm md:text-base font-medium text-gray-800 mb-2">
-                                            <strong>Distance:</strong>
-                                            @if (isset($charity->distance))
-                                                {{ round($charity->distance, 2) }} km
-                                            @else
-                                                N/A
-                                            @endif
+            <!-- List View -->
+            <div id="listView" class="hidden w-full">
+                <div class="overflow-auto h-96 lg:h-full bg-white rounded-xl shadow-lg">
+                    <ul class="divide-y divide-gray-200">
+                        @foreach ($charities as $charity)
+                            @if ($charity)
+                                <li class="p-4 hover:bg-gray-50">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <h2 class="font-Fredoka text-xl md:text-2xl text-gray-800">
+                                                {{ $charity->charity_legal_name }}</h2>
+                                            <p class="text-sm md:text-base text-gray-600 mt-1">
+                                                {{ $charity->full_address ?: 'Address not available' }}
+                                                <br>
+                                                <strong>Service Type:</strong> {{ $charity->formatted_service_type }}
+                                            </p>
                                         </div>
-                                        <div>
-                                            @if ($charity->charity_website)
-                                                <a href="{{ Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website }}"
-                                                    target="_blank" rel="noopener noreferrer"
-                                                    class="inline-block bg-Button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-xs md:text-sm transition-colors duration-300">
-                                                    Visit Website
-                                                </a>
-                                            @else
-                                                <span class="text-sm text-red-500">No website available</span>
-                                            @endif
+                                        <div class="text-right ml-4">
+                                            <div class="text-sm md:text-base font-medium text-gray-800 mb-2">
+                                                <strong>Distance:</strong>
+                                                @if (isset($charity->distance))
+                                                    {{ round($charity->distance, 2) }} km
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </div>
+                                            <div>
+                                                @if ($charity->charity_website)
+                                                    <a href="{{ Str::startsWith($charity->charity_website, ['http://', 'https://']) ? $charity->charity_website : 'http://' . $charity->charity_website }}"
+                                                        target="_blank" rel="noopener noreferrer"
+                                                        class="inline-block bg-Button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-xs md:text-sm transition-colors duration-300">
+                                                        Visit Website
+                                                    </a>
+                                                @else
+                                                    <span class="text-sm text-red-500">No website available</span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
 
-                <!-- Pagination Links -->
-                <div class="px-4 py-3">{{ $charities->links() }}</div>
+                    <!-- Pagination Links -->
+                    <div class="px-4 py-3">{{ $charities->links() }}</div>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- DaisyUI Modal Box -->
     <dialog id="userGuideModal" class="modal modal-bottom sm:modal-middle">
