@@ -82,7 +82,6 @@ class CharityController extends Controller
         ]);
     }
 
-
     protected function calculateBoundingBox($userLocation, $distanceKm)
     {
         // Approximate bounding box calculation (not precise, but quick)
@@ -115,16 +114,12 @@ class CharityController extends Controller
         try {
             if ($request->filled('search')) {
                 $address = $request->input('search');
-                if ($this->isAddressComplete($address)) {
-                    $location = $this->geocodeAddress($address);
-                    if ($location && $this->isInAustralia($location)) {
-                        return $location;
-                    } else {
-                        Log::warning('Address not in Australia or incomplete address input', ['address' => $address]);
-                        return $this->geocodeAddress("Melbourne, VIC");
-                    }
+                $location = $this->geocodeAddress($address);
+                if ($location && $this->isInAustralia($location)) {
+                    $request->session()->put('user_location', $location); // Save location to session
+                    return $location;
                 } else {
-                    Log::warning('Incomplete address input', ['address' => $address]);
+                    Log::warning('Address not in Australia or incomplete address input', ['address' => $address]);
                     return $this->geocodeAddress("Melbourne, VIC");
                 }
             } elseif ($sessionLocation = $request->session()->get('user_location')) {
@@ -142,14 +137,14 @@ class CharityController extends Controller
             return $this->geocodeAddress("Melbourne, VIC");
         }
     }
-    
+
     protected function isInAustralia($location)
     {
-        if (!isset($location['components'])) {
+        if (!isset($location['address_components'])) {
             return false;
         }
 
-        foreach ($location['components'] as $component) {
+        foreach ($location['address_components'] as $component) {
             if (in_array('country', $component['types']) && $component['short_name'] === 'AU') {
                 return true;
             }
@@ -170,6 +165,7 @@ class CharityController extends Controller
                 return [
                     'lat' => $data['results'][0]['geometry']['location']['lat'],
                     'lng' => $data['results'][0]['geometry']['location']['lng'],
+                    'address_components' => $data['results'][0]['address_components'], // Include address components for country check
                 ];
             } else {
                 Log::warning('Geocoding failed:', ['address' => $address, 'response' => $data]);
@@ -211,13 +207,7 @@ class CharityController extends Controller
             'rural_regional_remote_communities' => 'Rural, Regional, Remote Communities',
             'ethnic_groups' => 'Ethnic Groups',
             'people_with_disabilities' => 'People with Disabilities',
-            // 'advancing_social_or_public_welfare' => 'Advancing Social or Public Welfare',
             'advancing_education' => 'Advancing Education',
-            // 'people_at_risk_of_homelessness' => 'People at Risk of Homelessness',
-            // 'unemployed_person' => 'Unemployed Person',
-            // 'people_with_chronic illness' => 'People with Chronic Illness',
-            // 'advancing culture' => 'Advancing Culture',
-            // 'gay_lesbian_bisexual' => 'LGBTQ+',
         ];
     }
 
@@ -233,13 +223,7 @@ class CharityController extends Controller
             'rural_regional_remote_communities' => 'Rural_Regional_Remote_Communities',
             'ethnic_groups' => 'Ethnic_Groups',
             'people_with_disabilities' => 'People_with_Disabilities',
-            // 'advancing_social_or_public_welfare' => 'Advancing_Social_or_Public_Welfare',
             'advancing_education' => 'Advancing_Education',
-            // 'people_at_risk_of_homelessness' => 'People_at_Risk_of_Homelessness',
-            // 'unemployed_person' => 'Unemployed_Person',
-            // 'people_with_chronic_illness' => 'People_with_Chronic_Illness',
-            // 'advancing_culture' => 'Advancing_Culture',
-            // 'gay_lesbian_bisexual' => 'Gay_Lesbian_Bisexual'
         ][strtolower($type)] ?? $type;
     }
 
@@ -248,6 +232,7 @@ class CharityController extends Controller
         // Check if the address has at least one comma and no consecutive commas, suggesting a complete structure
         return strpos($address, ',') !== false && !preg_match('/,,/', $address);
     }
+
     protected function formatServiceTypeForDisplay($type)
     {
         // Convert underscores to spaces and capitalize the first letter of each word

@@ -7,28 +7,26 @@
         <h1 class="text-3xl md:text-5xl font-Fredoka text-Second">Support Service Directory</h1>
         <p class="text-lg text-gray-600 mt-2 mb-8">Find the nearest support services based on your location.</p>
         <!-- User Guide Button -->
-        <button class="btn" onclick="userGuideModal.showModal()">User Guide<i
-                class="fas fa-question-circle text-Second"></i></button>
+        <button class="btn" onclick="userGuideModal.showModal()">User Guide<i class="fas fa-question-circle text-Second"></i></button>
     </div>
     <div class="divider"></div>
     <div class="py-8 px-4 md:px-8 lg:px-16 max-w-[1280px] mx-auto">
         <!-- Search Form -->
-        <form id="searchForm" action="{{ route('support.index') }}" method="GET" class="mb-8 bg-white p-6 rounded-lg shadow-lg">
+        <form id="searchForm" action="{{ route('support.index') }}" method="GET" class="mb-4 bg-white p-4 rounded-lg shadow">
             <!-- Location Input and Search Button -->
             <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <div class="flex-grow">
                     <input type="text" name="search" id="locationInput" placeholder="Enter your address"
-                        class="form-input w-full p-4 rounded-lg border-2 border-gray-300 focus:border-Second focus:ring-Second"
+                        class="form-input w-full p-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         value="{{ request()->filled('search') ? request()->search : '' }}">
                 </div>
-                <button type="submit"
-                    class="bg-Second hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                <button type="submit" class="bg-Second hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
                     Search
                 </button>
             </div>
-        
+
             <!-- Dropdown, Slider, and View Toggles -->
-            <div class="mt-6 flex flex-col lg:flex-row gap-6 text-center">
+            <div class="mt-4 flex flex-col lg:flex-row gap-6 text-center">
                 <!-- View Toggle Buttons with Icons and Text Labels -->
                 <div class="flex items-center gap-4 text-Second lg:w-1/4">
                     <div class="tooltip" data-tooltip="Switch to list view">
@@ -44,12 +42,12 @@
                         </button>
                     </div>
                 </div>
-        
+
                 <!-- Category Dropdown -->
                 <div class="relative flex-grow lg:w-1/3">
                     <label for="serviceType" class="block font-semibold text-gray-800 mb-2">Filter by Service Type:</label>
                     <select id="serviceType" name="service_type" onchange="updateServiceType()"
-                        class="form-select block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-Second transition-all duration-300">
+                        class="form-select block w-full bg-gray-200 border border-gray-300 text-gray-800 py-2 px-4 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 transition-all duration-300">
                         <option value="">All Services</option>
                         @foreach ($serviceTypes as $key => $name)
                             <option value="{{ $key }}" {{ $currentType === $key ? 'selected' : '' }}>
@@ -62,9 +60,9 @@
                         {{-- <i class="fas fa-chevron-down"></i> --}}
                     </div>
                 </div>
-        
+
                 <!-- Distance Slider with Min and Max Selection -->
-                <div class="w-full lg:w-1/3 p-4">
+                <div class="w-full lg:w-1/3">
                     <label for="distance-range" class="block font-semibold text-gray-800 mb-2">Distance Range (km):</label>
                     <div id="distance-range" class="w-full"></div>
                     <div class="flex justify-between mt-2">
@@ -76,7 +74,6 @@
                 </div>
             </div>
         </form>
-        
 
         <!-- Views Container -->
         <div class="flex flex-col lg:flex-row gap-8 z-1">
@@ -229,7 +226,6 @@
     </dialog>
 @endsection
 
-
 @push('script')
     <script>
         $(document).ready(function() {
@@ -357,9 +353,19 @@
                     dataType: 'json',
                     success: function(data) {
                         if (data.length > 0) {
+                            const locationData = data[0];
+                        const isAustralia = locationData.display_name.includes('Australia');
+                        
+                        if (!isAustralia) {
+                            alert('Please enter an address in Australia.');
+                            if (userMarker) {
+                                map.removeLayer(userMarker);
+                                userMarker = null;
+                            }
+                            return;
+                        }
                             const newLocation = new L.LatLng(data[0].lat, data[0].lon);
-                            const zoomLevel = calculateZoomLevel(
-                                distanceKm); // Calculate zoom level based on distance
+                            const zoomLevel = calculateZoomLevel(distanceKm); // Calculate zoom level based on distance
                             map.setView(newLocation, zoomLevel); // Update map center and zoom level
 
                             // Save location and zoom level to localStorage
@@ -368,13 +374,9 @@
 
                             // Add or update marker for user location
                             if (userMarker) {
-                                userMarker.setLatLng(newLocation).bindPopup(
-                                    '<strong>Your Location</strong>').openPopup();
+                                userMarker.setLatLng(newLocation).bindPopup('<strong>Your Location</strong>').openPopup();
                             } else {
-                                userMarker = L.marker(newLocation, {
-                                        icon: userIcon
-                                    }).addTo(map)
-                                    .bindPopup('<strong>Your Location</strong>').openPopup();
+                                userMarker = L.marker(newLocation, { icon: userIcon }).addTo(map).bindPopup('<strong>Your Location</strong>').openPopup();
                             }
 
                             // Clear existing charity markers
@@ -388,27 +390,23 @@
                             $('li[data-lat][data-lng]').each(function() {
                                 const lat = parseFloat($(this).data('lat'));
                                 const lng = parseFloat($(this).data('lng'));
-                                const distance = haversineDistance(newLocation.lat, newLocation
-                                    .lon, lat, lng);
+                                const distance = haversineDistance(newLocation.lat, newLocation.lon, lat, lng);
                                 const type = $(this).data('service-type');
 
-                                if (distance <= distanceKm && (!serviceType || type ===
-                                        serviceType)) {
+                                if (distance <= distanceKm && (!serviceType || type === serviceType)) {
                                     $(this).removeClass('hidden');
 
                                     const name = $(this).data('name');
                                     const website = $(this).data('website');
 
                                     const popupContent = `
-                                    <strong>${name}</strong><br>
-                                    <p>Service Type: ${type}</p>
-                                    <p>Website: <a href="${website}" target="_blank">${website}</a></p>
-                                    <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
-                                `;
+                                        <strong>${name}</strong><br>
+                                        <p>Service Type: ${type}</p>
+                                        <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+                                        <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+                                    `;
 
-                                    L.marker([lat, lng], {
-                                        icon: charityIcon
-                                    }).addTo(map).bindPopup(popupContent);
+                                    L.marker([lat, lng], { icon: charityIcon }).addTo(map).bindPopup(popupContent);
 
                                 } else {
                                     $(this).addClass('hidden');
@@ -477,10 +475,7 @@
             function getGeocodeAndRoute(address, destinationLatLng) {
                 $.ajax({
                     url: `https://nominatim.openstreetmap.org/search`,
-                    data: {
-                        format: 'json',
-                        q: address
-                    },
+                    data: { format: 'json', q: address },
                     dataType: 'json',
                     success: function(data) {
                         if (data.length === 0) {
@@ -501,13 +496,9 @@
                             fitSelectedRoutes: true,
                             createMarker: function(i, waypoint) {
                                 if (i === 0) {
-                                    return L.marker(waypoint.latLng, {
-                                        icon: userIcon
-                                    });
+                                    return L.marker(waypoint.latLng, { icon: userIcon });
                                 } else {
-                                    return L.marker(waypoint.latLng, {
-                                        icon: charityIcon
-                                    });
+                                    return L.marker(waypoint.latLng, { icon: charityIcon });
                                 }
                             }
                         }).addTo(map);
@@ -528,15 +519,13 @@
                 const serviceType = $(this).data('service-type');
 
                 const popupContent = `
-                <strong>${name}</strong><br>
-                <p>Service Type: ${serviceType}</p>
-                <p>Website: <a href="${website}" target="_blank">${website}</a></p>
-                <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
-            `;
+                    <strong>${name}</strong><br>
+                    <p>Service Type: ${serviceType}</p>
+                    <p>Website: <a href="${website}" target="_blank">${website}</a></p>
+                    <a href="#" class="get-directions" data-lat="${lat}" data-lng="${lng}">Get Directions</a>
+                `;
 
-                L.marker([lat, lng], {
-                    icon: charityIcon
-                }).addTo(map).bindPopup(popupContent);
+                L.marker([lat, lng], { icon: charityIcon }).addTo(map).bindPopup(popupContent);
             });
         });
 
