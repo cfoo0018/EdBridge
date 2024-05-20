@@ -26,19 +26,24 @@
             </div>
             <div id="scroll-down-button"class="scrolldown"></div>
         </div>
-        <div class="about-us bg-light-blue-100 py-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="about-us bg-light-blue-100 py-20 bg ">
+            <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h2 class="text-4xl leading-9 fond-Overpass text-Second sm:text-4xl sm:leading-10 md:text-5xl">
                         Our Commitment to Your Future
                     </h2>
-                    <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-600 sm:mt-4">
+                    <p class="mt-3 max-w-2xl mx-auto text-xl text-white sm:mt-4">
                         At <span class="text-Second">BridgeEd</span>, we believe everyone deserves a chance to succeed.
                         We're here to bridge the gap between
                         <span class="text-Second">potential and opportunity</span>, providing tailored resources and support to help you <span class="text-Second">overcome educational
                         barriers.</span> Discover our journey towards making education accessible for all.
                     </p>
                 </div>
+            </div>
+            <div class="night">
+                @for ($i = 1; $i <= 5; $i++)
+                    <div class="shooting_star"></div>
+                @endfor
             </div>
         </div>
         <div class="bg-Bg">
