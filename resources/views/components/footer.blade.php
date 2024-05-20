@@ -1,8 +1,8 @@
-<footer class="bg-base-200 text-Second font-Fredoka p-10">
+<footer class="bg-base-200 text-Second font-Fredoka p-10 sm:text-center">
     <div class="container mx-auto flex flex-wrap justify-between sm:justify-center items-start sm:items-center text-center">
 
         <!-- Brand and Motto -->
-        <aside class="w-full lg:w-2/6 mb-6 lg:mb-0 text-left lg:text-center">
+        <aside class="w-full lg:w-2/6 mb-6 lg:mb-0  lg:text-center sm:text-center">
             <a href="{{ route('home') }}" class="font-Overpass font-bold text-5xl">Bridge Ed</a>
             <p class="mt-4">Empower your journey.<br>Find Warm Support & Resources with us!</p>
         </aside>
@@ -57,6 +57,6 @@
         transition: color 0.3s ease-in-out;
     }
     footer a.link-hover:hover {
-        color: #3490dc; /* You can change this color to match your theme */
+        color: #3490dc;
     }
 </style>
